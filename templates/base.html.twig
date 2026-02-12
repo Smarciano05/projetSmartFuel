@@ -2,16 +2,22 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="/css/baseCSS.css"/>
         {% block stylesheets %}
         {% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
     </head>
     <body>
+        <div class="en_tete">
+            
+            <img class="logoSite" src="/images/logoSite.png" alt="image_du_logo" height="60px" width="170px">
+        
+            <button class="buttonCarte" ><img src="/images/logoCarte.png"> Carte </button>
+            <button class="buttonRecherche" ><img src="/images/logoRecherche.png"> Recherche </button>
+            <button class="buttonConnexion"> Connexion </button>
+            
+        </div>
         {% block body %}{% endblock %}
     </body>
 </html>
