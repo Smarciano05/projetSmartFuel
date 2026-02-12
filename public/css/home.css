@@ -1,0 +1,86 @@
+/* Chaque section full-screen et full-width */
+
+.section {
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* commence en haut */
+    align-items: center;         /* centre horizontalement */
+    padding: 4rem 2rem;
+    box-sizing: border-box;
+    background-color: white;
+}
+.section-content {
+    text-align: center;
+    color: black;
+    margin-bottom: 60px;
+}
+
+.section-content {
+    margin-bottom: 50px;
+}
+
+/* Conteneur des deux profils */
+.profiles-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    width: 100%;
+    max-width: 1000px;
+    align-items: stretch;
+
+}
+
+/* Style des cartes */
+.container-client{
+    background-color: white;
+    color: black;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    text-align: left;
+    display: flex;              /* IMPORTANT */
+    flex-direction: column;     /* IMPORTANT */
+    flex: 1;
+
+}
+.container-pompiste {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    text-align: left;
+    color: black;
+    display: flex;              /* IMPORTANT */
+    flex-direction: column;     /* IMPORTANT */
+    flex: 1;
+}
+
+
+.button-client{
+    margin-top: auto;
+    padding: 10px 20px;
+    background-color: #22c55e;
+    border: none;
+    color: black;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+
+}
+.button-pompiste{
+    margin-top: auto;
+    padding: 10px 20px;
+    background-color: black;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+
+}
+
+button:hover {
+    background-color: lightgrey;
+}

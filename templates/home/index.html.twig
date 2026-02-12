@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+
+{% block body %}
+    <link rel="stylesheet" href="{{ 'css/home.css' }}">
+    <div class="section profile-section">
+
+        <div class="section-content">
+            <h1>Choisir votre profil</h1>
+            <h3>SmartFuel s'adapte à vos besoins</h3>
+        </div>
+
+
+        <div class="profiles-container">
+
+            <div class="container-client">
+                <h4>Client</h4>
+                <ul>
+                    <li>Consultez l'historique de consommation</li>
+                    <li>Consulter la carte interactive</li>
+                    <li>Suivez vos dépenses</li>
+                    <li>Gérez votre profil</li>
+                </ul>
+                <button class="button-client">Accéder - client</button>
+            </div>
+
+            <div class="container-pompiste">
+                <h4>Pompiste</h4>
+                <ul>
+                    <li>Enregistrez les prises d'essence</li>
+                    <li>Consulter la carte interactive</li>
+                    <li>Recherchez par plaque d'immatriculation</li>
+                    <li>Gérez votre station</li>
+                    <li>Gérez votre profil</li>
+                </ul>
+                <button class="button-pompiste">Accéder - pompiste</button>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
