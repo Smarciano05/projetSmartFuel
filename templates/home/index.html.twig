@@ -4,42 +4,71 @@
 
 
 {% block body %}
-    <link rel="stylesheet" href="{{ 'css/home.css' }}">
-    <div class="section profile-section">
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 
-        <div class="section-content">
-            <h1>Choisir votre profil</h1>
-            <h3>SmartFuel s'adapte à vos besoins</h3>
-        </div>
+        <section class="section">
+            <div class="section-content">
 
+            </div>
+        </section>
 
-        <div class="profiles-container">
-
-            <div class="container-client">
-                <h4>Client</h4>
-                <ul>
-                    <li>Consultez l'historique de consommation</li>
-                    <li>Consulter la carte interactive</li>
-                    <li>Suivez vos dépenses</li>
-                    <li>Gérez votre profil</li>
-                </ul>
-                <button class="button-client">Accéder - client</button>
+        <section class="section">
+            <div class="section-content">
+                <h1>Choisir votre profil</h1>
+                <h3>SmartFuel s'adapte à vos besoins</h3>
             </div>
 
-            <div class="container-pompiste">
-                <h4>Pompiste</h4>
-                <ul>
-                    <li>Enregistrez les prises d'essence</li>
-                    <li>Consulter la carte interactive</li>
-                    <li>Recherchez par plaque d'immatriculation</li>
-                    <li>Gérez votre station</li>
-                    <li>Gérez votre profil</li>
-                </ul>
-                <button class="button-pompiste">Accéder - pompiste</button>
+            <div class="profiles-container">
+                <div class="container-client icon-container">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <h4 class="title">Client</h4>
+                    <ul class="profile-list">
+                        <li><span class="bullet"></span> Consultez l'historique de consommation</li>
+                        <li><span class="bullet"></span> Consulter la carte interactive</li>
+                        <li><span class="bullet"></span> Suivez vos dépenses</li>
+                        <li><span class="bullet"></span> Gérez votre profil</li>
+                    </ul>
+                    <button class="button-client">Accéder - client</button>
+                </div>
+
+                <div class="container-pompiste icon-container">
+                    <i class="fa-solid fa-gas-pump"></i>
+                    <h4 class="title">Pompiste</h4>
+                    <ul class="profile-list">
+                        <li><span class="bullet"></span> Enregistrez les prises d'essence</li>
+                        <li><span class="bullet"></span> Consulter la carte interactive</li>
+                        <li><span class="bullet"></span> Gérez votre station</li>
+                        <li><span class="bullet"></span> Gérez votre profil</li>
+                    </ul>
+                    <button class="button-pompiste">Accéder - pompiste</button>
+                </div>
             </div>
+        </section>
 
-        </div>
+        <section class="section">
+            <div class="section-content">
+                <h1> Fonctionnalités principales </h1>
+                <br>
+                <ul class="features-list">
+                <li>
+                    <i class="fa-solid fa-location-dot"></i>
+                    Carte Interactive
+                    <p> Localisez les stations disponibles en temps réel</p>
+                </li>
+                <li>
 
-    </div>
+                    <p> </p>
+                </li>
+                <li>
+
+                    <p></p>
+                </li>
+                <li>
+                    Profil
+                    <p>Gérez vos informations personnelles</p>
+                </li>
+                </ul>
+            </div>
+        </section>
 
 {% endblock %}
