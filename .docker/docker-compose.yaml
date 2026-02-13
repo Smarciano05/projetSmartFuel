@@ -1,13 +1,13 @@
 x-orbstack:
-  project: smartFuel
+  project: smartfuel
 
 services:
   db:
     image: mysql:8.0
     platform: linux/arm64
-    container_name: smartFuel_db
+    container_name: smartfuel_db
     volumes:
-      - "smartFuel_db_data:/var/lib/mysql"
+      - "smartfuel_db_data:/var/lib/mysql"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -17,50 +17,50 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - smartFuel_network
+      - smartfuel_network
 
   adminer:
     image: adminer
     platform: linux/arm64
-    container_name: smartFuel_adminer
+    container_name: smartfuel_adminer
     environment:
       ADMINER_DEFAULT_DB_DRIVER: mysql
-      ADMINER_DEFAULT_DB_HOST: smartFuel_db
+      ADMINER_DEFAULT_DB_HOST: smartfuel_db
       ADMINER_DEFAULT_DB_NAME: ${MYSQL_DATABASE}
-      ADMINER_DEFAULT_SERVER: smartFuel_db
+      ADMINER_DEFAULT_SERVER: smartfuel_db
     restart: always
     ports:
       - "127.0.0.1:8081:8080"
     depends_on:
       - db
     networks:
-      - smartFuel_network
+      - smartfuel_network
 
   php:
-    container_name: smartFuel_php
+    container_name: smartfuel_php
     platform: linux/arm64
     build:
       context: ./php
       args:
         TIMEZONE: ${TIMEZONE}
     volumes:
-      - ../:/var/www/smartFuel:cached
+      - ../:/var/www/smartfuel:cached
     networks:
-      - smartFuel_network
+      - smartfuel_network
     ports:
       - "9003:9003"
 
   nginx:
-    container_name: smartFuel_nginx
+    container_name: smartfuel_nginx
     platform: linux/arm64
     build:
       context: ./nginx
     volumes:
-      - ../:/var/www/smartFuel:cached
+      - ../:/var/www/smartfuel:cached
     ports:
       - "80:80"
     networks:
-      - smartFuel_network
+      - smartfuel_network
     env_file:
       - .env.nginx
     depends_on:
@@ -68,15 +68,15 @@ services:
 
   mailhog:
     image: mailhog/mailhog
-    container_name: smartFuel_mailhog
+    container_name: smartfuel_mailhog
     ports:
       - "2525:1025"
       - "8090:8025"
     networks:
-      - smartFuel_network
+      - smartfuel_network
 
 volumes:
-  smartFuel_db_data:
+  smartfuel_db_data:
 
 networks:
-  smartFuel_network:
+  smartfuel_network:

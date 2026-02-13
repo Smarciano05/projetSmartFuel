@@ -3,20 +3,21 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" href="/css/baseCSS.css"/>
+        <link rel="stylesheet"  href="{{ 'css/base.css' }}">
+
         {% block stylesheets %}
         {% endblock %}
 
     </head>
     <body>
         <div class="en_tete">
-            
+
             <img class="logoSite" src="/images/logoSite.png" alt="image_du_logo" height="60px" width="170px">
-        
+
             <button class="buttonCarte" ><img src="/images/logoCarte.png"> Carte </button>
             <button class="buttonRecherche" ><img src="/images/logoRecherche.png"> Recherche </button>
             <button class="buttonConnexion"> Connexion </button>
-            
+
         </div>
         {% block body %}{% endblock %}
     </body>

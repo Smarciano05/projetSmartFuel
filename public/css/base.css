@@ -1,7 +1,10 @@
 .en_tete{
 	height:80px;
     background-color: black;
-    display:grid; /*JE ne comprends pas*/
+    display:flex; /*JE ne comprends pas*/
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
 }
 *{ /* Pour que l'en-tete prend tous le fond du haut */
     margin: 0;
@@ -11,59 +14,59 @@
     margin: 10px 5px;
 }
 .buttonConnexion{
-    
+
     background-color: #4caf50; /* Vert */
     border-radius: 12px;
     border: 10px;
     color: black;
     padding: 10px 17px;
     text-align: center;
-  
+
     font-size: 17px; /*taille de la police*/
     font-family: sans-serif; /*police*/
     font-weight: bold;
-    margin: 20px 2px; 
+    margin: 20px 2px;
     cursor: pointer; /*souris change de disgn*/
     position: fixed; /*pour mettre à droite je dois obligatoirement mettre position: fixed puis right: nb%;*/
     right:5%;
-    
-    
+
+
 
 }
 .buttonRecherche{
-    background-color:black; 
+    background-color:black;
     border: 2px;
     color: white;
     padding: 10px 17px;
-    
+
     font-size: 17px; /*taille de la police*/
     font-family: sans-serif;
     font-weight: bold;
-    margin: 15px 10px; 
+    margin: 15px 10px;
     cursor: pointer; /*souris change de disgn*/
     position: fixed;
     right: 18%;
     /*pour que le logo et le texte soit au centre du boutton bien aligné*/
     display: flex;       /*MET LE LOGO ET LE texte aligné mais PAS au centre*/
     align-items: center;  /*besoin de display: flex pour que ça aligne  et puis lui il va centrer*/
-    
+
 
 }
 .buttonCarte{
-    background-color:black; 
+    background-color:black;
     border: 2px;
     color: white;
     padding: 10px 17px;
     text-align: center;
- 
+
     font-size: 17px; /*taille de la police*/
     font-family: sans-serif;
     font-weight: bold;
-    margin: 15px 10px; 
+    margin: 15px 10px;
     cursor: pointer; /*souris change de disgn*/
     position: fixed;
     right: 30%;
-    display: flex;      
+    display: flex;
     align-items: center;
 
 }
