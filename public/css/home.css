@@ -67,6 +67,7 @@
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
+  
 
 }
 .button-pompiste{
@@ -78,9 +79,8 @@
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
+    
 
 }
 
-button:hover {
-    background-color: lightgrey;
-}
+

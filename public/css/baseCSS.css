@@ -10,7 +10,7 @@
 .logoSite{
     margin: 10px 5px;
 }
-.buttonConnexion{
+.btn.buttonConnexion{
     
     background-color: #4caf50; /* Vert */
     border-radius: 12px;
@@ -30,12 +30,12 @@
     
 
 }
-.buttonRecherche{
+.btn.buttonRecherche{
     background-color:black; 
     border: 2px;
     color: white;
     padding: 10px 17px;
-    
+    border-radius: 12px;
     font-size: 17px; /*taille de la police*/
     font-family: sans-serif;
     font-weight: bold;
@@ -49,13 +49,13 @@
     
 
 }
-.buttonCarte{
+.btn.buttonCarte{
     background-color:black; 
     border: 2px;
     color: white;
     padding: 10px 17px;
     text-align: center;
- 
+    border-radius: 12px;
     font-size: 17px; /*taille de la police*/
     font-family: sans-serif;
     font-weight: bold;
@@ -63,6 +63,25 @@
     cursor: pointer; /*souris change de disgn*/
     position: fixed;
     right: 30%;
+    display: flex;      
+    align-items: center;
+
+}
+
+.btn.buttonAccueil{
+    background-color:black; 
+    border: 2px;
+    color: white;
+    padding: 13px 17px; 
+    text-align: center;
+    border-radius: 12px;
+    font-size: 17px; /*taille de la police*/
+    font-family: sans-serif;
+    font-weight: bold;
+    margin: 15px 10px; 
+    cursor: pointer; /*souris change de disgn*/
+    position: fixed;
+    right: 40%;
     display: flex;      
     align-items: center;
 

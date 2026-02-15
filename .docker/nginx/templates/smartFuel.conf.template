@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name ${NGINX_BACKEND_DOMAIN};
+    server_name ${smartfuel.local};
     root /var/www/smartFuel/public;
 
     index index.php index.html index.htm;
