@@ -63,4 +63,8 @@ RUN echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/xdebug.ini
 RUN npm install -g yarn
 
 # Définir le répertoire de travail
+<<<<<<< HEAD
 WORKDIR /var/www/smartFuel
+=======
+WORKDIR /var/www/smartfuel
+>>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79

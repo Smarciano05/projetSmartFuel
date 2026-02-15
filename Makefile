@@ -1,6 +1,10 @@
 # Path to the docker-compose file
 DOCKER_COMPOSE_FILEPATH=.docker/docker-compose.yaml
+<<<<<<< HEAD
 DOCKER_PHP_CONTAINER=smartFuel_php
+=======
+DOCKER_PHP_CONTAINER=smartfuel_php
+>>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79
 
 # Start the containers in the background
 up:
@@ -30,13 +34,29 @@ clean:
 restart: down up
 
 # Connect to the PHP container
-start:
+shell:
 	docker exec -it $(DOCKER_PHP_CONTAINER) /bin/bash
 
 # Run composer install
 composer-install:
 	docker exec $(DOCKER_PHP_CONTAINER) composer install
 
-# Regénérer l'autoloading de Composer
+# Regenerate Composer autoloading
 dump-autoload:
 	docker exec $(DOCKER_PHP_CONTAINER) composer dump-autoload
+
+# Run Symfony console commands
+sf:
+	docker exec $(DOCKER_PHP_CONTAINER) php bin/console
+
+# Clear the Symfony cache
+cache-clear:
+	docker exec $(DOCKER_PHP_CONTAINER) php bin/console cache:clear
+
+# Run database migrations
+migrate:
+	docker exec $(DOCKER_PHP_CONTAINER) php bin/console doctrine:migrations:migrate --no-interaction
+
+# Run PHPUnit tests
+test:
+	docker exec $(DOCKER_PHP_CONTAINER) ./vendor/bin/phpunit

@@ -1,24 +1,29 @@
 /* Chaque section full-screen et full-width */
-
 .section {
     width: 100%;
     min-height: 90vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* commence en haut */
-    align-items: center;         /* centre horizontalement */
+    justify-content: flex-start;
+    align-items: center;
     padding: 4rem 2rem;
     box-sizing: border-box;
-    background-color: white;
 }
+
+/* Contenu centré et espacé */
 .section-content {
     text-align: center;
     color: black;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
 }
 
-.section-content {
-    margin-bottom: 50px;
+/* Alternance automatique des couleurs de fond */
+.section:nth-of-type(odd) {
+    background-color: #ffffff; /* blanc */
+}
+
+.section:nth-of-type(even) {
+    background-color: whitesmoke;
 }
 
 /* Conteneur des deux profils */
@@ -29,36 +34,35 @@
     width: 100%;
     max-width: 1000px;
     align-items: stretch;
-
+    margin: 0 auto;
 }
 
-/* Style des cartes */
-.container-client{
-    background-color: white;
-    color: black;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    text-align: left;
-    display: flex;              /* IMPORTANT */
-    flex-direction: column;     /* IMPORTANT */
-    flex: 1;
-
-}
+/* Cartes Profil */
+.container-client,
 .container-pompiste {
     background-color: white;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    text-align: left;
-    color: black;
-    display: flex;              /* IMPORTANT */
-    flex-direction: column;     /* IMPORTANT */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     flex: 1;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 320px;
 }
 
 
-.button-client{
+/* Titres */
+.title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 1rem 0;
+    color: black;
+}
+
+/* Boutons */
+.button-client {
     margin-top: auto;
     padding: 10px 20px;
     background-color: #22c55e;
@@ -67,10 +71,15 @@
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
+<<<<<<< HEAD
   
 
+=======
+    transition: background-color 0.2s;
+>>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79
 }
-.button-pompiste{
+
+.button-pompiste {
     margin-top: auto;
     padding: 10px 20px;
     background-color: black;
@@ -79,8 +88,100 @@
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
+<<<<<<< HEAD
     
 
 }
 
 
+=======
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #16a34a; /* vert foncé sur hover pour client */
+}
+
+/* Icônes dans un cercle coloré */
+.icon-container i {
+    font-size: 5rem;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* Couleurs des icônes */
+.container-client .fa-circle-user {
+    color: white;
+    background-color: #22c55e; /* vert */
+}
+
+.container-pompiste .fa-gas-pump {
+    color: white;
+    background-color: black;
+}
+
+/* Liste profil avec puces colorées */
+.profile-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.profile-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    color: #555;
+}
+
+.profile-list li .bullet {
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #22c55e;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* Grid pour les blocs de fonctionnalités */
+.features-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.features-list li {
+    background-color: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+    min-height: 220px;
+}
+
+.features-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    background-color: #22c55e;
+}
+
+.features-list li p {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #555;
+}
+>>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79

@@ -1,7 +1,10 @@
 .en_tete{
 	height:80px;
     background-color: black;
-    display:grid; /*JE ne comprends pas*/
+    display:flex; /*JE ne comprends pas*/
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
 }
 *{ /* Pour que l'en-tete prend tous le fond du haut */
     margin: 0;
@@ -10,60 +13,84 @@
 .logoSite{
     margin: 10px 5px;
 }
+<<<<<<< HEAD:public/css/baseCSS.css
 .btn.buttonConnexion{
     
     background-color: #4caf50; /* Vert */
+=======
+.buttonConnexion{
+
+    background-color: #22c55e;/* Vert */
+>>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79:public/css/base.css
     border-radius: 12px;
     border: 10px;
     color: black;
     padding: 10px 17px;
     text-align: center;
-  
+
     font-size: 17px; /*taille de la police*/
     font-family: sans-serif; /*police*/
     font-weight: bold;
-    margin: 20px 2px; 
+    margin: 20px 2px;
     cursor: pointer; /*souris change de disgn*/
     position: fixed; /*pour mettre à droite je dois obligatoirement mettre position: fixed puis right: nb%;*/
     right:5%;
-    
-    
+
+
 
 }
+<<<<<<< HEAD:public/css/baseCSS.css
 .btn.buttonRecherche{
     background-color:black; 
     border: 2px;
     color: white;
     padding: 10px 17px;
     border-radius: 12px;
+=======
+.buttonRecherche{
+    background-color:black;
+    border: 2px;
+    color: white;
+    padding: 10px 17px;
+
+>>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79:public/css/base.css
     font-size: 17px; /*taille de la police*/
     font-family: sans-serif;
     font-weight: bold;
-    margin: 15px 10px; 
+    margin: 15px 10px;
     cursor: pointer; /*souris change de disgn*/
     position: fixed;
     right: 18%;
     /*pour que le logo et le texte soit au centre du boutton bien aligné*/
     display: flex;       /*MET LE LOGO ET LE texte aligné mais PAS au centre*/
     align-items: center;  /*besoin de display: flex pour que ça aligne  et puis lui il va centrer*/
-    
+
 
 }
+<<<<<<< HEAD:public/css/baseCSS.css
 .btn.buttonCarte{
     background-color:black; 
+=======
+.buttonCarte{
+    background-color:black;
+>>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79:public/css/base.css
     border: 2px;
     color: white;
     padding: 10px 17px;
     text-align: center;
+<<<<<<< HEAD:public/css/baseCSS.css
     border-radius: 12px;
+=======
+
+>>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79:public/css/base.css
     font-size: 17px; /*taille de la police*/
     font-family: sans-serif;
     font-weight: bold;
-    margin: 15px 10px; 
+    margin: 15px 10px;
     cursor: pointer; /*souris change de disgn*/
     position: fixed;
     right: 30%;
-    display: flex;      
+    display: flex;
     align-items: center;
 
 }

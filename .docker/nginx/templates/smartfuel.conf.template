@@ -1,7 +1,12 @@
 server {
     listen 80;
+<<<<<<< HEAD:.docker/nginx/templates/smartFuel.conf.template
     server_name ${smartfuel.local};
     root /var/www/smartFuel/public;
+=======
+    server_name ${NGINX_BACKEND_DOMAIN};
+    root /var/www/smartfuel/public;
+>>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79:.docker/nginx/templates/smartfuel.conf.template
 
     index index.php index.html index.htm;
 
@@ -22,7 +27,7 @@ server {
         add_header 'Access-Control-Allow-Origin' '*' always;
         add_header 'Access-Control-Allow-Methods' 'GET, POST, DELETE, OPTIONS' always;
         add_header 'Access-Control-Allow-Headers' 'Authorization,DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range' always;
-        add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;
+        add_header 'Access-Control-Exposmartse-Headers' 'Content-Length,Content-Range' always;
 
         fastcgi_pass php:9000;
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
