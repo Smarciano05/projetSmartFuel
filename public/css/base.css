@@ -1,27 +1,25 @@
-.en_tete{
-	height:80px;
+.en_tete {
+    height: 80px;
     background-color: black;
-    display:flex; /*JE ne comprends pas*/
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
+    display: grid;
+    position: fixed;  /* AJOUTEZ CECI - rend tout l'en-tête fixe */
+    top: 0;           /* COLLÉ EN HAUT */
+    left: 0;          /* COLLÉ À GAUCHE */
+    width: 100%;      /* PREND TOUTE LA LARGEUR */
+    z-index: 1000;    /* AU-DESSUS DU RESTE */
 }
 *{ /* Pour que l'en-tete prend tous le fond du haut */
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+   
 }
 .logoSite{
     margin: 10px 5px;
 }
-<<<<<<< HEAD:public/css/baseCSS.css
-.btn.buttonConnexion{
-    
-    background-color: #4caf50; /* Vert */
-=======
 .buttonConnexion{
 
     background-color: #22c55e;/* Vert */
->>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79:public/css/base.css
     border-radius: 12px;
     border: 10px;
     color: black;
@@ -39,21 +37,12 @@
 
 
 }
-<<<<<<< HEAD:public/css/baseCSS.css
 .btn.buttonRecherche{
     background-color:black; 
     border: 2px;
     color: white;
     padding: 10px 17px;
     border-radius: 12px;
-=======
-.buttonRecherche{
-    background-color:black;
-    border: 2px;
-    color: white;
-    padding: 10px 17px;
-
->>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79:public/css/base.css
     font-size: 17px; /*taille de la police*/
     font-family: sans-serif;
     font-weight: bold;
@@ -67,22 +56,13 @@
 
 
 }
-<<<<<<< HEAD:public/css/baseCSS.css
 .btn.buttonCarte{
     background-color:black; 
-=======
-.buttonCarte{
-    background-color:black;
->>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79:public/css/base.css
     border: 2px;
     color: white;
     padding: 10px 17px;
     text-align: center;
-<<<<<<< HEAD:public/css/baseCSS.css
     border-radius: 12px;
-=======
-
->>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79:public/css/base.css
     font-size: 17px; /*taille de la police*/
     font-family: sans-serif;
     font-weight: bold;

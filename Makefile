@@ -1,10 +1,6 @@
 # Path to the docker-compose file
 DOCKER_COMPOSE_FILEPATH=.docker/docker-compose.yaml
-<<<<<<< HEAD
-DOCKER_PHP_CONTAINER=smartFuel_php
-=======
 DOCKER_PHP_CONTAINER=smartfuel_php
->>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79
 
 # Start the containers in the background
 up:

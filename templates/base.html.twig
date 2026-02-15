@@ -3,13 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}{% endblock %}</title>
-<<<<<<< HEAD
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="/css/baseCSS.css"/>
-=======
         <link rel="stylesheet" href="{{ asset('css/base.css') }}">
-
->>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79
         {% block stylesheets %}
         {% endblock %}
 
@@ -18,20 +13,12 @@
         <div class="en_tete">
 
             <img class="logoSite" src="/images/logoSite.png" alt="image_du_logo" height="60px" width="170px">
-<<<<<<< HEAD
         
             <button class="btn buttonAccueil"> Accueil </button>
             <button class="btn buttonCarte" ><img src="/images/logoCarte.png"> Carte </button>
             <button class="btn buttonRecherche" ><img src="/images/logoRecherche.png"> Recherche </button>
             <button class="btn buttonConnexion"> Connexion </button>
             
-=======
-
-            <button class="buttonCarte" ><img src="/images/logoCarte.png"> Carte </button>
-            <button class="buttonRecherche" ><img src="/images/logoRecherche.png"> Recherche </button>
-            <button class="buttonConnexion"> Connexion </button>
-
->>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79
         </div>
         {% block body %}{% endblock %}
 

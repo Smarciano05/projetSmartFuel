@@ -1,12 +1,7 @@
 server {
     listen 80;
-<<<<<<< HEAD:.docker/nginx/templates/smartFuel.conf.template
-    server_name ${smartfuel.local};
-    root /var/www/smartFuel/public;
-=======
     server_name ${NGINX_BACKEND_DOMAIN};
     root /var/www/smartfuel/public;
->>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79:.docker/nginx/templates/smartfuel.conf.template
 
     index index.php index.html index.htm;
 

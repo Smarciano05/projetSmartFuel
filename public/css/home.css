@@ -71,12 +71,7 @@
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-<<<<<<< HEAD
-  
-
-=======
     transition: background-color 0.2s;
->>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79
 }
 
 .button-pompiste {
@@ -88,13 +83,6 @@
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-<<<<<<< HEAD
-    
-
-}
-
-
-=======
     transition: background-color 0.2s;
 }
 
@@ -184,4 +172,3 @@ button:hover {
     font-size: 1rem;
     color: #555;
 }
->>>>>>> 974e780a984f75e3b60d35910dc2d13c140d4d79
