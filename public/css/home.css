@@ -178,3 +178,29 @@ button:hover {
     margin-bottom: 1rem;
     color: #22c55e; /* vert neutre */
 }
+
+
+
+
+/*css partie image et texte sur image mariam*/
+
+.section_imageSF {
+    height: 100vh; /* prend toute la hauteur de l'écran */
+    background-image: url("../images/imageSF1.jpg"); /* ton image */
+    background-size: cover; /* couvre tout l'écran */
+    background-position: center; /* centre l'image */
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Pour assombrir légèrement l'image (optionnel mais pro) */
+.class_imageSF {
+    background-color: rgba(0, 0, 0, 0.5); /* noir transparent */
+    color: white;
+    text-align: center;
+    padding: 40px;
+    border-radius: 10px;
+}
