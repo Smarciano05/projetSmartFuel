@@ -13,14 +13,20 @@
         <div class="en_tete">
 
             <img class="logoSite" src="/images/logoSite.png" alt="image_du_logo" height="60px" width="170px">
-        
+
             <button class="btn buttonAccueil"> Accueil </button>
             <button class="btn buttonCarte" ><img src="/images/logoCarte.png"> Carte </button>
             <button class="btn buttonRecherche" ><img src="/images/logoRecherche.png"> Recherche </button>
             <button class="btn buttonConnexion"> Connexion </button>
-            
+
         </div>
         {% block body %}{% endblock %}
+
+        <footer>
+            <div class="container">
+                <p class="mb-0">© {{ "now"|date("Y") }} SmartFuel - Tous droits réservés.</p>
+            </div>
+        </footer>
 
         <script src="https://kit.fontawesome.com/1497a6bbb1.js" crossorigin="anonymous"></script>
 
