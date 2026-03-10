@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enregistrer une prise d'essence{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('css/enregistrerEssence.css') }}">
+
+    <div class="max-w-2xl">
+        <!-- Titre -->
+        <div class="mb-6">
+            <h1>Enregistrer une prise d'essence</h1>
+            <p>Remplissez le formulaire pour enregistrer le plein</p>
+        </div>
+
+        <!-- Card formulaire -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Formulaire d'enregistrement</h2>
+                <p class="card-description">
+                    Station :
+                </p>
+            </div>
+
+            <div class="card-content">
+                {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+
+                {{ form_row(form.immatriculation) }}
+                {{ form_row(form.date) }}
+                {{ form_row(form.typeCarburant) }}
+                {{ form_row(form.quantite) }}
+
+                <button type="submit" class="button w-full">
+                    Enregistrer la prise d'essence
+                </button>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

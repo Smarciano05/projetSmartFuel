@@ -30,6 +30,13 @@ class Station
     #[ORM\OneToMany(targetEntity: EnregistrementEssence::class, mappedBy: 'station')]
     private Collection $enregistrementEssences;
 
+    #[ORM\Column]
+    private ?float $latitude = null;
+
+    #[ORM\Column]
+    private ?float $longitude = null;
+
+
     public function __construct()
     {
         $this->pompistes = new ArrayCollection();
@@ -109,6 +116,30 @@ class Station
                 $enregistrementEssence->setStation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(float $longitude): static
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(float $latitude): static
+    {
+        $this->latitude = $latitude;
 
         return $this;
     }

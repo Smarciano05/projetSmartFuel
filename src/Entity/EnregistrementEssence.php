@@ -14,12 +14,11 @@ class EnregistrementEssence
     #[ORM\Column]
     private ?int $id = null;
 
-
     #[ORM\Column(length: 255)]
     private ?string $type_carburant = null;
 
     #[ORM\Column]
-    private ?int $quantite = null;
+    private ?float $quantite = null;
 
     #[ORM\ManyToOne(inversedBy: 'enregistrementEssences')]
     #[ORM\JoinColumn(nullable: false)]
@@ -37,8 +36,8 @@ class EnregistrementEssence
     #[ORM\JoinColumn(nullable: false)]
     private ?Immatriculation $immatriculation = null;
 
-    #[ORM\Column]
-    private ?\DateTime $date = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
 
     public function getId(): ?int
     {
@@ -57,12 +56,12 @@ class EnregistrementEssence
         return $this;
     }
 
-    public function getQuantite(): ?int
+    public function getQuantite(): ?float
     {
         return $this->quantite;
     }
 
-    public function setQuantite(int $quantite): static
+    public function setQuantite(float $quantite): static
     {
         $this->quantite = $quantite;
 
@@ -117,15 +116,15 @@ class EnregistrementEssence
         return $this;
     }
 
-    public function getDate(): ?\DateTime
+    public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(\DateTime $date): static
+    public function setDate(?\DateTimeInterface $date): void
     {
         $this->date = $date;
-
-        return $this;
     }
+
+
 }
