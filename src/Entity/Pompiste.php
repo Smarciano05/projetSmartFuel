@@ -15,37 +15,23 @@ class Pompiste
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::NUMBER)]
-    private ?Number $IDPompiste = null;
-
     #[ORM\Column(length: 255)]
     private ?string $NomPompiste = null;
 
     #[ORM\Column(length: 255)]
     private ?string $PrenomPompiste = null;
 
-    #[ORM\Column(type: Types::NUMBER)]
-    private ?Number $IDStation = null;
+    #[ORM\ManyToOne(targetEntity: Stations::class, inversedBy: 'pompistes')]
+    #[ORM\JoinColumn(name: 'IDStation', referencedColumnName: 'id', nullable: false)]
+    private ?Stations $station = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $NomStation = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIDPompiste(): ?Number
-    {
-        return $this->IDPompiste;
-    }
-
-    public function setIDPompiste(Number $IDPompiste): static
-    {
-        $this->IDPompiste = $IDPompiste;
-
-        return $this;
-    }
+    
 
     public function getNomPompiste(): ?string
     {
@@ -71,27 +57,14 @@ class Pompiste
         return $this;
     }
 
-    public function getIDStation(): ?Number
+    public function getStation(): ?Stations
     {
-        return $this->IDStation;
+        return $this->station;
     }
 
-    public function setIDStation(Number $IDStation): static
+    public function setStation(?Stations $station): self
     {
-        $this->IDStation = $IDStation;
-
-        return $this;
-    }
-
-    public function getNomStation(): ?string
-    {
-        return $this->NomStation;
-    }
-
-    public function setNomStation(string $NomStation): static
-    {
-        $this->NomStation = $NomStation;
-
+        $this->station = $station;
         return $this;
     }
 }
