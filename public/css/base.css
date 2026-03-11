@@ -12,7 +12,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-   
 }
 .logoSite{
     margin: 10px 5px;
@@ -92,4 +91,14 @@
     display: flex;      
     align-items: center;
 
+}
+
+footer{
+   background-color: black; 
+   color: white;
+   padding: 20px 0px 0px 20px;
+}
+
+.container{
+    text-align: center;
 }
