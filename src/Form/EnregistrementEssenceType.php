@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EnregistrerEssenceType extends AbstractType
+class EnregistrementEssenceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -24,7 +24,7 @@ class EnregistrerEssenceType extends AbstractType
             ])
             ->add('date', DateTimeType::class,[
                 'widget' => 'single_text',
-                'label' => 'Date et heure de l\'enregistrement',
+                'label' => 'Date et heure ',
             ])
             ->add('typeCarburant', ChoiceType::class , [
                 'label' => 'Type de carburant',
@@ -51,7 +51,6 @@ class EnregistrerEssenceType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        //permet de relier au formulaire à l'entité EnregistrementEssence
         $resolver->setDefaults([
             'data_class' => EnregistrementEssence::class,
         ]);

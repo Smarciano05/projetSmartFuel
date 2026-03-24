@@ -3,7 +3,7 @@
 {% block title %}Enregistrer une prise d'essence{% endblock %}
 
 {% block body %}
-    <link rel="stylesheet" href="{{ asset('css/enregistrerEssence.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/prise_essence/new.css') }}">
 
     <div class="max-w-2xl">
         <!-- Titre -->
@@ -17,7 +17,7 @@
             <div class="card-header">
                 <h2 class="card-title">Formulaire d'enregistrement</h2>
                 <p class="card-description">
-                    Station :
+                    Station :  {{ station.nom }}
                 </p>
             </div>
 

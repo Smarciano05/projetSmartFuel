@@ -1,0 +1,59 @@
+/* new.css */
+
+/* Reset et box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.max-w-2xl {
+    max-width: 42rem;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #111; }
+p { color: #4b5563; }
+
+/* Card */
+.card {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.card-header { padding: 1rem 1.5rem; border-bottom: 1px solid #e5e7eb; }
+.card-title { font-size: 1.25rem; font-weight: bold; }
+.card-description { font-size: 0.875rem; color: #6b7280; }
+.card-content { padding: 1.5rem; }
+
+.space-y-6 > * + * { margin-top: 1.5rem; }
+
+/* Labels et champs Symfony */
+label { font-weight: 500; display: block; margin-bottom: 0.25rem; }
+input, select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+}
+input[readonly] { background-color: #f9fafb; cursor: not-allowed; }
+
+/* Bouton */
+button.button {
+    background-color: #111;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+button.button:hover { background-color: #1f2937; }
+button.w-full { width: 100%; }
