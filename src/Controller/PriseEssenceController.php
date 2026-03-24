@@ -58,7 +58,7 @@ final class PriseEssenceController extends AbstractController
             $enregistrementEssence->setClient($immatriculation->getClient());
 
             // Recuperer les données du formulaire
-            $enregistrementEssence->setDate(new \DateTime());
+            $enregistrementEssence->setDate(new \DateTimeImmutable());
             $enregistrementEssence->setTypeCarburant($form->get('typeCarburant')->getData());
             $enregistrementEssence->setQuantite($form->get('quantite')->getData());
 

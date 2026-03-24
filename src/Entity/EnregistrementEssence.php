@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: EnregistrementEssenceRepository::class)]
 class EnregistrementEssence
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -38,6 +39,14 @@ class EnregistrementEssence
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
+
+    /**
+     * @param \DateTimeInterface|null $date
+     */
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
 
     public function getId(): ?int
     {
