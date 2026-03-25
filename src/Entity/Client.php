@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\PompisteRepository;
+use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PompisteRepository::class)]
-class Pompiste
+#[ORM\Entity(repositoryClass: ClientRepository::class)]
+class Client
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,27 +21,28 @@ class Pompiste
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
-    #[ORM\ManyToOne(inversedBy: 'pompistes')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Station $station = null;
+    /**
+     * @var Collection<int, Immatriculation>
+     */
+    #[ORM\OneToMany(targetEntity: Immatriculation::class, mappedBy: 'client')]
+    private Collection $immatriculations;
 
     /**
      * @var Collection<int, EnregistrementEssence>
      */
-    #[ORM\OneToMany(targetEntity: EnregistrementEssence::class, mappedBy: 'pompiste')]
+    #[ORM\OneToMany(targetEntity: EnregistrementEssence::class, mappedBy: 'client')]
     private Collection $enregistrementEssences;
 
     public function __construct()
     {
+        $this->immatriculations = new ArrayCollection();
         $this->enregistrementEssences = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
         return $this->id;
     }
-
 
     public function getNom(): ?string
     {
@@ -67,14 +68,32 @@ class Pompiste
         return $this;
     }
 
-    public function getStation(): ?Station
+    /**
+     * @return Collection<int, Immatriculation>
+     */
+    public function getImmatriculations(): Collection
     {
-        return $this->station;
+        return $this->immatriculations;
     }
 
-    public function setStation(?Station $station): static
+    public function addImmatriculation(Immatriculation $immatriculation): static
     {
-        $this->station = $station;
+        if (!$this->immatriculations->contains($immatriculation)) {
+            $this->immatriculations->add($immatriculation);
+            $immatriculation->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImmatriculation(Immatriculation $immatriculation): static
+    {
+        if ($this->immatriculations->removeElement($immatriculation)) {
+            // set the owning side to null (unless already changed)
+            if ($immatriculation->getClient() === $this) {
+                $immatriculation->setClient(null);
+            }
+        }
 
         return $this;
     }
@@ -91,7 +110,7 @@ class Pompiste
     {
         if (!$this->enregistrementEssences->contains($enregistrementEssence)) {
             $this->enregistrementEssences->add($enregistrementEssence);
-            $enregistrementEssence->setPompiste($this);
+            $enregistrementEssence->setClient($this);
         }
 
         return $this;
@@ -101,13 +120,11 @@ class Pompiste
     {
         if ($this->enregistrementEssences->removeElement($enregistrementEssence)) {
             // set the owning side to null (unless already changed)
-            if ($enregistrementEssence->getPompiste() === $this) {
-                $enregistrementEssence->setPompiste(null);
+            if ($enregistrementEssence->getClient() === $this) {
+                $enregistrementEssence->setClient(null);
             }
         }
 
         return $this;
     }
-
-
 }

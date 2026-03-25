@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\PompisteRepository;
+use App\Repository\StationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PompisteRepository::class)]
-class Pompiste
+#[ORM\Entity(repositoryClass: StationRepository::class)]
+class Station
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,30 +18,28 @@ class Pompiste
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $prenom = null;
-
-    #[ORM\ManyToOne(inversedBy: 'pompistes')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Station $station = null;
+    /**
+     * @var Collection<int, Pompiste>
+     */
+    #[ORM\OneToMany(targetEntity: Pompiste::class, mappedBy: 'station')]
+    private Collection $pompistes;
 
     /**
      * @var Collection<int, EnregistrementEssence>
      */
-    #[ORM\OneToMany(targetEntity: EnregistrementEssence::class, mappedBy: 'pompiste')]
+    #[ORM\OneToMany(targetEntity: EnregistrementEssence::class, mappedBy: 'station')]
     private Collection $enregistrementEssences;
 
     public function __construct()
     {
+        $this->pompistes = new ArrayCollection();
         $this->enregistrementEssences = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
         return $this->id;
     }
-
 
     public function getNom(): ?string
     {
@@ -55,26 +53,32 @@ class Pompiste
         return $this;
     }
 
-    public function getPrenom(): ?string
+    /**
+     * @return Collection<int, Pompiste>
+     */
+    public function getPompistes(): Collection
     {
-        return $this->prenom;
+        return $this->pompistes;
     }
 
-    public function setPrenom(string $prenom): static
+    public function addPompiste(Pompiste $pompiste): static
     {
-        $this->prenom = $prenom;
+        if (!$this->pompistes->contains($pompiste)) {
+            $this->pompistes->add($pompiste);
+            $pompiste->setStation($this);
+        }
 
         return $this;
     }
 
-    public function getStation(): ?Station
+    public function removePompiste(Pompiste $pompiste): static
     {
-        return $this->station;
-    }
-
-    public function setStation(?Station $station): static
-    {
-        $this->station = $station;
+        if ($this->pompistes->removeElement($pompiste)) {
+            // set the owning side to null (unless already changed)
+            if ($pompiste->getStation() === $this) {
+                $pompiste->setStation(null);
+            }
+        }
 
         return $this;
     }
@@ -91,7 +95,7 @@ class Pompiste
     {
         if (!$this->enregistrementEssences->contains($enregistrementEssence)) {
             $this->enregistrementEssences->add($enregistrementEssence);
-            $enregistrementEssence->setPompiste($this);
+            $enregistrementEssence->setStation($this);
         }
 
         return $this;
@@ -101,13 +105,11 @@ class Pompiste
     {
         if ($this->enregistrementEssences->removeElement($enregistrementEssence)) {
             // set the owning side to null (unless already changed)
-            if ($enregistrementEssence->getPompiste() === $this) {
-                $enregistrementEssence->setPompiste(null);
+            if ($enregistrementEssence->getStation() === $this) {
+                $enregistrementEssence->setStation(null);
             }
         }
 
         return $this;
     }
-
-
 }
