@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/projetSmartFuel.iml" filepath="$PROJECT_DIR$/.idea/projetSmartFuel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/projetSmartfuel.iml" filepath="$PROJECT_DIR$/.idea/projetSmartfuel.iml" />
     </modules>
   </component>
 </project>
