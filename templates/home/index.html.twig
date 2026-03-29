@@ -1,51 +1,54 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Accueil{% endblock %}
-
-
-{% block body %}
+{% block stylesheets %}
+    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+{% endblock %}
 
-        <section class="section_imageSF">
-            <div class="class_imageSF">
+{% block main %}
+
+
+    <section class="section_imageSF">
+        <div class="class_imageSF">
             <h1>Gestion Intelligente de Carburant</h1>
-            <p>Suivez vos consommations, localisez les stations et gérez vos opérations en temps réel</p>
-                <button class="button-pompiste">En savoir plus</button>
+            <p>Suivez vos consommations, localisez les Stations et gérez vos opérations en temps réel</p>
+            <button class="button-pompiste">En savoir plus</button>
 
 
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-content">
+            <h1>Choisir votre profil</h1>
+            <h3>SmartFuel s'adapte à vos besoins</h3>
+        </div>
+
+        <div class="profiles-container">
+            <div class="container-client icon-container">
+                <i class="fa-solid fa-circle-user"></i>
+                <h4 class="title">Client</h4>
+                <ul class="profile-list">
+                    <li><span class="bullet"></span> Consultez l'historique de consommation</li>
+                    <li><span class="bullet"></span> Suivez vos dépenses</li>
+
+
+                </ul>
+                <button class="button-client">Accéder - client</button>
             </div>
-        </section>
 
-        <section class="section">
-            <div class="section-content">
-                <h1>Choisir votre profil</h1>
-                <h3>SmartFuel s'adapte à vos besoins</h3>
+            <div class="container-pompiste icon-container">
+                <i class="fa-solid fa-gas-pump"></i>
+                <h4 class="title">Pompiste</h4>
+                <ul class="profile-list">
+                    <li><span class="bullet"></span> Enregistrez les prises d'essence</li>
+                    <li><span class="bullet"></span> Gérez votre Stations</li>
+                </ul>
+                <button class="button-pompiste">Accéder - pompiste</button>
             </div>
-
-            <div class="profiles-container">
-                <div class="container-client icon-container">
-                    <i class="fa-solid fa-circle-user"></i>
-                    <h4 class="title">Client</h4>
-                    <ul class="profile-list">
-                        <li><span class="bullet"></span> Consultez l'historique de consommation</li>
-                        <li><span class="bullet"></span> Suivez vos dépenses</li>
-
-
-                    </ul>
-                    <button class="button-client">Accéder - client</button>
-                </div>
-
-                <div class="container-pompiste icon-container">
-                    <i class="fa-solid fa-gas-pump"></i>
-                    <h4 class="title">Pompiste</h4>
-                    <ul class="profile-list">
-                        <li><span class="bullet"></span> Enregistrez les prises d'essence</li>
-                        <li><span class="bullet"></span> Gérez votre station</li>
-                    </ul>
-                    <button class="button-pompiste">Accéder - pompiste</button>
-                </div>
-            </div>
-        </section>
+        </div>
+    </section>
     <section class="section">
         <div class="section-content">
             <h1>Fonctionnalités principales</h1>
@@ -54,17 +57,17 @@
                 <li>
                     <i class="fa-solid fa-location-dot"></i>
                     <h4>Carte Interactive</h4>
-                    <p>Localisez les stations disponibles en temps réel</p>
+                    <p>Localisez les Stations disponibles en temps réel</p>
                 </li>
                 <li>
                     <i class="fa-solid fa-dollar-sign"></i>
-                   <h4>Tarifs carburants</h4>
-                    <p>Consultez les prix du carburant par station</p>
+                    <h4>Tarifs carburants</h4>
+                    <p>Consultez les prix du carburant par Stations</p>
                 </li>
                 <li>
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <h4>Recherche rapide</h4>
-                    <p>Trouvez facilement une station ou un véhicule par plaque d’immatriculation</p>
+                    <p>Trouvez facilement une Stations ou un véhicule par plaque d’immatriculation</p>
                 </li>
                 <li>
                     <i class="fa-solid fa-user"></i>

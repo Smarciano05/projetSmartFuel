@@ -16,28 +16,20 @@ class EnregistrementEssenceRepository extends ServiceEntityRepository
         parent::__construct($registry, EnregistrementEssence::class);
     }
 
-    //    /**
-    //     * @return EnregistrementEssence[] Returns an array of EnregistrementEssence objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('e.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?EnregistrementEssence
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Récupère l'historique d'un client par son ID
+     */
+    public function findByClientId(int $clientId): array
+    {
+        return $this->createQueryBuilder('e') // 'e' = alias pour EnregistrementEssence
+        ->innerJoin('e.station', 's')    // join pour charger la station
+        ->addSelect('s')                 // sélectionner la station pour éviter lazy loading
+        ->innerJoin('e.immatriculation', 'i') // join pour charger l'immatriculation
+        ->addSelect('i')                 // sélectionner l'immatriculation
+        ->where('e.client = :clientId')  // filtrer par client
+        ->setParameter('clientId', $clientId)
+            ->orderBy('e.date', 'DESC')      // ordre par date décroissante
+            ->getQuery()
+            ->getResult();                   // renvoie un tableau d'entités
+    }
 }
