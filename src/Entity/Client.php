@@ -3,17 +3,34 @@
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\DBAL\Types\Types;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
-class Client
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\Column(length: 180)]
+    private ?string $email = null;
+
+    /**
+     * @var list<string> The user roles
+     */
+    #[ORM\Column]
+    private array $roles = [];
+
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
 
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
@@ -21,27 +38,91 @@ class Client
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
-    /**
-     * @var Collection<int, Immatriculation>
-     */
-    #[ORM\OneToMany(targetEntity: Immatriculation::class, mappedBy: 'client')]
-    private Collection $immatriculations;
+    #[ORM\Column(length: 255)]
+    private ?string $ville = null;
 
-    /**
-     * @var Collection<int, EnregistrementEssence>
-     */
-    #[ORM\OneToMany(targetEntity: EnregistrementEssence::class, mappedBy: 'client')]
-    private Collection $enregistrementEssences;
-
-    public function __construct()
-    {
-        $this->immatriculations = new ArrayCollection();
-        $this->enregistrementEssences = new ArrayCollection();
-    }
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $numero = null;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    /**
+     * @param list<string> $roles
+     */
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Ensure the session doesn't contain actual password hashes by CRC32C-hashing them, as supported since Symfony 7.3.
+     */
+    public function __serialize(): array
+    {
+        $data = (array) $this;
+        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+
+        return $data;
+    }
+
+    #[\Deprecated]
+    public function eraseCredentials(): void
+    {
+        // @deprecated, to be removed when upgrading to Symfony 8
     }
 
     public function getNom(): ?string
@@ -68,62 +149,26 @@ class Client
         return $this;
     }
 
-    /**
-     * @return Collection<int, Immatriculation>
-     */
-    public function getImmatriculations(): Collection
+    public function getVille(): ?string
     {
-        return $this->immatriculations;
+        return $this->ville;
     }
 
-    public function addImmatriculation(Immatriculation $immatriculation): static
+    public function setVille(string $ville): static
     {
-        if (!$this->immatriculations->contains($immatriculation)) {
-            $this->immatriculations->add($immatriculation);
-            $immatriculation->setClient($this);
-        }
+        $this->ville = $ville;
 
         return $this;
     }
 
-    public function removeImmatriculation(Immatriculation $immatriculation): static
+    public function getNumero(): ?int
     {
-        if ($this->immatriculations->removeElement($immatriculation)) {
-            // set the owning side to null (unless already changed)
-            if ($immatriculation->getClient() === $this) {
-                $immatriculation->setClient(null);
-            }
-        }
-
-        return $this;
+        return $this->numero;
     }
 
-    /**
-     * @return Collection<int, EnregistrementEssence>
-     */
-    public function getEnregistrementEssences(): Collection
+    public function setNumero(int $numero): static
     {
-        return $this->enregistrementEssences;
-    }
-
-    public function addEnregistrementEssence(EnregistrementEssence $enregistrementEssence): static
-    {
-        if (!$this->enregistrementEssences->contains($enregistrementEssence)) {
-            $this->enregistrementEssences->add($enregistrementEssence);
-            $enregistrementEssence->setClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEnregistrementEssence(EnregistrementEssence $enregistrementEssence): static
-    {
-        if ($this->enregistrementEssences->removeElement($enregistrementEssence)) {
-            // set the owning side to null (unless already changed)
-            if ($enregistrementEssence->getClient() === $this) {
-                $enregistrementEssence->setClient(null);
-            }
-        }
+        $this->numero = $numero;
 
         return $this;
     }

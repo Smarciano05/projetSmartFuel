@@ -21,7 +21,7 @@ final class Version20260301212256 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE client (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, prenom VARCHAR(255) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
-        $this->addSql('CREATE TABLE immatriculation (id INT AUTO_INCREMENT NOT NULL, numero VARCHAR(255) NOT NULL, client_id INT NOT NULL, INDEX IDX_BE73422E19EB6921 (client_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        $this->addSql('CREATE TABLE immatriculation (id INT AUTO_INCREMENT NOT NULL, numero  INT NOT NULL, client_id INT NOT NULL, INDEX IDX_BE73422E19EB6921 (client_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('ALTER TABLE immatriculation ADD CONSTRAINT FK_BE73422E19EB6921 FOREIGN KEY (client_id) REFERENCES client (id)');
     }
 

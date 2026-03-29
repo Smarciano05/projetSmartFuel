@@ -16,7 +16,7 @@ class Immatriculation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $numero = null;
+    private ? Number $numero = null;
 
     #[ORM\ManyToOne(inversedBy: 'immatriculations')]
     #[ORM\JoinColumn(nullable: false)]
@@ -38,12 +38,12 @@ class Immatriculation
         return $this->id;
     }
 
-    public function getNumero(): ?string
+    public function getNumero(): ?Number
     {
         return $this->numero;
     }
 
-    public function setNumero(string $numero): static
+    public function setNumero(Number $numero): static
     {
         $this->numero = $numero;
 

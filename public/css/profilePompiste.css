@@ -1,0 +1,114 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* HEADER */
+.main-header {
+    background-color: #22c55e;
+    height: 70px;
+    display: flex;
+    justify-content: space-between; /* Écarte gauche et droite */
+    align-items: center;
+    padding: 0 30px;
+    color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Alignement à gauche (Photo + Nom + Station) */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid white;
+    object-fit: cover;
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.separator {
+    width: 1px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.station-name {
+    font-weight: 500;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Alignement à droite (Déconnexion) */
+.logout-btn {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.2); /* Petit fond pour le bouton */
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* SIDEBAR & CONTENU */
+.content-wrapper {
+    display: flex;
+    margin-top: 70px;
+}
+
+.sidebar {
+    width: 280px;
+    background-color: #1e293b;
+    /* On change fixed par sticky pour qu'elle reste à gauche sans chevaucher le footer */
+    position: sticky; 
+    top: 70px; /* Aligné sous ton header */
+    height: calc(100vh - 70px);
+    /* Empêche la sidebar de masquer ce qui est en dessous */
+    flex-shrink: 0; 
+}
+
+.nav-menu { list-style: none; padding-top: 20px; }
+
+.nav-menu li a {
+    display: block;
+    padding: 15px 25px;
+    color: #cbd5e1;
+    text-decoration: none;
+    border-left: 4px solid transparent;
+}
+
+.nav-menu li a.active, .nav-menu li a:hover {
+    background-color: #334155;
+    color: #22c55e;
+    border-left: 4px solid #22c55e;
+}
+
+.main-content {
+    flex: 1;
+    margin-left: 280px;
+    padding: 30px;
+}

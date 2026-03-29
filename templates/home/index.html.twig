@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Accueil{% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/home.css') }}">
+{% endblock %}
 
+{% block main %}
 
-{% block body %}
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 
         <section class="section_imageSF">
             <div class="class_imageSF">
             <h1>Gestion Intelligente de Carburant</h1>
-            <p>Suivez vos consommations, localisez les stations et gérez vos opérations en temps réel</p>
+            <p>Suivez vos consommations, localisez les Stations et gérez vos opérations en temps réel</p>
                 <button class="button-pompiste">En savoir plus</button>
 
 
@@ -40,7 +43,7 @@
                     <h4 class="title">Pompiste</h4>
                     <ul class="profile-list">
                         <li><span class="bullet"></span> Enregistrez les prises d'essence</li>
-                        <li><span class="bullet"></span> Gérez votre station</li>
+                        <li><span class="bullet"></span> Gérez votre Stations</li>
                     </ul>
                     <button class="button-pompiste">Accéder - pompiste</button>
                 </div>
@@ -54,17 +57,17 @@
                 <li>
                     <i class="fa-solid fa-location-dot"></i>
                     <h4>Carte Interactive</h4>
-                    <p>Localisez les stations disponibles en temps réel</p>
+                    <p>Localisez les Stations disponibles en temps réel</p>
                 </li>
                 <li>
                     <i class="fa-solid fa-dollar-sign"></i>
                    <h4>Tarifs carburants</h4>
-                    <p>Consultez les prix du carburant par station</p>
+                    <p>Consultez les prix du carburant par Stations</p>
                 </li>
                 <li>
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <h4>Recherche rapide</h4>
-                    <p>Trouvez facilement une station ou un véhicule par plaque d’immatriculation</p>
+                    <p>Trouvez facilement une Stations ou un véhicule par plaque d’immatriculation</p>
                 </li>
                 <li>
                     <i class="fa-solid fa-user"></i>

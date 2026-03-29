@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\StationsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +27,17 @@ class Stations
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $litreDiesel = null;
+
+    /**
+     * @var Collection<int, Pompiste>
+     */
+    #[ORM\OneToMany(targetEntity: Pompiste::class, mappedBy: 'Stations', orphanRemoval: true)]
+    private Collection $pompistes;
+
+    public function __construct()
+    {
+        $this->pompistes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -75,6 +88,36 @@ class Stations
     public function setLitreDiesel(string $litreDiesel): static
     {
         $this->litreDiesel = $litreDiesel;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pompiste>
+     */
+    public function getPompistes(): Collection
+    {
+        return $this->pompistes;
+    }
+
+    public function addPompiste(Pompiste $pompiste): static
+    {
+        if (!$this->pompistes->contains($pompiste)) {
+            $this->pompistes->add($pompiste);
+            $pompiste->setStations($this);
+        }
+
+        return $this;
+    }
+
+    public function removePompiste(Pompiste $pompiste): static
+    {
+        if ($this->pompistes->removeElement($pompiste)) {
+            // set the owning side to null (unless already changed)
+            if ($pompiste->getStations() === $this) {
+                $pompiste->setStations(null);
+            }
+        }
 
         return $this;
     }

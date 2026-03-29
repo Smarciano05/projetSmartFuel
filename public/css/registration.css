@@ -1,0 +1,153 @@
+/* Conteneur principal qui centre tout */
+.inscription-pompiste-wrapper {
+    background: radial-gradient(circle at top right, #1a1a1a, #050505);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* La carte du formulaire (Large et sans bordure) */
+.inscription-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(15px);
+    width: 100%;
+    max-width: 800px; /* Version large pour éviter l'effet bâton */
+    border-radius: 24px;
+    border: none; 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+/* En-tête vert SmartFuel */
+.inscription-header {
+    background: #22c55e;
+    padding: 40px;
+    text-align: center;
+    border: none;
+}
+
+.inscription-title {
+    color: #000;
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Corps du formulaire avec beaucoup d'espace */
+.inscription-body {
+    padding: 50px 80px;
+}
+
+/* Style pour les messages d'erreurs sous les champs */
+.inscription-body ul {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 15px 0;
+}
+
+.inscription-body ul li {
+    color: #ff4d4d; /* Rouge vif pour être lisible sur le noir */
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Utilise plutôt ceci (plus intelligent) */
+.form-row-container:has(ul) .form-input-custom {
+    border-color: #ff4d4d;
+}
+
+.alert-danger {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid #ef4444;
+    color: #f87171;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* Espacement entre chaque champ (row) */
+.form-row-container {
+    margin-bottom: 25px;
+}
+
+/* Style des labels */
+.form-label-custom {
+    display: block;
+    color: #22c55e;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+/* Style des champs de saisie */
+.form-input-custom {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.form-input-custom:focus {
+    outline: none;
+    border-color: #22c55e;
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+}
+
+/* --- LA CHECKBOX ALIGNÉE À GAUCHE DU TEXTE --- */
+.checkbox-group {
+    display: flex;
+    flex-direction: row-reverse; /* Pour mettre l'input avant le label visuellement */
+    justify-content: flex-end;   /* Aligné à gauche */
+    align-items: center;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.checkbox-input {
+    width: 20px;
+    height: 20px;
+    accent-color: #22c55e;
+    cursor: pointer;
+    margin: 0;
+}
+
+.checkbox-label {
+    color: #22c55e;
+    font-weight: 600;
+    margin: 0;
+    cursor: pointer;
+}
+
+/* Le bouton valider */
+.btn-submit-pompiste {
+    width: 100%;
+    background: #22c55e;
+    color: #000;
+    border: none;
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-submit-pompiste:hover {
+    background: #1ca850;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+}
