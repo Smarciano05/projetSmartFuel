@@ -101,3 +101,13 @@ footer {
     padding: 20px;
     text-align: left;
 }
+
+footer{
+   background-color: black; 
+   color: white;
+   padding: 20px 0px 0px 20px;
+}
+
+.container{
+    text-align: center;
+}
