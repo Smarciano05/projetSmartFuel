@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique des pleins{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('css/historique.css') }}">
+
+    <h1>Historique de mes pleins</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Type carburant</th>
+            <th>Quantité</th>
+            <th>Station</th>
+            <th>Immatriculation</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for enregistrement in historique %}
+            <tr>
+                <td>{{ enregistrement.date ? enregistrement.date|date('d/m/Y H:i:s') : '' }}</td>
+                <td>{{ enregistrement.typeCarburant }}</td>
+                <td>{{ enregistrement.quantite }} L</td>
+                <td>{{ enregistrement.station.nom }}</td>
+                <td>{{ enregistrement.immatriculation.numero }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

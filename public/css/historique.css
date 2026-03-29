@@ -1,0 +1,58 @@
+body {
+    background: #f5f6fa;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    width: 90%;
+    margin: 40px auto;
+}
+
+.header {
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.header p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Tableau */
+
+.table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.table-custom th {
+    background: #111;
+    color: white;
+    padding: 14px;
+    text-align: left;
+}
+
+.table-custom td {
+    padding: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+.table-custom tr:hover {
+    background: #f9f9f9;
+}
+
+
+
+.empty {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+}
