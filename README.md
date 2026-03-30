@@ -1,3 +1,10 @@
--> ajout des fixtures : faire la commande load
-//
--> ajoute de importStationCommand et Stationjsonimport -> donné de l'api station pour les integrer dans la bdd et pouvoir les manipuler 
+
+#  migrer la DB
+docker-compose exec php php bin/console doctrine:migrations:migrate
+
+# Fixtures et stations
+docker-compose exec php php bin/console doctrine:fixtures:load
+docker-compose exec php php bin/console app:import-station
+
+# Installer bundle emails
+docker-compose exec php composer require symfonycasts/verify-email-bundle
