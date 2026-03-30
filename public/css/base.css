@@ -1,113 +1,185 @@
-
-* {
+.navbar-custom {
+    background-color: #000000;
+    width: 100%;
+    min-height: 100px; /* Hauteur de la barre */
+    display: flex;
+    align-items: center;
+    /* IMPORTANT : Pas de position fixed ici pour que le body suive naturellement */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* BODY ET LAYOUT PRINCIPAL */
-html, body {
-    height: 100%;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* permet au footer de rester en bas */
-}
-
-/* HEADER FIXE */
-.en_tete {
-    height: 80px;
-    background-color: black;
-    position: fixed;
-    top: 0;
-    left: 0;
+.header-container {
     width: 100%;
-    z-index: 1000;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between; /* Pousse le logo à gauche et la nav à droite */
+    align-items: center;
 }
 
-/* LOGO */
-.logoSite {
-    position: absolute;
-    left: 20px;
-    top: 10px;
+/* 3. LOGO */
+.logo-box img {
+    width: 238px;
+    height: 80px;
+    object-fit: contain;
+    display: block;
 }
 
-/* BOUTONS FIXES SUR LA BARRE */
-.buttonAccueil, .buttonCarte, .buttonRecherche, .buttonConnexion {
-    border-radius: 12px;
-    font-size: 17px;
-    font-weight: bold;
+/* 4. NAVIGATION (DROITE) */
+.nav-links {
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 10px 17px;
-    cursor: pointer;
+    gap: 30px; /* Espace entre Carte et Connexion */
 }
 
-.buttonAccueil {
-    background-color: black;
-    color: white;
-    position: absolute;
-    top: 15px;
-    right: 40%;
-}
-
-.buttonCarte {
-    background-color: black;
-    color: white;
-    position: absolute;
-    top: 15px;
-    right: 30%;
-}
-
-.buttonRecherche {
-    background-color: black;
-    color: white;
-    position: absolute;
-    top: 15px;
-    right: 18%;
-}
-
-.buttonConnexion {
-    background-color: #22c55e;
-    color: black;
-    position: absolute;
-    top: 15px;
-    right: 5%;
-}
-
-/* WRAPPER POUR CENTRER LE CONTENU */
-.wrapper {
-    flex: 1;                  /* prend l’espace entre header et footer */
+.nav-btn-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;   /* centre verticalement */
-    align-items: center;       /* centre horizontalement si besoin */
-    padding-top: 80px;         /* espace pour le header fixe */
+    align-items: center;
+    gap: 10px;
 }
 
-/* BODY */
-.container-fluid {
-    width: 100%;
-    padding: 20px;
+.nav-btn-link:hover {
+    color: #22c55e;
 }
 
-/* FOOTER */
+.nav-icon {
+    height: 22px;
+    width: auto;
+}
+
+/* Bouton Connexion Vert */
+.btn-connexion {
+    background-color: #22c55e;
+    color: #000000;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.3s ease;
+}
+
+.btn-connexion:hover {
+    background-color:#22c55e;
+    color: #000000;
+    transform: translateY(-2px);
+}
+
+/* 5. LE CONTENU (MAIN) */
+.main-content {
+    background-color: #ffffff;
+}
+
+/* Style global du footer */
 footer {
-    background-color: black;
-    color: white;
-    padding: 20px;
-    text-align: left;
+    background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+    color: #e0e0e0;
+    padding: 60px 20px 30px;
+    font-family: 'Inter', -apple-system, sans-serif;
+    border-top: 2px solid #333;
 }
 
-footer{
-   background-color: black; 
-   color: white;
-   padding: 20px 0px 0px 20px;
+/* Conteneur principal pour organiser les colonnes */
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    gap: 30px;
 }
 
-.container{
+/* Sections du footer */
+.piedSite, .liens-utiles {
+    flex: 1;
+    min-width: 250px;
+}
+
+/* Titres (Contact & Navigation) */
+.h4new {
+    color: #22c55e; /* Couleur Or/Ambre */
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+}
+
+/* Petite barre décorative sous les titres */
+.h4new::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: #22c55e;
+    margin-top: 8px;
+    border-radius: 2px;
+}
+
+/* Liste de navigation */
+.liens-utiles ul {
+    list-style: none;
+    padding: 0;
+}
+
+.liens-utiles ul li {
+    margin-bottom: 12px;
+}
+
+.liens-utiles ul li a {
+    color: #aaa;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.liens-utiles ul li a:hover {
+    color: #ffffff;
+    padding-left: 8px; /* Effet de glissement au survol */
+}
+
+/* Informations de contact */
+.num, .email {
+    color: #bbb;
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+/* Ligne du bas (Copyright) */
+.container {
     text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 25px;
 }
+
+.container a {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s;
+}
+
+.container a:hover {
+    color: #22c55e; /* Devient vert au survol */
+    text-decoration: underline;
+}
+
+/* Responsive : Adaptation mobile */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .h4new::after {
+        margin: 8px auto;
+    }
+}
+
