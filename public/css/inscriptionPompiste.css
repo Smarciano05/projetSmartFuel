@@ -89,3 +89,18 @@ body {
     border-radius: 10px;
     border: none;
 }
+
+select.form-input-custom {
+    color: #1e293b; /* texte sombre */
+    background-color: #fff; /* fond clair */
+}
+
+select.form-input-custom option {
+    color: #1e293b;
+    background-color: #fff;
+}
+
+select.form-input-custom:focus {
+    border-color: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
+}

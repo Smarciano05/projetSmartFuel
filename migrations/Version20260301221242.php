@@ -23,7 +23,7 @@ final class Version20260301221242 extends AbstractMigration
         $this->addSql('CREATE TABLE enregistrement_essence (id INT AUTO_INCREMENT NOT NULL, date DATE NOT NULL, type_carburant VARCHAR(255) NOT NULL, quantite INT NOT NULL, pompiste_id INT NOT NULL, client_id INT NOT NULL, Stations_id INT NOT NULL, immatriculation_id INT NOT NULL, INDEX IDX_9992C49FBE0760C4 (pompiste_id), INDEX IDX_9992C49F19EB6921 (client_id), INDEX IDX_9992C49F21BDB235 (Stations_id), INDEX IDX_9992C49F5FD1A365 (immatriculation_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('ALTER TABLE enregistrement_essence ADD CONSTRAINT FK_9992C49FBE0760C4 FOREIGN KEY (pompiste_id) REFERENCES pompiste (id)');
         $this->addSql('ALTER TABLE enregistrement_essence ADD CONSTRAINT FK_9992C49F19EB6921 FOREIGN KEY (client_id) REFERENCES client (id)');
-        $this->addSql('ALTER TABLE enregistrement_essence ADD CONSTRAINT FK_9992C49F21BDB235 FOREIGN KEY (Stations_id) REFERENCES Stations (id)');
+        $this->addSql('ALTER TABLE enregistrement_essence ADD CONSTRAINT FK_9992C49F21BDB235 FOREIGN KEY (Stations_id) REFERENCES Station (id)');
         $this->addSql('ALTER TABLE enregistrement_essence ADD CONSTRAINT FK_9992C49F5FD1A365 FOREIGN KEY (immatriculation_id) REFERENCES immatriculation (id)');
     }
 

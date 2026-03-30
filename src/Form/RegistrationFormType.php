@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Pompiste;
-use App\Entity\Stations;
+use App\Entity\Station;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -48,14 +48,13 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             /* Champ temporaire pour l'ID de la station */
-            ->add('stationId', IntegerType::class, [
+            ->add('station', EntityType::class, [
+                'class' => Station::class,       // <- Obligatoire !
                 'mapped' => false,
-                'label' => 'Numéro de la Station',
+                'choice_label' => 'nom',
                 'required' => true,
-                'attr' => ['placeholder' => 'Entrez l\'ID de la station'],
-                'constraints' => [
-                    new NotBlank(['message' => 'Veuillez entrer l\'ID de la station essence']),
-                ],
+                'attr' => ['placeholder' => 'Entrez le nom de la station'],
+
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
@@ -77,23 +76,6 @@ class RegistrationFormType extends AbstractType
             ])
         ;
 
-        // Ajouter un écouteur d'événement pour convertir l'ID en objet Stations
-        $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
-            $form = $event->getForm();
-            $user = $event->getData();
-            $stationId = $form->get('stationId')->getData();
-
-            if ($stationId && $user) {
-                // Récupérer l'EntityManager via le formulaire
-                $entityManager = $form->getConfig()->getOption('entity_manager');
-                if ($entityManager) {
-                    $station = $entityManager->getRepository(Stations::class)->find($stationId);
-                    if ($station) {
-                        $user->setStations($station);
-                    }
-                }
-            }
-        });
     }
 
     public function configureOptions(OptionsResolver $resolver): void

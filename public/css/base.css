@@ -67,7 +67,7 @@
 }
 
 .btn-connexion:hover {
-    background-color: #1a9d4b;
+    background-color:#22c55e;
     color: #000000;
     transform: translateY(-2px);
 }
@@ -104,13 +104,12 @@ footer {
 
 /* Titres (Contact & Navigation) */
 .h4new {
-    color: #1a9d4b; /* Couleur Or/Ambre */
+    color: #22c55e; /* Couleur Or/Ambre */
     font-size: 1.1rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     margin-bottom: 20px;
-    position: block;
 }
 
 /* Petite barre décorative sous les titres */
@@ -119,7 +118,7 @@ footer {
     display: block;
     width: 40px;
     height: 3px;
-    background: #1a9d4b;
+    background: #22c55e;
     margin-top: 8px;
     border-radius: 2px;
 }
@@ -168,7 +167,7 @@ footer {
 }
 
 .container a:hover {
-    color: #1a9d4b; /* Devient vert au survol */
+    color: #22c55e; /* Devient vert au survol */
     text-decoration: underline;
 }
 
@@ -178,7 +177,7 @@ footer {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .h4new::after {
         margin: 8px auto;
     }
