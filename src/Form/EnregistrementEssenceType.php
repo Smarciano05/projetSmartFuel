@@ -36,8 +36,6 @@ class EnregistrementEssenceType extends AbstractType
                     'Essence' => 'Essence',
                     'Diesel' => 'Diesel',
                     'Gazole' => 'Gazole',
-                    'Électrique' => 'Électrique',
-                    'Premium'=> 'Premium',
                 ],
                 'attr' => [
                     'placeholder' => 'Ex: Essence',

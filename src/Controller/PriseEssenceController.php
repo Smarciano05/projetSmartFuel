@@ -38,15 +38,17 @@ final class PriseEssenceController extends AbstractController
         //afficher le nom de la station
 
         //recuperer le pompiste connecté pour avoir le nom de la station lié à ce pompiste
-        // if($this->getUser()) {}
-        $pompiste = $entityManager->getRepository(Pompiste::class)->findOneBy(['nom' => "Martin"]);
-        $station = $pompiste->getStation();
+        if($this->getUser()) {
+            $pompiste = $this->getUser();
+            $station = $pompiste->getStation();
+            $nomStation = $station->getNom();
+        }
 
         //verifier si soumis et valide -> que le pompiste a cliqué sur le bouton et regle valide
         if($form->isSubmitted() && $form->isValid()) {
 
             //on lie le pompiste connecté
-            $pompiste = $entityManager->getRepository(Pompiste::class)->findOneBy(['nom' => "Martin"]);
+            $pompiste = $this->getUser();
             $enregistrementEssence->setPompiste($pompiste);
 
             $enregistrementEssence->setStation($pompiste->getStation());
@@ -72,7 +74,7 @@ final class PriseEssenceController extends AbstractController
         return $this->render('prise_essence/new.html.twig', [
             'controller_name' => 'EnregistrerEssenceController',
             'form' => $form->createView(),
-            'station' => $station ,
+            'station' => $nomStation ,
 
         ]);
     }
