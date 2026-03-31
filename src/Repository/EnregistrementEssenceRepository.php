@@ -40,4 +40,20 @@ class EnregistrementEssenceRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    /**
+     * Récupère l'historique des enregistrements pour un client
+     * @param int $clientId
+     * @return EnregistrementEssence[]
+     */
+    public function findByClient($client): array
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.client = :client')
+            ->setParameter('client', $client)
+            ->orderBy('e.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }
+

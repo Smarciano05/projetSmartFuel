@@ -14,9 +14,15 @@ final class HistoriqueController extends AbstractController
     {
 
         //si le client est connecté
-        $clientId = 9;
+        $client = $this->getUser();
+
+        if (!$client) {
+            // Redirige vers la page de connexion
+            return $this->redirectToRoute('app_login');
+        }
         // recuperer les enregistrement effectué
-        $historique = $enregistrementEssenceRepository->findByClientId($clientId);
+        $historique = $enregistrementEssenceRepository->findByClient($client);
+
 
 
         return $this->render('historique/index.html.twig', [
