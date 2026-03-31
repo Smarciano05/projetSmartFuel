@@ -43,7 +43,7 @@ class EnregistrementEssenceRepository extends ServiceEntityRepository
 
     /**
      * Récupère l'historique des enregistrements pour un client
-     * @param int $clientId
+     * @param int $client
      * @return EnregistrementEssence[]
      */
     public function findByClient($client): array

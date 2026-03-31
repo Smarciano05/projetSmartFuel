@@ -24,7 +24,6 @@ final class HistoriqueController extends AbstractController
         $historique = $enregistrementEssenceRepository->findByClient($client);
 
 
-
         return $this->render('historique/index.html.twig', [
             'historique' => $historique,
         ]);
