@@ -34,9 +34,16 @@ class Stations
     #[ORM\OneToMany(targetEntity: Pompiste::class, mappedBy: 'Stations', orphanRemoval: true)]
     private Collection $pompistes;
 
+    /**
+     * @var Collection<int, StockCarburant>
+     */
+    #[ORM\OneToMany(targetEntity: StockCarburant::class, mappedBy: 'idStation', orphanRemoval: true)]
+    private Collection $stockCarburants;
+
     public function __construct()
     {
         $this->pompistes = new ArrayCollection();
+        $this->stockCarburants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,6 +123,36 @@ class Stations
             // set the owning side to null (unless already changed)
             if ($pompiste->getStations() === $this) {
                 $pompiste->setStations(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, StockCarburant>
+     */
+    public function getStockCarburants(): Collection
+    {
+        return $this->stockCarburants;
+    }
+
+    public function addStockCarburant(StockCarburant $stockCarburant): static
+    {
+        if (!$this->stockCarburants->contains($stockCarburant)) {
+            $this->stockCarburants->add($stockCarburant);
+            $stockCarburant->setIdStation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStockCarburant(StockCarburant $stockCarburant): static
+    {
+        if ($this->stockCarburants->removeElement($stockCarburant)) {
+            // set the owning side to null (unless already changed)
+            if ($stockCarburant->getIdStation() === $this) {
+                $stockCarburant->setIdStation(null);
             }
         }
 
