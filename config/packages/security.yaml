@@ -3,7 +3,7 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
 
     providers:
-        # 1. On remplace users_in_memory par ton entité Pompiste
+        #  remplace users_in_memory par Pompiste
         app_pompiste_provider:
             entity:
                 class: App\Entity\Pompiste
@@ -16,23 +16,23 @@ security:
 
         main:
             lazy: true
-            # 2. On dit au firewall d'utiliser le provider Pompiste
+            #  On dit au firewall d'utiliser le provider Pompiste
             provider: app_pompiste_provider
 
-            # 3. On active le formulaire de connexion
+            #   active le formulaire de connexion
             form_login:
                 login_path: app_login    # Nom de la route de ta page de login
                 check_path: app_login    # La route où le formulaire est soumis
                 enable_csrf: true        # Protection contre les attaques CSRF
-                default_target_path: /   # Où rediriger après le succès (ex: /pompiste)
+                default_target_path: /   # Où rediriger après le succès ici faut que je mette la page du pompiste une fois connecté 
 
-            # 4. On active la déconnexion
+            #  active la déconnexion
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
+                target: app_login #une fois déconnecté on retourne à la page de connexion 
                 # target: app_any_route
 
-    access_control:
-        # Tu peux restreindre l'accès à tes pages ici
-        # - { path: ^/pompiste, roles: ROLE_USER }
+    access_control:  #pour controller qui à ecces à quoi 
+       
+        - { path: ^/pompiste, roles: ROLE_USER }

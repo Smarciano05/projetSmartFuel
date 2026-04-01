@@ -1,38 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion Pompiste{% endblock %}
 
-{% block body %}
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/registration.css') }}">
+{% endblock %}
 
-        {% if app.user %}
-            <div class="mb-3">
-                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>
-            </div>
-        {% endif %}
+{% block main %}
+<div class="inscription-pompiste-wrapper">
+    <div class="inscription-card">
+        <div class="inscription-header">
+            <h3 class="inscription-title">Connexion Pompiste</h3>
+        </div>
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="username">Email</label>
-        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-        <label for="password">Password</label>
-        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
-        <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+        <div class="inscription-body">
+            {# Gestion des erreurs de connexion (fournies par Symfony Security) #}
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
+            {# Message si l'utilisateur est déjà connecté #}
+            {% if app.user %}
+                <div class="mb-3">
+                    Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                </div>
+            {% endif %}
 
-            <div class="checkbox mb-3">
-                <input type="checkbox" name="_remember_me" id="_remember_me">
-                <label for="_remember_me">Remember me</label>
-            </div>
-        #}
+            <form method="post">
+                {# Champ Email #}
+                <div class="form-row-container">
+                    <label for="inputEmail" class="form-label-custom">Email</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-input-custom" autocomplete="email" placeholder="pompiste@smartfuel.fr" required autofocus>
+                </div>
 
-        <button class="btn btn-lg btn-primary" type="submit">
-            Sign in
-        </button>
-    </form>
+                {# Champ Mot de passe #}
+                <div class="form-row-container">
+                    <label for="inputPassword" class="form-label-custom">Mot de passe</label>
+                    <input type="password" name="password" id="inputPassword" class="form-input-custom" autocomplete="current-password" required>
+                </div>
+
+                {# Token CSRF pour la sécurité #}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                {# Bouton de soumission #}
+                <button type="submit" class="btn-submit-pompiste">Se connecter</button>
+
+                {# Lien vers l'inscription #}
+                <div class="form-footer" style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem;">
+                    <p>Pas encore de compte ? 
+                        <a href="{{ path('inscription_pompiste') }}" style="color: #2563eb; text-decoration: underline; font-weight: bold;">
+                            Inscrivez-vous ici
+                        </a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
