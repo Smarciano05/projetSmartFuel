@@ -2,42 +2,55 @@
 
 {% block title %}Connexion Pompiste{% endblock %}
 
-{% block main %}
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/registration.css') }}">
+{% endblock %}
 
-            {# Message si l'utilisateur est déjà connecté #}
+{% block body %}
+{# 1. Wrapper principal pour centrer et mettre le dégradé #}
+<div class="inscription-pompiste-wrapper">
+    
+    {# 2. La carte qui contient tout #}
+    <div class="inscription-card">
+        
+        {# 3. L'en-tête vert SmartFuel #}
+        <div class="inscription-header">
+            <h1 class="inscription-title">SmartFuel Login</h1>
+        </div>
+
+        {# 4. Le corps du formulaire #}
+        <div class="inscription-body">
+            
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
             {% if app.user %}
-                <div class="mb-3">
-                    Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                <div class="mb-3" style="text-align: center; color: #22c55e; font-weight: bold;">
+                    Vous êtes connecté en tant que {{ app.user.userIdentifier }}<br>
+                    <a href="{{ path('app_logout') }}" style="color: #ff4d4d;">Déconnexion</a>
                 </div>
             {% endif %}
 
             <form method="post">
-                {# Champ Email #}
                 <div class="form-row-container">
                     <label for="inputEmail" class="form-label-custom">Email</label>
-                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-input-custom" autocomplete="email" placeholder="pompiste@smartfuel.fr" required autofocus>
+                    <input type="email" value="{{ last_username }}" name="_username" id="inputEmail" class="form-input-custom" autocomplete="email" placeholder="pompiste@smartfuel.fr" required autofocus>
                 </div>
 
-                {# Champ Mot de passe #}
                 <div class="form-row-container">
                     <label for="inputPassword" class="form-label-custom">Mot de passe</label>
-                    <input type="password" name="password" id="inputPassword" class="form-input-custom" autocomplete="current-password" required>
+                    <input type="password" name="_password" id="inputPassword" class="form-input-custom" autocomplete="current-password" required>
                 </div>
 
-                {# Token CSRF pour la sécurité #}
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                {# Bouton de soumission #}
                 <button type="submit" class="btn-submit-pompiste">Se connecter</button>
 
-                {# Lien vers l'inscription #}
                 <div class="form-footer" style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem;">
                     <p>Pas encore de compte ? 
-                        <a href="{{ path('inscription_pompiste') }}" style="color: #2563eb; text-decoration: underline; font-weight: bold;">
+                        <a href="{{ path('inscription_pompiste') }}" style="color: #22c55e; text-decoration: underline; font-weight: bold;">
                             Inscrivez-vous ici
                         </a>
                     </p>

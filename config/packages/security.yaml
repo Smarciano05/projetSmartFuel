@@ -24,7 +24,7 @@ security:
                 login_path: app_login    # Nom de la route de ta page de login
                 check_path: app_login    # La route où le formulaire est soumis
                 enable_csrf: true        # Protection contre les attaques CSRF
-                default_target_path: /   # Où rediriger après le succès ici faut que je mette la page du pompiste une fois connecté 
+                default_target_path: app_home   # Où rediriger après le succès ici faut que je mette la page du pompiste une fois connecté 
 
             #  active la déconnexion
             logout:
