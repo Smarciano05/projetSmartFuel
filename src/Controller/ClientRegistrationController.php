@@ -42,7 +42,7 @@ class ClientRegistrationController extends AbstractController
             $this->addFlash('success', 'Inscription réussie ! Vous pouvez maintenant vous connecter.');
             
             // Redirection vers la page de connexion
-            return $this->redirectToRoute('app_client');
+            return $this->redirectToRoute('app_client_login');
         }
 
         return $this->render('registration/client_register.html.twig', [

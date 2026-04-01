@@ -13,7 +13,7 @@ class ClientSecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-             return $this->redirectToRoute('app_client_home');
+             return $this->redirectToRoute('pageclient');
         }
 
         return $this->render('security/client_login.html.twig', [
