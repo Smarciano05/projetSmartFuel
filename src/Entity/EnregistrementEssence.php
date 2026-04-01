@@ -31,7 +31,7 @@ class EnregistrementEssence
 
     #[ORM\ManyToOne(inversedBy: 'enregistrementEssences')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Stations $Stations = null;
+    private ?Station $Station = null;
 
     #[ORM\ManyToOne(inversedBy: 'enregistrementEssences')]
     #[ORM\JoinColumn(nullable: false)]
@@ -93,14 +93,14 @@ class EnregistrementEssence
         return $this;
     }
 
-    public function getStations(): ?Stations
+    public function getStation(): ?Station
     {
-        return $this->Stations;
+        return $this->Station;
     }
 
-    public function setStations(?Stations $Stations): static
+    public function setStation(?Station $Station): static
     {
-        $this->Stations = $Stations;
+        $this->Station = $Station;
 
         return $this;
     }

@@ -43,7 +43,7 @@ class Pompiste implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne(inversedBy: 'pompistes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Stations $Stations = null;
+    private ?Station $Station = null;
 
     #[ORM\Column(type: Types::INTEGER)]
     private ?int $numero = null;
@@ -156,14 +156,14 @@ class Pompiste implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getStations(): ?Stations
+    public function getStation(): ?Station
     {
-        return $this->Stations;
+        return $this->Station;
     }
 
-    public function setStations(?Stations $Stations): static
+    public function setStation(?Station $Station): static
     {
-        $this->Stations = $Stations;
+        $this->Station = $Station;
 
         return $this;
     }

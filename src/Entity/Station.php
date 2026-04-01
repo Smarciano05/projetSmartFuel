@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\StationsRepository;
+use App\Repository\StationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: StationsRepository::class)]
-class Stations
+#[ORM\Entity(repositoryClass: StationRepository::class)]
+class Station
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -22,16 +22,11 @@ class Stations
     #[ORM\Column(length: 255)]
     private ?string $nomVille = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    private ?string $litreEssence = null;
-
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    private ?string $litreDiesel = null;
 
     /**
      * @var Collection<int, Pompiste>
      */
-    #[ORM\OneToMany(targetEntity: Pompiste::class, mappedBy: 'Stations', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Pompiste::class, mappedBy: 'Station', orphanRemoval: true)]
     private Collection $pompistes;
 
     /**
@@ -75,29 +70,6 @@ class Stations
         return $this;
     }
 
-    public function getLitreEssence(): ?string
-    {
-        return $this->litreEssence;
-    }
-
-    public function setLitreEssence(string $litreEssence): static
-    {
-        $this->litreEssence = $litreEssence;
-
-        return $this;
-    }
-
-    public function getLitreDiesel(): ?string
-    {
-        return $this->litreDiesel;
-    }
-
-    public function setLitreDiesel(string $litreDiesel): static
-    {
-        $this->litreDiesel = $litreDiesel;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Pompiste>
@@ -111,7 +83,7 @@ class Stations
     {
         if (!$this->pompistes->contains($pompiste)) {
             $this->pompistes->add($pompiste);
-            $pompiste->setStations($this);
+            $pompiste->setStation($this);
         }
 
         return $this;
@@ -121,8 +93,8 @@ class Stations
     {
         if ($this->pompistes->removeElement($pompiste)) {
             // set the owning side to null (unless already changed)
-            if ($pompiste->getStations() === $this) {
-                $pompiste->setStations(null);
+            if ($pompiste->getStation() === $this) {
+                $pompiste->setStation(null);
             }
         }
 

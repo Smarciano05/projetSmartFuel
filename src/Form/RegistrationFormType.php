@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Pompiste;
-use App\Entity\Stations;
+use App\Entity\Station;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -77,7 +77,7 @@ class RegistrationFormType extends AbstractType
             ])
         ;
 
-        // Ajouter un écouteur d'événement pour convertir l'ID en objet Stations
+        // Ajouter un écouteur d'événement pour convertir l'ID en objet Station
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             $form = $event->getForm();
             $user = $event->getData();
@@ -87,9 +87,9 @@ class RegistrationFormType extends AbstractType
                 // Récupérer l'EntityManager via le formulaire
                 $entityManager = $form->getConfig()->getOption('entity_manager');
                 if ($entityManager) {
-                    $station = $entityManager->getRepository(Stations::class)->find($stationId);
+                    $station = $entityManager->getRepository(Station::class)->find($stationId);
                     if ($station) {
-                        $user->setStations($station);
+                        $user->setStation($station);
                     }
                 }
             }

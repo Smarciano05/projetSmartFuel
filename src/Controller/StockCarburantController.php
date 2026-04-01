@@ -24,7 +24,7 @@ final class StockCarburantController extends AbstractController
         }
         
         // Récupérer l'id de la station du pompiste
-        $idStation = $pompiste->getStations()->getId();
+        $idStation = $pompiste->getStation()->getId();
         
         // Filtrer les stocks par idStation
         $listStockCarbStation = $repository->findBy(['idStation' => $idStation]);

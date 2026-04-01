@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Pompiste;
-use App\Entity\Stations;
+use App\Entity\Station;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
@@ -37,7 +37,7 @@ class RegistrationController extends AbstractController
             $stationId = $form->get('stationId')->getData();
             
             // Trouver la station
-            $station = $entityManager->getRepository(Stations::class)->find($stationId);
+            $station = $entityManager->getRepository(Station::class)->find($stationId);
             
             if (!$station) {
                 $this->addFlash('error', 'Cette station n\'existe pas.');
@@ -45,7 +45,7 @@ class RegistrationController extends AbstractController
             }
             
             // Associer la station au pompiste
-            $user->setStations($station);
+            $user->setStation($station);
 
             $user->setRoles(['ROLE_USER']);
             /** @var string $plainPassword */

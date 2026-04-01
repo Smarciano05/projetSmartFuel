@@ -15,7 +15,7 @@ class StockCarburant
 
     #[ORM\ManyToOne(inversedBy: 'stockCarburants')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Stations $idStation = null;
+    private ?Station $idStation = null;
 
     #[ORM\Column(length: 255)]
     private ?string $typeCarburant = null;
@@ -28,12 +28,12 @@ class StockCarburant
         return $this->id;
     }
 
-    public function getIdStation(): ?Stations
+    public function getIdStation(): ?Station
     {
         return $this->idStation;
     }
 
-    public function setIdStation(?Stations $idStation): static
+    public function setIdStation(?Station $idStation): static
     {
         $this->idStation = $idStation;
 
