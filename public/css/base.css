@@ -1,95 +1,185 @@
-.en_tete {
-    height: 80px;
-    background-color: black;
-    display: grid;
-    position: fixed;  /* AJOUTEZ CECI - rend tout l'en-tête fixe */
-    top: 0;           /* COLLÉ EN HAUT */
-    left: 0;          /* COLLÉ À GAUCHE */
-    width: 100%;      /* PREND TOUTE LA LARGEUR */
-    z-index: 1000;    /* AU-DESSUS DU RESTE */
-}
-*{ /* Pour que l'en-tete prend tous le fond du haut */
+.navbar-custom {
+    background-color: #000000;
+    width: 100%;
+    min-height: 100px; /* Hauteur de la barre */
+    display: flex;
+    align-items: center;
+    /* IMPORTANT : Pas de position fixed ici pour que le body suive naturellement */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-   
 }
-.logoSite{
-    margin: 10px 5px;
+
+.header-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between; /* Pousse le logo à gauche et la nav à droite */
+    align-items: center;
 }
-.buttonConnexion{
 
-    background-color: #22c55e;/* Vert */
-    border-radius: 12px;
-    border: 10px;
-    color: black;
-    padding: 10px 17px;
-    text-align: center;
-
-    font-size: 17px; /*taille de la police*/
-    font-family: sans-serif; /*police*/
-    font-weight: bold;
-    margin: 20px 2px;
-    cursor: pointer; /*souris change de disgn*/
-    position: fixed; /*pour mettre à droite je dois obligatoirement mettre position: fixed puis right: nb%;*/
-    right:5%;
-
-
-
+/* 3. LOGO */
+.logo-box img {
+    width: 238px;
+    height: 80px;
+    object-fit: contain;
+    display: block;
 }
-.btn.buttonRecherche{
-    background-color:black; 
-    border: 2px;
-    color: white;
-    padding: 10px 17px;
-    border-radius: 12px;
-    font-size: 17px; /*taille de la police*/
-    font-family: sans-serif;
-    font-weight: bold;
-    margin: 15px 10px;
-    cursor: pointer; /*souris change de disgn*/
-    position: fixed;
-    right: 18%;
-    /*pour que le logo et le texte soit au centre du boutton bien aligné*/
-    display: flex;       /*MET LE LOGO ET LE texte aligné mais PAS au centre*/
-    align-items: center;  /*besoin de display: flex pour que ça aligne  et puis lui il va centrer*/
 
-
-}
-.btn.buttonCarte{
-    background-color:black; 
-    border: 2px;
-    color: white;
-    padding: 10px 17px;
-    text-align: center;
-    border-radius: 12px;
-    font-size: 17px; /*taille de la police*/
-    font-family: sans-serif;
-    font-weight: bold;
-    margin: 15px 10px;
-    cursor: pointer; /*souris change de disgn*/
-    position: fixed;
-    right: 30%;
+/* 4. NAVIGATION (DROITE) */
+.nav-links {
     display: flex;
     align-items: center;
-
+    gap: 30px; /* Espace entre Carte et Connexion */
 }
 
-.btn.buttonAccueil{
-    background-color:black; 
-    border: 2px;
-    color: white;
-    padding: 13px 17px; 
-    text-align: center;
-    border-radius: 12px;
-    font-size: 17px; /*taille de la police*/
-    font-family: sans-serif;
+.nav-btn-link {
+    color: #ffffff;
+    text-decoration: none;
     font-weight: bold;
-    margin: 15px 10px; 
-    cursor: pointer; /*souris change de disgn*/
-    position: fixed;
-    right: 40%;
-    display: flex;      
+    font-size: 18px;
+    display: flex;
     align-items: center;
-
+    gap: 10px;
 }
+
+.nav-btn-link:hover {
+    color: #22c55e;
+}
+
+.nav-icon {
+    height: 22px;
+    width: auto;
+}
+
+/* Bouton Connexion Vert */
+.btn-connexion {
+    background-color: #22c55e;
+    color: #000000;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.3s ease;
+}
+
+.btn-connexion:hover {
+    background-color:#22c55e;
+    color: #000000;
+    transform: translateY(-2px);
+}
+
+/* 5. LE CONTENU (MAIN) */
+.main-content {
+    background-color: #ffffff;
+}
+
+/* Style global du footer */
+footer {
+    background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+    color: #e0e0e0;
+    padding: 60px 20px 30px;
+    font-family: 'Inter', -apple-system, sans-serif;
+    border-top: 2px solid #333;
+}
+
+/* Conteneur principal pour organiser les colonnes */
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    gap: 30px;
+}
+
+/* Sections du footer */
+.piedSite, .liens-utiles {
+    flex: 1;
+    min-width: 250px;
+}
+
+/* Titres (Contact & Navigation) */
+.h4new {
+    color: #22c55e; /* Couleur Or/Ambre */
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+}
+
+/* Petite barre décorative sous les titres */
+.h4new::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: #22c55e;
+    margin-top: 8px;
+    border-radius: 2px;
+}
+
+/* Liste de navigation */
+.liens-utiles ul {
+    list-style: none;
+    padding: 0;
+}
+
+.liens-utiles ul li {
+    margin-bottom: 12px;
+}
+
+.liens-utiles ul li a {
+    color: #aaa;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.liens-utiles ul li a:hover {
+    color: #ffffff;
+    padding-left: 8px; /* Effet de glissement au survol */
+}
+
+/* Informations de contact */
+.num, .email {
+    color: #bbb;
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+/* Ligne du bas (Copyright) */
+.container {
+    text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 25px;
+}
+
+.container a {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s;
+}
+
+.container a:hover {
+    color: #22c55e; /* Devient vert au survol */
+    text-decoration: underline;
+}
+
+/* Responsive : Adaptation mobile */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .h4new::after {
+        margin: 8px auto;
+    }
+}
+

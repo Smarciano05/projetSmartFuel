@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription Pompiste{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/registration.css') }}">
+{% endblock %}
+
+{% block main %}
+<div class="inscription-pompiste-wrapper">
+    <div class="inscription-card">
+        <div class="inscription-header">
+            <h3 class="inscription-title">Inscription Pompiste</h3>
+        </div>
+
+        <div class="inscription-body">
+            {% for flash_error in app.flashes('verify_email_error') %}
+                <div class="alert alert-danger">{{ flash_error }}</div>
+            {% endfor %}
+
+            {{ form_start(registrationForm) }}
+
+                <div class="form-row-container">
+                    {{ form_label(registrationForm.nom, 'Nom', {'label_attr': {'class': 'form-label-custom'}}) }}
+                    {{ form_errors(registrationForm.nom) }}
+                    {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-input-custom', 'placeholder': 'votre nom de famille'}}) }}
+
+                </div>
+
+                <div class="form-row-container">
+                    {{ form_label(registrationForm.prenom, 'Prénom', {'label_attr': {'class': 'form-label-custom'}}) }}
+                    {{ form_errors(registrationForm.prenom) }}
+                    {{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-input-custom', 'placeholder': 'votre prénom'}}) }}
+                </div>
+
+                <div class="form-row-container">
+                    {{ form_label(registrationForm.numero, 'Numéro de téléphone', {'label_attr': {'class': 'form-label-custom'}}) }}
+                    {{ form_errors(registrationForm.numero) }}
+                    {{ form_widget(registrationForm.numero, {'attr': {'class': 'form-input-custom', 'placeholder': '06 12 34 56 78'}}) }}
+                </div>
+
+                <div class="form-row-container">
+                    {{ form_label(registrationForm.station, 'Nom de la Station', {'label_attr': {'class': 'form-label-custom'}}) }}
+                    {{ form_errors(registrationForm.station) }}
+                    {{ form_widget(registrationForm.station, {'attr': {'class': 'form-input-custom', 'style':'color:#1e293b; background-color:#fff;'}}) }}                </div>
+
+                <div class="form-row-container">
+                    {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'form-label-custom'}}) }}
+                    {{ form_errors(registrationForm.email) }}
+                    {{ form_widget(registrationForm.email, {'attr': {'class': 'form-input-custom', 'placeholder': 'pompiste@smartfuel.fr'}}) }}
+
+                </div>
+
+                <div class="form-row-container">
+                    {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'form-label-custom'}}) }}
+                    {{ form_errors(registrationForm.plainPassword) }}
+                    {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-input-custom'}}) }}
+                </div>
+
+                <div class="checkbox-group">
+                    {{ form_label(registrationForm.agreeTerms, "J'accepte les conditions d'utilisation", {'label_attr': {'class': 'checkbox-label'}}) }}
+                    {{ form_errors(registrationForm.agreeTerms) }}
+                    {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'checkbox-input'}}) }}
+                </div>
+
+                <button type="submit" class="btn-submit-pompiste">S'inscrire</button>
+
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

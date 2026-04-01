@@ -1,0 +1,56 @@
+/* Conteneur principal */
+.map-container {
+    width: 95%;
+    margin: 30px auto;
+    background: #111111; /* noir moderne */
+    border-radius: 14px;
+
+    /* bordure très fine */
+    border: 1px solid rgba(34, 197, 94, 0.25);
+
+    /* ombre moderne douce */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+    overflow: hidden;
+}
+
+/* Header */
+.map-header {
+    background: #22c55e; /* vert moderne */
+    color: white;
+    text-align: center;
+    padding: 16px 25px;
+}
+
+/* Titre */
+.map-header h1 {
+    margin: 0;
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+/* Sous-titre */
+.map-header p {
+    margin: 4px 0 0 0;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+/* Carte */
+#map {
+    width: 100%;
+    height: 480px; /* moins long */
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    #map {
+        height: 420px;
+    }
+}
+
+@media (max-width: 768px) {
+    #map {
+        height: 320px;
+    }
+}

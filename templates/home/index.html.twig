@@ -3,7 +3,7 @@
 {% block title %}Accueil{% endblock %}
 
 
-{% block body %}
+{% block main %}
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 
         <section class="section_imageSF">
@@ -32,7 +32,7 @@
 
 
                     </ul>
-                    <button onclick="window.location.href='{{ path('pageclient') }}'" class="button-client">Accéder - client</button>
+                    <button class="button-client"  onclick="window.location.href='{{ path('app_client_login') }}'">Accéder - client</button>
                 </div>
 
                 <div class="container-pompiste icon-container">
@@ -42,7 +42,9 @@
                         <li><span class="bullet"></span> Enregistrez les prises d'essence</li>
                         <li><span class="bullet"></span> Gérez votre station</li>
                     </ul>
-                    <button class="button-pompiste">Accéder - pompiste</button>
+                    <button class="button-pompiste" onclick="window.location.href='{{ path('app_login') }}'">
+    Accéder - pompiste
+</button>
                 </div>
             </div>
         </section>

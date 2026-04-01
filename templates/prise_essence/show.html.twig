@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/prise_essence/show.css') }}">
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+
+        <div class="card">
+
+            <div class="card-header">
+                <h1>Détails de l'enregistrement</h1>
+
+                <div class="top-actions">
+                    <a href="{{ path('app_prise_essence_edit', {'id': enregistrement_essence.id}) }}" class="btn btn-green">
+                        Modifier
+                    </a>
+
+                    <div class="delete-btn">
+                        {{ include('prise_essence/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-info">
+                <div class="info">
+                    <span class="label">Date</span>
+                    <span class="value">
+                    {{ enregistrement_essence.date ? enregistrement_essence.date|date('d/m/Y') : '' }}
+                </span>
+                </div>
+
+                <div class="info">
+                    <span class="label">Heure</span>
+                    <span class="value">
+                    {{ enregistrement_essence.date ? enregistrement_essence.date|date('H:i') : '' }}
+                </span>
+                </div>
+
+                <div class="info">
+                    <span class="label">Client</span>
+                    <span class="value">
+                    {{ enregistrement_essence.client.nom }}
+                        {{ enregistrement_essence.client.prenom }}
+                </span>
+                </div>
+
+                <div class="info">
+                    <span class="label">Plaque</span>
+                    <span class="value plaque">
+                    {{ enregistrement_essence.immatriculation.numero }}
+                </span>
+                </div>
+
+                <div class="info">
+                    <span class="label">Carburant</span>
+                    <span class="badge">
+                    {{ enregistrement_essence.typeCarburant }}
+                </span>
+                </div>
+
+                <div class="info">
+                    <span class="label">Quantité</span>
+                    <span class="value big">
+                    {{ enregistrement_essence.quantite }} L
+                </span>
+                </div>
+            </div>
+
+            <div class="bottom-actions">
+                <a href="{{ path('app_prise_essence_index') }}" class="btn btn-black">
+                    Retour
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
