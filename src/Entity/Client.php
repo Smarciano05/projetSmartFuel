@@ -6,9 +6,12 @@ use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\DBAL\Types\Types;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
-class Client
+class Client implements UserInterface,PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,11 +24,26 @@ class Client
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $numero = null;
+
+    #[ORM\Column(length: 180, unique: true)] // Unique est important pour le login !
+    private ?string $email = null;
+
     /**
      * @var Collection<int, Immatriculation>
      */
-    #[ORM\OneToMany(targetEntity: Immatriculation::class, mappedBy: 'client')]
+    #[ORM\OneToMany(targetEntity: Immatriculation::class, mappedBy: 'client')]  //jsp à quoi ça sert ça 
     private Collection $immatriculations;
+     
+    
+    #[ORM\Column]
+    private array $roles = [];
+
+     #[ORM\Column]
+    private ?string $password = null;
+
+
 
     /**
      * @var Collection<int, EnregistrementEssence>
@@ -43,6 +61,19 @@ class Client
     {
         return $this->id;
     }
+
+     public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+     public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
 
     public function getNom(): ?string
     {
@@ -67,6 +98,85 @@ class Client
 
         return $this;
     }
+
+     /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+     public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    /**
+     * @param list<string> $roles
+     */
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Ensure the session doesn't contain actual password hashes by CRC32C-hashing them, as supported since Symfony 7.3.
+     */
+    public function __serialize(): array
+    {
+        $data = (array) $this;
+        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+
+        return $data;
+    }
+
+    public function getNumero(): ?int
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(int $numero): static
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+
+    public function eraseCredentials(): void
+    {
+        // Si vous stockez des données sensibles temporaires sur l'utilisateur, nettoyez-les ici
+    }
+
+
+
+
+
+
 
     /**
      * @return Collection<int, Immatriculation>
