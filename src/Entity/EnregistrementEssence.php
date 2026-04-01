@@ -32,9 +32,8 @@ class EnregistrementEssence
     #[ORM\JoinColumn(nullable: false)]
     private ?Station $station = null;
 
-    #[ORM\ManyToOne(inversedBy: 'enregistrementEssences')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Immatriculation $immatriculation = null;
+    #[ORM\Column]
+    private ?string $immatriculation = null;
 
     #[ORM\Column]
     private ?\DateTime $date = null;
@@ -104,17 +103,16 @@ class EnregistrementEssence
         return $this;
     }
 
-    public function getImmatriculation(): ?Immatriculation
+    public function getImmatriculation(): ?string
     {
         return $this->immatriculation;
     }
 
-    public function setImmatriculation(?Immatriculation $immatriculation): static
+    public function setImmatriculation(?string $immatriculation): void
     {
         $this->immatriculation = $immatriculation;
-
-        return $this;
     }
+
 
     public function getDate(): ?\DateTime
     {

@@ -49,17 +49,15 @@ final class PriseEssenceController extends AbstractController
 
             //on lie le pompiste connecté
             $pompiste = $this->getUser();
+
+            //
             $enregistrementEssence->setPompiste($pompiste);
 
+            //pour le nom de la station
             $enregistrementEssence->setStation($pompiste->getStation());
 
-            //on lie l'immatriculation du client ?
-            $numero = $form->get('immatriculation')->getData();
-            $immatriculation = $entityManager->getRepository(Immatriculation::class)->findOneBy(['numero' => $numero]);
-            $enregistrementEssence->setImmatriculation($immatriculation);
-            $enregistrementEssence->setClient($immatriculation->getClient());
-
             // Recuperer les données du formulaire
+            $enregistrementEssence->setImmatriculation($form->get('immatriculation')->getData());
             $enregistrementEssence->setDate(new \DateTime());
             $enregistrementEssence->setTypeCarburant($form->get('typeCarburant')->getData());
             $enregistrementEssence->setQuantite($form->get('quantite')->getData());

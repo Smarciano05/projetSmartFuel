@@ -47,19 +47,16 @@ class AppFixtures extends Fixture
         // creer immatriculations pour les clients
         $immatriculation1 = new Immatriculation();
         $immatriculation1->setNumero('AB-123-CD');
-        $immatriculation1->setClient($client1);
         $manager->persist($immatriculation1);
 
         //creer immatriculation pour le client 2
         $immatriculation2 = new Immatriculation();
         $immatriculation2->setNumero('EF-456-GH');
-        $immatriculation2->setClient($client2);
         $manager->persist($immatriculation2);
 
         //creer immatriculation pour le client 1
         $immatriculation3 = new Immatriculation();
         $immatriculation3->setNumero('IJ-789-KL');
-        $immatriculation3->setClient($client1);
         $manager->persist($immatriculation3);
 
 

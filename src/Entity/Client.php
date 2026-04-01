@@ -30,19 +30,11 @@ class Client implements UserInterface,PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)] // Unique est important pour le login !
     private ?string $email = null;
 
-    /**
-     * @var Collection<int, Immatriculation>
-     */
-    #[ORM\OneToMany(targetEntity: Immatriculation::class, mappedBy: 'client')]  //jsp à quoi ça sert ça 
-    private Collection $immatriculations;
-     
-    
     #[ORM\Column]
     private array $roles = [];
 
      #[ORM\Column]
     private ?string $password = null;
-
 
 
     /**
@@ -170,42 +162,6 @@ class Client implements UserInterface,PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         // Si vous stockez des données sensibles temporaires sur l'utilisateur, nettoyez-les ici
-    }
-
-
-
-
-
-
-
-    /**
-     * @return Collection<int, Immatriculation>
-     */
-    public function getImmatriculations(): Collection
-    {
-        return $this->immatriculations;
-    }
-
-    public function addImmatriculation(Immatriculation $immatriculation): static
-    {
-        if (!$this->immatriculations->contains($immatriculation)) {
-            $this->immatriculations->add($immatriculation);
-            $immatriculation->setClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImmatriculation(Immatriculation $immatriculation): static
-    {
-        if ($this->immatriculations->removeElement($immatriculation)) {
-            // set the owning side to null (unless already changed)
-            if ($immatriculation->getClient() === $this) {
-                $immatriculation->setClient(null);
-            }
-        }
-
-        return $this;
     }
 
     /**
