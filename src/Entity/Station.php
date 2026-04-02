@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\StationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StationRepository::class)]
@@ -18,17 +19,25 @@ class Station
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+
+
     /**
      * @var Collection<int, Pompiste>
      */
-    #[ORM\OneToMany(targetEntity: Pompiste::class, mappedBy: 'station')]
+    #[ORM\OneToMany(targetEntity: Pompiste::class, mappedBy: 'Station', orphanRemoval: true)]
     private Collection $pompistes;
 
-    /**
+     /**
      * @var Collection<int, EnregistrementEssence>
      */
     #[ORM\OneToMany(targetEntity: EnregistrementEssence::class, mappedBy: 'station')]
     private Collection $enregistrementEssences;
+
+    /**
+     * @var Collection<int, StockCarburant>
+     */
+    #[ORM\OneToMany(targetEntity: StockCarburant::class, mappedBy: 'idStation', orphanRemoval: true)]
+    private Collection $stockCarburants;
 
     #[ORM\Column]
     private ?float $latitude = null;
@@ -40,7 +49,7 @@ class Station
     public function __construct()
     {
         $this->pompistes = new ArrayCollection();
-        $this->enregistrementEssences = new ArrayCollection();
+        $this->stockCarburants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -91,29 +100,29 @@ class Station
     }
 
     /**
-     * @return Collection<int, EnregistrementEssence>
+     * @return Collection<int, StockCarburant>
      */
-    public function getEnregistrementEssences(): Collection
+    public function getStockCarburants(): Collection
     {
-        return $this->enregistrementEssences;
+        return $this->stockCarburants;
     }
 
-    public function addEnregistrementEssence(EnregistrementEssence $enregistrementEssence): static
+    public function addStockCarburant(StockCarburant $stockCarburant): static
     {
-        if (!$this->enregistrementEssences->contains($enregistrementEssence)) {
-            $this->enregistrementEssences->add($enregistrementEssence);
-            $enregistrementEssence->setStation($this);
+        if (!$this->stockCarburants->contains($stockCarburant)) {
+            $this->stockCarburants->add($stockCarburant);
+            $stockCarburant->setIdStation($this);
         }
 
         return $this;
     }
 
-    public function removeEnregistrementEssence(EnregistrementEssence $enregistrementEssence): static
+    public function removeStockCarburant(StockCarburant $stockCarburant): static
     {
-        if ($this->enregistrementEssences->removeElement($enregistrementEssence)) {
+        if ($this->stockCarburants->removeElement($stockCarburant)) {
             // set the owning side to null (unless already changed)
-            if ($enregistrementEssence->getStation() === $this) {
-                $enregistrementEssence->setStation(null);
+            if ($stockCarburant->getIdStation() === $this) {
+                $stockCarburant->setIdStation(null);
             }
         }
 

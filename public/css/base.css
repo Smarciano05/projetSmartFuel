@@ -67,7 +67,7 @@
 }
 
 .btn-connexion:hover {
-    background-color:#22c55e;
+    background-color: #1a9d4b;
     color: #000000;
     transform: translateY(-2px);
 }
@@ -77,7 +77,7 @@
     background-color: #ffffff;
 }
 
-/* Style global du footer */
+    /* Style global du footer */
 footer {
     background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
     color: #e0e0e0;
@@ -104,12 +104,13 @@ footer {
 
 /* Titres (Contact & Navigation) */
 .h4new {
-    color: #22c55e; /* Couleur Or/Ambre */
+    color: #1a9d4b; /* Couleur Or/Ambre */
     font-size: 1.1rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     margin-bottom: 20px;
+    position: block;
 }
 
 /* Petite barre décorative sous les titres */
@@ -118,7 +119,7 @@ footer {
     display: block;
     width: 40px;
     height: 3px;
-    background: #22c55e;
+    background: #1a9d4b;
     margin-top: 8px;
     border-radius: 2px;
 }
@@ -167,7 +168,7 @@ footer {
 }
 
 .container a:hover {
-    color: #22c55e; /* Devient vert au survol */
+    color: #1a9d4b; /* Devient vert au survol */
     text-decoration: underline;
 }
 
@@ -177,9 +178,8 @@ footer {
         flex-direction: column;
         text-align: center;
     }
-
+    
     .h4new::after {
         margin: 8px auto;
     }
 }
-

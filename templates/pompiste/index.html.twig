@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile pompiste{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/profilePompiste.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="app-container">
+        <header class="main-header">
+            <div class="header-left">
+                <div class="user-block">
+                    <img src="https://via.placeholder.com/45" alt="Profil" class="profile-img">
+                    <span class="user-name">Jean Dupont</span>
+                </div>
+                <div class="separator"></div>
+                <span class="station-name">Station TotalEnergies - Gonesse</span>
+            </div>
+            
+            <div class="header-right">
+                <a href="#" class="logout-btn">Déconnexion</a>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <aside class="sidebar">
+                <ul class="nav-menu">
+                    <li><a href="#">🏠 Dashboard</a></li>
+                    <li><a href="#">🔍 Recherche plaque</a></li>
+                    <li><a href="#">⛽ Enregistrer prise d'essence</a></li>
+                    <li><a href="{{path('app_stock_carburant')}}">📊 Gestion des stocks</a></li>
+                    <li><a href="#">📈 Historique</a></li>
+                    <li><a href="#">🗺️ Carte</a></li>
+                </ul>
+            </aside>
+
+            <main class="main-content">
+                {% block main %}{% endblock %}
+            </main>
+        </div>
+    </div>
+{% endblock %}

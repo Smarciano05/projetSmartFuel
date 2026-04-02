@@ -1,0 +1,205 @@
+/* 1. MISE EN PAGE GLOBALE */
+.tout {
+    background: radial-gradient(circle at top right, #1a1a1a, #050505);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px; /* Largeur optimale pour un formulaire */
+}
+
+/* 2. LA CARTE (SANS TRAIT) */
+.card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(15px);
+    border-radius: 24px;
+    /* On enlève toute bordure ici */
+    border: none; 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+/* 3. L'ENTÊTE (ÉURÉ ET PROPRE) */
+.card-header {
+    background: #22c55e;
+    padding: 40px 20px;
+    text-align: center;
+    /* On s'assure qu'il n'y a pas de trait en bas */
+    border-bottom: none; 
+}
+
+.card-header h3 {
+    color: #000;
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 4. LE CORPS (AÉRÉ) */
+.card-body {
+    padding: 50px; /* On donne beaucoup d'espace interne */
+}
+
+/* ESPACEMENT DES BLOCS DE FORMULAIRE (LES "ROWS") */
+/* Symfony génère des <div> autour de chaque form_row */
+.card-body form div {
+    margin-bottom: 25px; /* Espace vertical entre chaque champ */
+}
+
+/* On cible le conteneur spécifique de la checkbox */
+/* Dans Symfony, c'est généralement une div qui contient l'input et le label */
+.card-body form div:has(input[type="checkbox"]) {
+    display: flex;
+    flex-direction: row-reverse; /* Met l'input avant le texte */
+    justify-content: center;    /* Centre le bloc horizontalement */
+    align-items: center;        /* Aligne verticalement la case et le texte */
+    gap: 15px;                  /* Crée un espace entre la case et le texte */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Style pour les erreurs individuelles sous les champs */
+.card-body form ul {
+    list-style: none; /* Enlève les puces */
+    padding: 0;
+    margin: 5px 0 15px 0;
+}
+
+.card-body form ul li {
+    color: #ff6b6b; /* Un rouge clair/corail très lisible sur noir */
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: left;
+    display: block;
+    animation: shake 0.4s ease-in-out; /* Petite animation pour attirer l'oeil */
+}
+
+/* Style pour les erreurs globales (form_errors) tout en haut */
+.alert-danger {
+    background: rgba(255, 107, 107, 0.15);
+    border: 1px solid #ff6b6b;
+    color: #ff6b6b;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+/* Optionnel : petite animation de secousse pour l'erreur */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Si l'input a une erreur (Symfony ajoute parfois une classe ou on cible le parent) */
+.card-body form div:has(ul) input {
+    border-color: #ff6b6b !important;
+    box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.1) !important;
+}
+
+/* On réinitialise les marges du label pour qu'il ne pousse pas vers le bas */
+.card-body form div:has(input[type="checkbox"]) label {
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+/* On s'assure que la checkbox n'est pas trop petite */
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+}
+
+/* STYLE DES LABELS */
+label {
+    display: block;
+    color: #22c55e;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 10px; /* Espace entre le texte et l'input */
+    font-size: 0.95rem;
+}
+
+/* STYLE DES INPUTS */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"] {  
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Indispensable pour la largeur 100% */
+}
+
+input:focus {
+    outline: none;
+    border-color: #22c55e;
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+}
+
+/* CAS PARTICULIER : LA CHECKBOX */
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #22c55e;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* 5. LE BOUTON (IMPOSANT ET MODERNE) */
+.btn-primary {
+    width: 100%;
+    background: #22c55e;
+    color: #000;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px; /* Aération au-dessus du bouton */
+}
+
+.btn-primary:hover {
+    background: #1ca850;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+}
+
+/* LIEN DE CONNEXION EN BAS */
+.text-center {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.text-center p {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* ALERTES FLASH */
+.alert {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+.alert-danger { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
+.alert-success { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid #22c55e; }

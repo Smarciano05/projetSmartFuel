@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+{% block stylesheets %}{{ parent() }} <link rel="stylesheet" href="{{ asset('css/choixInscription.css') }}">{% endblock %}
+{% block main %}
+    <div class="split-screen">
+        <a href="{{ path('inscription_client') }}" class="choice-section client-side">
+            <i class="fa-solid fa-user-gear"></i>
+            <h2>Client</h2>
+            <div class="btn-choice">S'inscrire en tant que Client</div>
+        </a>
+
+        <a href="{{ path('inscription_pompiste') }}" class="choice-section pompiste-side">
+            <i class="fa-solid fa-gas-pump"></i>
+            <h2>Pompiste</h2>
+            <div class="btn-choice">S'inscrire en tant que Pompiste</div>
+        </a>
+    </div>
+
+
+
+{% endblock %}
