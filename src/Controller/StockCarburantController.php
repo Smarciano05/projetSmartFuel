@@ -21,6 +21,11 @@ final class StockCarburantController extends AbstractController
             $this->addFlash('danger', "Accès réservé aux pompistes.");
             return $this->redirectToRoute('app_home');
         }
+
+        //pour garder les infos du profile: 
+        $nom=$pompiste->getNom();
+        $prenom=$pompiste->getPrenom();
+        $nomStation = $pompiste->getStation()->getNom();
         
         // Récupérer l'id de la station du pompiste
         $idStation = $pompiste->getStation()->getId();
@@ -31,6 +36,9 @@ final class StockCarburantController extends AbstractController
         return $this->render('stock_carburant/index.html.twig', [
             'controller_name' => 'StockCarburantController',
             'listStockCarbStation' => $listStockCarbStation,
+            'NOM'=>$nom,
+            'PRENOM'=>$prenom,
+            'NOM_station' => $nomStation,
         ]);
     }
 

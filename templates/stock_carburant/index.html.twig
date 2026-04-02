@@ -2,23 +2,36 @@
 
 {% block title %} GESTION DE STOCK DES CARBURANTS {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/gestionStockC.css') }}">
+{% endblock %}
+
 {% block main %}
-<h4> Gestion de Stock de Carburant </h4>
-<table border>
-    <tr>
-        <td> Typpe de Carburant </td>
-        <td> Quantité de Carburant </td>
-    </tr>
-
+<div class="stock-wrapper">
+    <h4 class="table-title">Gestion de Stock de Carburant</h4>
     
-{% for carbStation in listStockCarbStation %}
-    <tr>
-        <td>{{carbStation.getTypeCarburant()}}</td>
-        <td>{{carbStation.getQteCarburant()}} </td>
-    </tr>
-{% endfor %}
-
-</table>
-
-
+    <div class="table-container">
+        <table class="stock-table">
+            <thead>
+                <tr>
+                    <th>Type de Carburant</th>
+                    <th>Quantité (Litrafe)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for carbStation in listStockCarbStation %}
+                <tr>
+                    <td class="font-bold">{{ carbStation.getTypeCarburant() }}</td>
+                    <td class="text-right">{{ carbStation.getQteCarburant()|number_format(1, '.', ' ') }} L</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2" class="text-center">Aucun stock disponible pour cette station.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

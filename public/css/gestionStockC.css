@@ -1,0 +1,82 @@
+/* Container principal */
+.stock-wrapper {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    width: 100%;      /* Ajoute ceci */
+    max-width: 100%;  /* Ajoute ceci pour annuler toute limite */
+    padding: 20px;
+    box-sizing: border-box; /* Pour que le padding ne dépasse pas de l'écran */
+}
+
+.table-title {
+    color: #121212;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    border-left: 5px solid #1a9d4b;
+    padding-left: 15px;
+}
+
+/* Container de la table pour le scroll mobile */
+.table-container {
+    width: 100%;      /* Ajoute ceci */
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Style de la table */
+.stock-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+.stock-table thead {
+    background-color: #1a9d4b;
+    color: #ffffff;
+}
+
+.stock-table th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.stock-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+}
+
+/* Effet au survol des lignes */
+.stock-table tbody tr:hover {
+    background-color: #f8faff;
+    transition: background-color 0.2s ease;
+}
+
+/* Mise en avant des données */
+.font-bold {
+    font-weight: bold;
+    color: #1a9d4b;
+}
+
+.text-right {
+    text-align: right;
+    font-family: 'Courier New', Courier, monospace; /* Style numérique */
+    font-weight: 600;
+}
+
+.text-center {
+    text-align: center;
+    padding: 30px;
+    color: #7f8c8d;
+}
+
+/* Alternance de couleurs (zebra stripes) */
+.stock-table tbody tr:nth-child(even) {
+    background-color: #fcfcfc;
+}

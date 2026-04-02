@@ -8,7 +8,7 @@
 
 /* HEADER */
 .main-header {
-    background-color: #22c55e;
+    background-color: #1a9d4b;
     height: 70px;
     display: flex;
     justify-content: space-between; /* Écarte gauche et droite */
@@ -82,7 +82,7 @@
 
 .sidebar {
     width: 280px;
-    background-color: #1e293b;
+    background-color: #121212;
     /* On change fixed par sticky pour qu'elle reste à gauche sans chevaucher le footer */
     position: sticky; 
     top: 70px; /* Aligné sous ton header */
@@ -102,13 +102,14 @@
 }
 
 .nav-menu li a.active, .nav-menu li a:hover {
-    background-color: #334155;
-    color: #22c55e;
-    border-left: 4px solid #22c55e;
+    background-color: #121212;
+    color: #1a9d4b;
+    border-left: 4px solid #1a9d4b;
 }
 
 .main-content {
     flex: 1;
-    margin-left: 280px;
+    margin-left: 0; /* Change 280px par 0 */
     padding: 30px;
+    width: 100%;    /* Assure-toi qu'il prend tout */
 }
