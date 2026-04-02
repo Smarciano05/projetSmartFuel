@@ -51,7 +51,7 @@ security:
             logout:
                 path: app_logout
                 # where to redirect after logout
-                target: app_login #une fois déconnecté on retourne à la page de connexion 
+                target: app_client_login #une fois déconnecté on retourne à la page de connexion 
                 # target: app_any_route
 
     access_control:  #pour controller qui à ecces à quoi 

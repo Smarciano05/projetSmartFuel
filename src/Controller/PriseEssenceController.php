@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\EnregistrementEssence;
 use App\Entity\Immatriculation;
 use App\Entity\Pompiste;
+use App\Entity\Client;
 use App\Form\EnregistrementEssenceType;
 use App\Repository\EnregistrementEssenceRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -37,42 +38,92 @@ final class PriseEssenceController extends AbstractController
 
         //afficher le nom de la station
 
+
         //recuperer le pompiste connecté pour avoir le nom de la station lié à ce pompiste
-        if($this->getUser()) {
+        if ($this->getUser() instanceof Pompiste) {
+
+
+
             $pompiste = $this->getUser();
+
+
             $station = $pompiste->getStation();
             $nomStation = $station->getNom();
         }
 
         //verifier si soumis et valide -> que le pompiste a cliqué sur le bouton et regle valide
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             //on lie le pompiste connecté
-            $pompiste = $this->getUser();
+            if ($this->getUser() instanceof Pompiste) {
+                $pompiste = $this->getUser();
 
-            //
-            $enregistrementEssence->setPompiste($pompiste);
+                //
+                $enregistrementEssence->setPompiste($pompiste);
 
-            //pour le nom de la station
-            $enregistrementEssence->setStation($pompiste->getStation());
+                //pour le nom de la station
+                $enregistrementEssence->setStation($pompiste->getStation());
 
-            // Recuperer les données du formulaire
-            $enregistrementEssence->setImmatriculation($form->get('immatriculation')->getData());
-            $enregistrementEssence->setDate(new \DateTime());
-            $enregistrementEssence->setTypeCarburant($form->get('typeCarburant')->getData());
-            $enregistrementEssence->setQuantite($form->get('quantite')->getData());
+                // Recuperer les données du formulaire  -modif mariam parce que immatriculation c'est un obj maintenant pas juste un str 
+                // récupérer le texte saisi 
+                $numeroSaisi = $form->get('immatriculation')->getData();
 
-            //sauvegarde dans la base de données
-            $entityManager->persist($enregistrementEssence);
-            $entityManager->flush();
+                // chercher si cette immatriculation existe déjà en base
+                $immatRepo = $entityManager->getRepository(Immatriculation::class);
+                $immatriculation = $immatRepo->findOneBy(['numero' => $numeroSaisi]);
 
-            return new Response('Enregistrement de l\'essence réussi !');
+                // si elle n'existe pas on crée 
+                if (!$immatriculation) {
+                    $immatriculation = new Immatriculation();
+                    $immatriculation->setNumero($numeroSaisi);
+                    // On demande à Doctrine de se préparer à créer cette nouvelle immatriculation
+                    $entityManager->persist($immatriculation);
+                }
+
+                // on lie l'objet Immatriculation  à l'enregistrement
+                $enregistrementEssence->setImmatriculation($immatriculation);
+
+
+
+                $enregistrementEssence->setDate(new \DateTime());
+                $enregistrementEssence->setTypeCarburant($form->get('typeCarburant')->getData());
+                $enregistrementEssence->setQuantite($form->get('quantite')->getData());
+
+
+                //récupérer le champs de email client , trouver le client qui correspond et le mettre
+
+                //récupérer l'email saisi
+                $emailSaisi = $form->get('client_email')->getData();
+
+                // chercher le client correspondant
+                $clientRepo = $entityManager->getRepository(Client::class);
+                $client = $clientRepo->findOneBy(['email' => $emailSaisi]);
+
+                //Vérifier si le client existe
+                if (!$client) {
+
+                    return new Response("Erreur : Aucun client trouvé avec l'adresse " . $emailSaisi);
+                }
+
+                // lier le client à l'enregistrement
+                $enregistrementEssence->setClient($client);
+
+                //sauvegarde dans la base de données
+                $entityManager->persist($enregistrementEssence);
+                $entityManager->flush();
+
+
+
+                return new Response('Enregistrement de l\'essence réussi !');
+            } else {
+                return new Response(' Connectez-vous en tant que pompiste');
+            }
         }
 
         return $this->render('prise_essence/new.html.twig', [
             'controller_name' => 'EnregistrerEssenceController',
             'form' => $form->createView(),
-            'station' => $nomStation ,
+            'station' => $nomStation,
 
         ]);
     }
@@ -106,7 +157,7 @@ final class PriseEssenceController extends AbstractController
     #[Route('/{id}', name: 'app_prise_essence_delete', methods: ['POST'])]
     public function delete(Request $request, EnregistrementEssence $enregistrementEssence, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$enregistrementEssence->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $enregistrementEssence->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($enregistrementEssence);
             $entityManager->flush();
         }

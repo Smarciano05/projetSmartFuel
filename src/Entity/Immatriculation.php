@@ -18,7 +18,7 @@ class Immatriculation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ? Number $numero = null;
+    private ?string  $numero = null;
 
 
 
@@ -27,12 +27,12 @@ class Immatriculation
         return $this->id;
     }
 
-    public function getNumero(): ?Number
+    public function getNumero(): ?string
     {
         return $this->numero;
     }
 
-    public function setNumero(Number $numero): static
+    public function setNumero(string $numero): static
     {
         $this->numero = $numero;
 

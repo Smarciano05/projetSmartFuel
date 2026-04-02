@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\EnregistrementEssenceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Immatriculation;
 
 #[ORM\Entity(repositoryClass: EnregistrementEssenceRepository::class)]
 class EnregistrementEssence
@@ -32,8 +33,9 @@ class EnregistrementEssence
     #[ORM\JoinColumn(nullable: false)]
     private ?Station $station = null;
 
-    #[ORM\Column]
-    private ?string $immatriculation = null;
+    #[ORM\ManyToOne(targetEntity: Immatriculation::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Immatriculation $immatriculation = null;
 
     #[ORM\Column]
     private ?\DateTime $date = null;
@@ -103,14 +105,15 @@ class EnregistrementEssence
         return $this;
     }
 
-    public function getImmatriculation(): ?string
+    public function getImmatriculation(): ?Immatriculation
     {
         return $this->immatriculation;
     }
 
-    public function setImmatriculation(?string $immatriculation): void
+    public function setImmatriculation(?Immatriculation $immatriculation): static
     {
         $this->immatriculation = $immatriculation;
+        return $this;
     }
 
 
