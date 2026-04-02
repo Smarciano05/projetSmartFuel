@@ -1,115 +1,84 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Profil Client - Carburant</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <title>Profil Client - {{ user.prenom }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<main class="min-h-screen bg-gray-100">
+<body class="min-h-screen bg-gray-100">
 
-  <!-- HEADER PROFIL -->
-  <header class="bg-white shadow-md">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <header class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-      <div class="flex items-center gap-4">
-        <img
-          src="https://images.unsplash.com/photo-1771050889377-b68415885c64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBhdmF0YXIlMjBwb3J0cmFpdHxlbnwxfHx8fDE3NzE1ODg2MTB8MA&ixlib=rb-4.1.0&q=80&w=1080"
-          class="w-16 h-16 rounded-full object-cover"
-        />
+            <div class="flex items-center gap-4">
+                {# Génération d'un avatar avec les initiales car plus de photo #}
+                <div class="w-16 h-16 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xl font-bold uppercase">
+                    {{ user.prenom|slice(0, 1) }}{{ user.nom|slice(0, 1) }}
+                </div>
 
-        <div>
-          <h1 class="text-xl font-bold">Jean Dupont</h1>
-          <p class="text-sm text-gray-500">ID: CLT-2024-0542</p>
-          <p class="text-sm text-gray-500">Plaque: AB-123-CD</p>
+                <div>
+                    <h1 class="text-xl font-bold">{{ user.prenom }} {{ user.nom }}</h1>
+                    <p class="text-sm text-gray-500">ID Client : {{ user.id }}</p>
+                    <p class="text-sm text-gray-500">{{ user.email }}</p>
+                </div>
+            </div>
+
+            {# Lien vers la route de déconnexion configurée dans security.yaml #}
+            <a href="{{ path('app_logout') }}" 
+               class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">
+                Déconnexion
+            </a>
+
         </div>
-      </div>
+    </header>
 
-      <button
-        class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-        onclick="alert('Déconnexion...')"
-      >
-        Déconnexion
-      </button>
+    <main class="max-w-7xl mx-auto p-6">
 
-    </div>
-  </header>
+        <section class="bg-white rounded-2xl shadow p-6 mb-8">
+            <h2 class="text-lg font-semibold mb-4">Statut du compte</h2>
 
-  <!-- CONTENU PRINCIPAL -->
-  <main class="max-w-7xl mx-auto p-6">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-green-100 p-4 rounded-xl">
+                    <p class="text-sm text-gray-600">Total ravitaillements</p>
+                    <p class="text-lg font-bold">{{ historique|length }} enregistrements</p>
+                </div>
 
-    <!-- STATUS VEHICULE -->
-    <section class="bg-white rounded-2xl shadow p-6 mb-8">
-      <h2 class="text-lg font-semibold mb-4">Statut du véhicule</h2>
+                <div class="bg-blue-100 p-4 rounded-xl">
+                    <p class="text-sm text-gray-600">Statut</p>
+                    <p class="text-lg font-bold">Compte Actif</p>
+                </div>
+            </div>
+        </section>
 
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-green-100 p-4 rounded-xl">
-          <p class="text-sm text-gray-600">Dernier ravitaillement</p>
-          <p class="text-lg font-bold">Il y a 5 jours</p>
-        </div>
+        <section class="bg-white rounded-2xl shadow p-6">
+            <h2 class="text-lg font-semibold mb-6">Historique des ravitaillements</h2>
 
-        <div class="bg-yellow-100 p-4 rounded-xl">
-          <p class="text-sm text-gray-600">Prochain ravitaillement disponible</p>
-          <p class="text-lg font-bold">Dans 2 jours</p>
-        </div>
-      </div>
-    </section>
+            <div class="space-y-4">
+                {# On boucle sur la variable 'historique' envoyée par le contrôleur #}
+                {% for essence in historique %}
+                    <div class="border rounded-xl p-4 flex justify-between items-center hover:bg-gray-50 transition-colors">
+                        <div>
+                            {# On accède aux propriétés de ton entité EnregistrementEssence #}
+                            <p class="font-semibold">{{ essence.nomStation }}</p>
+                            <p class="text-sm text-gray-500">{{ essence.typeCarburant }} • {{ essence.quantite }}L</p>
+                            <p class="text-sm text-gray-400">
+                                Le {{ essence.dateEnregistrement|date('d/m/Y à H:i') }}
+                            </p>
+                        </div>
+                        <p class="font-bold text-lg text-indigo-700">{{ essence.prixTotal }} €</p>
+                    </div>
+                {% else %}
+                    {# Ce bloc s'affiche si la liste 'historique' est vide #}
+                    <div class="text-center py-10">
+                        <p class="text-gray-500">Aucun ravitaillement enregistré pour le moment.</p>
+                    </div>
+                {% endfor %}
 
-    <!-- HISTORIQUE -->
-    <section class="bg-white rounded-2xl shadow p-6">
-      <h2 class="text-lg font-semibold mb-6">Historique des ravitaillements</h2>
+            </div>
+        </section>
 
-      <div class="space-y-4">
+    </main>
 
-        <div class="border rounded-xl p-4 flex justify-between items-center">
-          <div>
-            <p class="font-semibold">Station Total - Avenue des Champs</p>
-            <p class="text-sm text-gray-500">Diesel • 45.5L</p>
-            <p class="text-sm text-gray-400">Il y a 5 jours</p>
-          </div>
-          <p class="font-bold text-lg">75.83 €</p>
-        </div>
-
-        <div class="border rounded-xl p-4 flex justify-between items-center">
-          <div>
-            <p class="font-semibold">Shell Express - Route Nationale</p>
-            <p class="text-sm text-gray-500">Diesel • 38.2L</p>
-            <p class="text-sm text-gray-400">08/02/2026</p>
-          </div>
-          <p class="font-bold text-lg">63.73 €</p>
-        </div>
-
-        <div class="border rounded-xl p-4 flex justify-between items-center">
-          <div>
-            <p class="font-semibold">BP Service - Centre Ville</p>
-            <p class="text-sm text-gray-500">Diesel • 42.0L</p>
-            <p class="text-sm text-gray-400">01/02/2026</p>
-          </div>
-          <p class="font-bold text-lg">70.14 €</p>
-        </div>
-
-        <div class="border rounded-xl p-4 flex justify-between items-center">
-          <div>
-            <p class="font-semibold">Esso - Périphérique Sud</p>
-            <p class="text-sm text-gray-500">Diesel • 40.8L</p>
-            <p class="text-sm text-gray-400">25/01/2026</p>
-          </div>
-          <p class="font-bold text-lg">68.13 €</p>
-        </div>
-
-        <div class="border rounded-xl p-4 flex justify-between items-center">
-          <div>
-            <p class="font-semibold">Station Total - Avenue des Champs</p>
-            <p class="text-sm text-gray-500">Diesel • 44.3L</p>
-            <p class="text-sm text-gray-400">18/01/2026</p>
-          </div>
-          <p class="font-bold text-lg">73.85 €</p>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-</main>
+</body>
 </html>

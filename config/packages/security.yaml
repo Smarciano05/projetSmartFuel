@@ -26,7 +26,7 @@ security:
             form_login:
                 login_path: app_client_login
                 check_path: app_client_login
-                default_target_path: app_client_home # Ta route après succès
+                default_target_path: pageclient # Ta route après succès
                 enable_csrf: true
             logout:
                 path: app_client_logout

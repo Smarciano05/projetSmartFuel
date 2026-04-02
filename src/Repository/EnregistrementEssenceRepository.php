@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\EnregistrementEssence;
+use App\Entity\Client;
+use App\Entity\Immatriculation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,17 +21,14 @@ class EnregistrementEssenceRepository extends ServiceEntityRepository
     //    /**
     //     * @return EnregistrementEssence[] Returns an array of EnregistrementEssence objects
     //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('e.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+ public function findByClientSorted(Client $user): array{
+    return $this->createQueryBuilder('e')
+        ->andWhere('e.client = :val')
+        ->setParameter('val', $user)
+        ->orderBy('e.date', 'DESC')
+        ->getQuery()
+        ->getResult();
+}
 
     //    public function findOneBySomeField($value): ?EnregistrementEssence
     //    {
