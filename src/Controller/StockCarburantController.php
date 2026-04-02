@@ -15,7 +15,6 @@ final class StockCarburantController extends AbstractController
     {
         // Récupérer le pompiste connecté (exemple avec Symfony Security)
         $pompiste = $this->getUser();
-        dd($pompiste);
         // 1. On vérifie si l'utilisateur est bien une instance de Pompiste
         if (!$pompiste instanceof Pompiste) {
             // Si c'est un Client (ou pas connecté), on redirige ou on affiche une erreur

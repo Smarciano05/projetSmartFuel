@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion Pompiste{% endblock %}
+{% block title %}Connexion Client{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -16,7 +16,7 @@
         
         {# 3. L'en-tête vert SmartFuel #}
         <div class="inscription-header">
-            <h1 class="inscription-title"> Connexion Pompiste</h1>
+            <h1 class="inscription-title">Conexion Client</h1>
         </div>
 
         {# 4. Le corps du formulaire #}
@@ -50,7 +50,7 @@
 
                 <div class="form-footer" style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem;">
                     <p>Pas encore de compte ? 
-                        <a href="{{ path('inscription_pompiste') }}" style="color: #22c55e; text-decoration: underline; font-weight: bold;">
+                        <a href="{{ path('inscription_client') }}" style="color: #22c55e; text-decoration: underline; font-weight: bold;">
                             Inscrivez-vous ici
                         </a>
                     </p>

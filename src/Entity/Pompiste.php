@@ -170,7 +170,7 @@ class Pompiste implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getStation(): ?Station
     {
-        return $this->Station;
+        return $this->station;
     }
 
     public function setStation(?Station $station): static

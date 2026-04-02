@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/prise_essence/edit.css') }}">
+{% endblock %}
+
+{% block title %}Modifier la prise d'essence{% endblock %}
+
+
+{% block main %}
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Modifier la prise d'essence</h1>
+            </div>
+
+            <div class="card-body">
+                {{ include('prise_essence/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+            </div>
+
+            <div class="actions">
+                <a href="{{ path('app_prise_essence_index') }}" class="btn btn-black">
+                    Retour
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

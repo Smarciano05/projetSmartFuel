@@ -46,6 +46,7 @@ class ClientRegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            
             ->add('numero', IntegerType::class, [
                 'label' => 'Numéro de téléphone',
                 'constraints' => [

@@ -11,8 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\DBAL\Types\Types;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-class Client implements UserInterface, PasswordAuthenticatedUserInterface
+class Client implements UserInterface,PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -40,11 +39,9 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
-    /**
-     * @var Collection<int, Immatriculation>
-     */
-    #[ORM\OneToMany(targetEntity: Immatriculation::class, mappedBy: 'client')]
-    private Collection $immatriculations;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $numero = null;
+
 
     /**
      * @var Collection<int, EnregistrementEssence>
@@ -53,20 +50,22 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $enregistrementEssences;
 
 
-    #[ORM\Column(type: Types::INTEGER)]
-    private ?int $numero = null;
+    public function __construct()
+    {
+        $this->enregistrementEssences = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEmail(): ?string
+     public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+     public function setEmail(string $email): static
     {
         $this->email = $email;
 
@@ -174,36 +173,8 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    
 
-    /**
-     * @return Collection<int, Immatriculation>
-     */
-    public function getImmatriculations(): Collection
-    {
-        return $this->immatriculations;
-    }
-
-    public function addImmatriculation(Immatriculation $immatriculation): static
-    {
-        if (!$this->immatriculations->contains($immatriculation)) {
-            $this->immatriculations->add($immatriculation);
-            $immatriculation->setClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImmatriculation(Immatriculation $immatriculation): static
-    {
-        if ($this->immatriculations->removeElement($immatriculation)) {
-            // set the owning side to null (unless already changed)
-            if ($immatriculation->getClient() === $this) {
-                $immatriculation->setClient(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, EnregistrementEssence>
