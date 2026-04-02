@@ -3,18 +3,19 @@
 namespace App\Entity;
 
 use App\Repository\PompisteRepository;
-use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
+use BcMath\Number;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: PompisteRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-class Pompiste implements UserInterface, PasswordAuthenticatedUserInterface
+class Pompiste implements UserInterface, PasswordAuthenticatedUserInterface 
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -52,6 +53,9 @@ class Pompiste implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Station $station = null;
 
+    /**
+     * @var Collection<int, EnregistrementEssence>
+     */
     #[ORM\OneToMany(targetEntity: EnregistrementEssence::class, mappedBy: 'pompiste')]
     private Collection $enregistrementEssences;
 
@@ -72,7 +76,7 @@ class Pompiste implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setEmail(string $email): static
     {
-        $this->email = $email;
+        $this->email = $email; 
 
         return $this;
     }
@@ -119,7 +123,7 @@ class Pompiste implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPassword(string $password): static
     {
-        $this->password = $password;
+        $this->password = $password; 
 
         return $this;
     }
@@ -175,20 +179,20 @@ class Pompiste implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getNumero(): ?int
+    public function getNumero(): ?int 
     {
-        return $this->numero;
+        return $this->numero; 
     }
 
-    public function setNumero(int $numero): static
+    public function setNumero(int $numero): static 
     {
-        $this->numero = $numero;
+        $this->numero = $numero; 
 
         return $this;
     }
 
     public function isVerified(): bool
-    {
+    {  
         return $this->isVerified;
     }
 
@@ -198,15 +202,4 @@ class Pompiste implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    public function getEnregistrementEssences(): Collection
-    {
-        return $this->enregistrementEssences;
-    }
-
-    public function setEnregistrementEssences(Collection $enregistrementEssences): void
-    {
-        $this->enregistrementEssences = $enregistrementEssences;
-    }
-
 }

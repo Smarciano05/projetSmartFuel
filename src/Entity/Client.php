@@ -3,9 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\DBAL\Types\Types;
@@ -18,6 +18,21 @@ class Client implements UserInterface,PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length: 180)]
+    private ?string $email = null;
+
+    /**
+     * @var list<string> The user roles
+     */
+    #[ORM\Column]
+    private array $roles = [];
+
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
+
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
@@ -27,15 +42,6 @@ class Client implements UserInterface,PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::INTEGER)]
     private ?int $numero = null;
 
-    #[ORM\Column(length: 180, unique: true)] // Unique est important pour le login !
-    private ?string $email = null;
-
-    #[ORM\Column]
-    private array $roles = [];
-
-     #[ORM\Column]
-    private ?string $password = null;
-
 
     /**
      * @var Collection<int, EnregistrementEssence>
@@ -43,9 +49,9 @@ class Client implements UserInterface,PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: EnregistrementEssence::class, mappedBy: 'client')]
     private Collection $enregistrementEssences;
 
+
     public function __construct()
     {
-        $this->immatriculations = new ArrayCollection();
         $this->enregistrementEssences = new ArrayCollection();
     }
 
@@ -66,32 +72,7 @@ class Client implements UserInterface,PasswordAuthenticatedUserInterface
         return $this;
     }
 
-
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): static
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): static
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-     /**
+    /**
      * A visual identifier that represents this user.
      *
      * @see UserInterface
@@ -101,7 +82,10 @@ class Client implements UserInterface,PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
-     public function getRoles(): array
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
@@ -146,6 +130,37 @@ class Client implements UserInterface,PasswordAuthenticatedUserInterface
         return $data;
     }
 
+    #[\Deprecated]
+    public function eraseCredentials(): void
+    {
+        // @deprecated, to be removed when upgrading to Symfony 8
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): static
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+
     public function getNumero(): ?int
     {
         return $this->numero;
@@ -158,11 +173,8 @@ class Client implements UserInterface,PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    
 
-    public function eraseCredentials(): void
-    {
-        // Si vous stockez des données sensibles temporaires sur l'utilisateur, nettoyez-les ici
-    }
 
     /**
      * @return Collection<int, EnregistrementEssence>

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+
+use App\Entity\Number;
 use App\Repository\ImmatriculationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -16,7 +18,7 @@ class Immatriculation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $numero = null;
+    private ? Number $numero = null;
 
 
 
@@ -25,12 +27,12 @@ class Immatriculation
         return $this->id;
     }
 
-    public function getNumero(): ?string
+    public function getNumero(): ?Number
     {
         return $this->numero;
     }
 
-    public function setNumero(string $numero): static
+    public function setNumero(Number $numero): static
     {
         $this->numero = $numero;
 

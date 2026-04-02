@@ -49,6 +49,12 @@ services:
       - smartfuel_network
     ports:
       - "9003:9003"
+    environment:
+      DB_HOST: smartfuel_db
+      DB_PORT: 3306
+      DB_DATABASE: ${MYSQL_DATABASE}
+      DB_USERNAME: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
 
   nginx:
     container_name: smartfuel_nginx
@@ -57,6 +63,7 @@ services:
       context: ./nginx
     volumes:
       - ../:/var/www/smartfuel:cached
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       - "80:80"
     networks:

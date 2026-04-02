@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Inscription Client{% endblock %}
-{% block stylesheets %}{{ parent() }} <link rel="stylesheet" href="{{ asset('css/inscriptionPompiste.css') }}"> {% endblock %}
+{% block stylesheets %}{{ parent() }} <link rel="stylesheet" href="{{ asset('css/inscriptionClient.css') }}"> {% endblock %}
 {% block main %}
 <div class="tout">
     <div class="container">
@@ -22,33 +22,33 @@
 
                 {{ form_start(registrationForm) }}
                     
-                    <div class="form-row-container">
+                    //<div class="form-row-container">
                     {{ form_row(registrationForm.nom, {
                         label: 'Nom',
                         attr: {'placeholder': 'votre nom de famille'}
                     }) }}
-                    </div>
+                    //</div>
                     
-                    <div class="form-row-container">
+                    //<div class="form-row-container">
                     {{ form_row(registrationForm.prenom, {
                         label: 'Prénom',
                         attr: {'placeholder': 'votre prenom'}
                     }) }}
-                    </div>
+                    //</div>
                     
-                    <div class="form-row-container">
+                    //<div class="form-row-container">
                     {{ form_row(registrationForm.email, {
                         label: 'Email',
                         attr: {'placeholder': 'client@smartfuel.fr'}
                     }) }}
-                    </div>
+                    //</div>
 
-                    <div class="form-row-container">
+                    //<div class="form-row-container">
                     {{ form_row(registrationForm.numero, {
                         label: 'Numéro de téléphone',
                         attr: {'placeholder': '06 12 34 56 78'}
                     }) }}
-                    </div>
+                    //</div>
                     
                     <div class="form-row-container">
                     {{ form_row(registrationForm.plainPassword, {
@@ -60,7 +60,7 @@
                     {{ form_row(registrationForm.agreeTerms, {
                         label: 'J\'accepte les conditions d\'utilisation'
                     }) }}
-                    </div>
+                    </div>//
 
                     <button type="submit" class="btn btn-primary w-100 mt-3">S'inscrire</button>
                 {{ form_end(registrationForm) }}

@@ -1,0 +1,24 @@
+{% extends 'pompiste/index.html.twig' %}
+
+{% block title %} GESTION DE STOCK DES CARBURANTS {% endblock %}
+
+{% block main %}
+<h4> Gestion de Stock de Carburant </h4>
+<table border>
+    <tr>
+        <td> Typpe de Carburant </td>
+        <td> Quantité de Carburant </td>
+    </tr>
+
+    
+{% for carbStation in listStockCarbStation %}
+    <tr>
+        <td>{{carbStation.getTypeCarburant()}}</td>
+        <td>{{carbStation.getQteCarburant()}} </td>
+    </tr>
+{% endfor %}
+
+</table>
+
+
+{% endblock %}
