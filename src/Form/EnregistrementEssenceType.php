@@ -11,26 +11,28 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class EnregistrementEssenceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('immatriculation', TextType::class , [
+            ->add('immatriculation', TextType::class, [
                 'label' => 'Immatriculation',
                 'attr' => [
                     'placeholder' => 'AA-123-AA',
                 ],
-                'mapped'=> false,
+                'mapped' => false,
             ])
-            ->add('date', DateTimeType::class,[
+
+            ->add('date', DateTimeType::class, [
                 'widget' => 'single_text',
                 'data' => new \DateTime(),
                 'label' => 'Date et heure ',
-                 'disabled'=>true // user ne pt pas changer
+                'disabled' => false // user ne pt pas changer
             ])
-            ->add('typeCarburant', ChoiceType::class , [
+            ->add('typeCarburant', ChoiceType::class, [
                 'label' => 'Type de carburant',
                 'choices' => [
                     'Essence' => 'Essence',
@@ -41,11 +43,16 @@ class EnregistrementEssenceType extends AbstractType
                     'placeholder' => 'Ex: Essence',
                 ],
             ])
-            ->add('quantite', TextType::class , [
+            ->add('quantite', TextType::class, [
                 'label' => 'Quantité (en litres)',
                 'attr' => [
                     'placeholder' => 'Ex: 50.0',
                 ],
+            ])
+            ->add('client_email', EmailType::class, [
+                'label' => 'Email du Client',
+                'attr' => ['placeholder' => 'client@exemple.com'],
+                'mapped' => false, // On ne l'enregistre pas directement on s'en sert comme une clé
             ])
 
         ;
