@@ -33,7 +33,7 @@ security:
                 enable_csrf: true
             logout:
                 path: app_client_logout
-                target: app_client_login
+                target: app_home
 
         main:
             lazy: true
@@ -51,7 +51,7 @@ security:
             logout:
                 path: app_logout
                 # where to redirect after logout
-                target: app_client_login #une fois déconnecté on retourne à la page de connexion 
+                target: app_home #une fois déconnecté on retourne à la page de connexion 
                 # target: app_any_route
 
     access_control:  #pour controller qui à ecces à quoi 
