@@ -44,13 +44,26 @@
                     <p class="text-lg font-bold">{{ historique|length }} enregistrements</p>
                 </div>
 
-                <div class="bg-blue-100 p-4 rounded-xl">
-                    <p class="text-sm text-gray-600">Statut</p>
-                    <p class="text-lg font-bold">Compte Actif</p>
-                </div>
-            </div>
-        </section>
+                <div class="bg-amber-100 p-4 rounded-xl">
+            <p class="text-sm text-gray-600">Prochain plein autorisé</p>
+            <p class="text-lg font-bold text-amber-800">
+                {% if historique is not empty %}
+                    {# On prend la date de la dernière essence et on ajoute 1 jour #}
+                    {% set derniereDate = historique|first.date %}
+                    {% set prochaineDate = derniereDate|date_modify("+24 hours") %}
+                    
+                    {% if "now"|date('U') >= prochaineDate|date('U') %}
+                        <span class="text-green-600">Disponible maintenant ✅</span>
+                    {% else %}
+                        Le {{ prochaineDate|date('d/m à H:i') }}
+                    {% endif %}
+                {% else %}
+                    <span class="text-green-600">Disponible maintenant ✅</span>
+                {% endif %}
+            </p>
+        </div>
 
+               
         <section class="bg-white rounded-2xl shadow p-6">
             <h2 class="text-lg font-semibold mb-6">Historique des ravitaillements</h2>
 
@@ -60,13 +73,13 @@
                     <div class="border rounded-xl p-4 flex justify-between items-center hover:bg-gray-50 transition-colors">
                         <div>
                             {# On accède aux propriétés de ton entité EnregistrementEssence #}
-                            <p class="font-semibold">{{ essence.nomStation }}</p>
+                            <p class="font-semibold">{{ essence.station.nom }}</p>
                             <p class="text-sm text-gray-500">{{ essence.typeCarburant }} • {{ essence.quantite }}L</p>
                             <p class="text-sm text-gray-400">
-                                Le {{ essence.dateEnregistrement|date('d/m/Y à H:i') }}
+                                Le {{ essence.date|date('d/m/Y à H:i') }}
                             </p>
                         </div>
-                        <p class="font-bold text-lg text-indigo-700">{{ essence.prixTotal }} €</p>
+                        <p class="font-bold text-lg text-indigo-700">{{ (essence.quantite * 2)|number_format(2, ',', ' ') }} €</p>
                     </div>
                 {% else %}
                     {# Ce bloc s'affiche si la liste 'historique' est vide #}

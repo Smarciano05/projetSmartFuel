@@ -1,0 +1,55 @@
+{% extends 'pompiste/index.html.twig' %}
+
+{% block main %}
+<div class="max-w-4xl mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-6">Recherche par Immatriculation</h1>
+
+    <form method="get" class="flex gap-2 mb-8">
+        <input type="text" name="q" value="{{ plaque_recherchee }}" placeholder="Ex: AA-123-AA" 
+               class="border p-2 rounded-lg flex-1 focus:ring-2 focus:ring-indigo-500 outline-none">
+        <button type="submit" class="bg-indigo-600 text-black px-6 py-2 rounded-lg hover:bg-indigo-700 ">Chercher</button>
+    </form>
+
+    {% if plaque_recherchee %}
+        <div class="mb-6 p-4 rounded-xl {{ peut_ravitailler ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }} font-bold">
+            {% if peut_ravitailler %}
+                ✅ Ravitaillement AUTORISÉ pour la plaque {{ plaque_recherchee }}
+            {% else %}
+                ❌ Ravitaillement INTERDIT : Moins de 24h depuis le dernier plein.
+            {% endif %}
+        </div>
+
+        <div class="bg-white shadow rounded-2xl overflow-hidden">
+            <table class="w-full text-left">
+                <thead class="bg-gray-50 border-b">
+                    <tr>
+                        <th class="p-4">Date</th>
+                        <th class="p-4">Station</th>
+                        <th class="p-4">Quantité</th>
+                        <th class="p-4">Statut 24h</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for essence in resultats %}
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="p-4">{{ essence.date|date('d/m/Y H:i') }}</td>
+                            <td class="p-4">{{ essence.station.nom }}</td>
+                            <td class="p-4">{{ essence.quantite }}L</td>
+                            <td class="p-4 text-sm">
+                                {% set diff = date().diff(essence.date) %}
+                                {% if diff.days < 1 %}
+                                    <span class="text-red-500 font-medium">Il y a {{ (date().getTimestamp() - essence.date.getTimestamp()) // 3600 }}h</span>
+                                {% else %}
+                                    <span class="text-green-600 font-medium">+ de 24h</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr><td colspan="4" class="p-10 text-center text-gray-500">Aucun historique pour cette plaque.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

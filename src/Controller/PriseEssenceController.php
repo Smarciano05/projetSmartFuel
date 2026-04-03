@@ -20,119 +20,107 @@ final class PriseEssenceController extends AbstractController
     #[Route(name: 'app_prise_essence_index', methods: ['GET'])]
     public function index(EnregistrementEssenceRepository $enregistrementEssenceRepository): Response
     {
+        //pour garder les infos du profile: 
+        $pompiste = $this->getUser();
+        $nom=$pompiste->getNom();
+        $prenom=$pompiste->getPrenom();
+        $nomStation = $pompiste->getStation()->getNom();
+
         return $this->render('prise_essence/index.html.twig', [
             'enregistrement_essences' => $enregistrementEssenceRepository->findAll(),
+            'NOM'=>$nom,
+            'PRENOM'=>$prenom,
+            'NOM_station' => $nomStation,
         ]);
     }
 
     #[Route('/new', name: 'app_prise_essence_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        // creer une instance de l'entité EnregistrementEssence
-        $enregistrementEssence = new EnregistrementEssence();
+        $pompiste = $this->getUser();
 
-        //creer le formulaire à partir de l'entité EnregistrementEssence
+        // Sécurité immédiate : seul un pompiste accède au formulaire
+        if (!$pompiste instanceof Pompiste) {
+            return new Response('Veuillez vous connecter en tant que pompiste.');
+        }
+
+        $enregistrementEssence = new EnregistrementEssence();
         $form = $this->createForm(EnregistrementEssenceType::class, $enregistrementEssence);
-        //traite le formulaire
         $form->handleRequest($request);
 
-        //afficher le nom de la station
-
-
-        //recuperer le pompiste connecté pour avoir le nom de la station lié à ce pompiste
-        if ($this->getUser() instanceof Pompiste) {
-
-
-
-            $pompiste = $this->getUser();
-
-
-            $station = $pompiste->getStation();
-            $nomStation = $station->getNom();
-        }
-
-        //verifier si soumis et valide -> que le pompiste a cliqué sur le bouton et regle valide
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //on lie le pompiste connecté
-            if ($this->getUser() instanceof Pompiste) {
-                $pompiste = $this->getUser();
+            // Liaison Pompiste et Station
+            $enregistrementEssence->setPompiste($pompiste);
+            $enregistrementEssence->setStation($pompiste->getStation());
 
-                //
-                $enregistrementEssence->setPompiste($pompiste);
+            // Gestion de l'Immatriculation
+            $numeroSaisi = $form->get('immatriculation')->getData();
+            $immatRepo = $entityManager->getRepository(Immatriculation::class);
+            $immatriculation = $immatRepo->findOneBy(['numero' => $numeroSaisi]);
 
-                //pour le nom de la station
-                $enregistrementEssence->setStation($pompiste->getStation());
-
-                // Recuperer les données du formulaire  -modif mariam parce que immatriculation c'est un obj maintenant pas juste un str 
-                // récupérer le texte saisi 
-                $numeroSaisi = $form->get('immatriculation')->getData();
-
-                // chercher si cette immatriculation existe déjà en base
-                $immatRepo = $entityManager->getRepository(Immatriculation::class);
-                $immatriculation = $immatRepo->findOneBy(['numero' => $numeroSaisi]);
-
-                // si elle n'existe pas on crée 
-                if (!$immatriculation) {
-                    $immatriculation = new Immatriculation();
-                    $immatriculation->setNumero($numeroSaisi);
-                    // On demande à Doctrine de se préparer à créer cette nouvelle immatriculation
-                    $entityManager->persist($immatriculation);
-                }
-
-                // on lie l'objet Immatriculation  à l'enregistrement
-                $enregistrementEssence->setImmatriculation($immatriculation);
-
-
-
-                $enregistrementEssence->setDate(new \DateTime());
-                $enregistrementEssence->setTypeCarburant($form->get('typeCarburant')->getData());
-                $enregistrementEssence->setQuantite($form->get('quantite')->getData());
-
-
-                //récupérer le champs de email client , trouver le client qui correspond et le mettre
-
-                //récupérer l'email saisi
-                $emailSaisi = $form->get('client_email')->getData();
-
-                // chercher le client correspondant
-                $clientRepo = $entityManager->getRepository(Client::class);
-                $client = $clientRepo->findOneBy(['email' => $emailSaisi]);
-
-                //Vérifier si le client existe
-                if (!$client) {
-
-                    return new Response("Erreur : Aucun client trouvé avec l'adresse " . $emailSaisi);
-                }
-
-                // lier le client à l'enregistrement
-                $enregistrementEssence->setClient($client);
-
-                //sauvegarde dans la base de données
-                $entityManager->persist($enregistrementEssence);
-                $entityManager->flush();
-
-
-
-                return new Response('Enregistrement de l\'essence réussi !');
-            } else {
-                return new Response(' Connectez-vous en tant que pompiste');
+            if (!$immatriculation) {
+                $immatriculation = new Immatriculation();
+                $immatriculation->setNumero($numeroSaisi);
+                $entityManager->persist($immatriculation);
             }
+            $enregistrementEssence->setImmatriculation($immatriculation);
+
+            // Gestion du Client (Le point bloquant)
+            $emailSaisi = $form->get('client_email')->getData();
+            $client = $entityManager->getRepository(Client::class)->findOneBy(['email' => $emailSaisi]);
+
+            if (!$client) {
+                $this->addFlash('error', "Client introuvable avec l'email : " . $emailSaisi);
+                return $this->redirectToRoute('app_prise_essence_index');
+            }
+
+            // ON ATTACHE LE CLIENT ICI
+            $enregistrementEssence->setClient($client);
+
+            // Autres données
+            $enregistrementEssence->setDate(new \DateTime());
+            $enregistrementEssence->setTypeCarburant($form->get('typeCarburant')->getData());
+            $enregistrementEssence->setQuantite($form->get('quantite')->getData());
+
+
+            // Sauvegarde finale
+            $entityManager->persist($enregistrementEssence);
+            $entityManager->flush();
+
+            // On crée le message flash (nommé 'success')
+            $this->addFlash('success', 'La prise d\'essence pour ' . $client->getNom() . ' a été enregistrée avec succès !');
         }
 
+        //pour garder les infos du profile: 
+    
+        $nom=$pompiste->getNom();
+        $prenom=$pompiste->getPrenom();
+        $nomStation = $pompiste->getStation()->getNom();
+
         return $this->render('prise_essence/new.html.twig', [
-            'controller_name' => 'EnregistrerEssenceController',
             'form' => $form->createView(),
             'station' => $nomStation,
-
+            'NOM'=>$nom,
+            'PRENOM'=>$prenom,
+            'NOM_station' => $nomStation,
         ]);
     }
 
     #[Route('/{id}', name: 'app_prise_essence_show', methods: ['GET'])]
     public function show(EnregistrementEssence $enregistrementEssence): Response
     {
+        //pour garder les infos du profile: 
+        $pompiste = $this->getUser();
+        $nom=$pompiste->getNom();
+        $prenom=$pompiste->getPrenom();
+        $nomStation = $pompiste->getStation()->getNom();
+
         return $this->render('prise_essence/show.html.twig', [
             'enregistrement_essence' => $enregistrementEssence,
+            'NOM'=>$nom,
+            'PRENOM'=>$prenom,
+            'NOM_station' => $nomStation,
         ]);
     }
 
@@ -148,9 +136,18 @@ final class PriseEssenceController extends AbstractController
             return $this->redirectToRoute('app_prise_essence_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        //pour garder les infos du profile: 
+        $pompiste = $this->getUser();
+        $nom=$pompiste->getNom();
+        $prenom=$pompiste->getPrenom();
+        $nomStation = $pompiste->getStation()->getNom();
+
         return $this->render('prise_essence/edit.html.twig', [
             'enregistrement_essence' => $enregistrementEssence,
             'form' => $form,
+            'NOM'=>$nom,
+            'PRENOM'=>$prenom,
+            'NOM_station' => $nomStation,
         ]);
     }
 

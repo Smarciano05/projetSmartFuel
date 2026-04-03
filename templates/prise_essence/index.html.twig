@@ -1,8 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'pompiste/index.html.twig' %}
 
 {% block title %}Gestion des enregistrements{% endblock %}
 
 {% block stylesheets %}
+    {{parent()}}
     <link rel="stylesheet" href="{{ asset('css/prise_essence/index.css') }}">
 {% endblock %}
 
