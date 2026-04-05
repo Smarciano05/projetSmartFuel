@@ -11,7 +11,7 @@
  php bin/console doctrine:fixtures:load
 
 php bin/console app:import-station                                                                                                                      
-php bin/console app:import-stock-csv public/data/stock_carburant.csv
+php bin/console app:import-stock-csv public/data/stockcarburant.csv
  
 
 # Installer bundle emails
