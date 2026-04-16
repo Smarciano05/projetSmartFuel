@@ -19,8 +19,6 @@ class Station
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-
-
     /**
      * @var Collection<int, Pompiste>
      */
