@@ -30,13 +30,13 @@ class EnregistrementEssenceRepository extends ServiceEntityRepository
         ->getResult();
 }
 
-    //    public function findOneBySomeField($value): ?EnregistrementEssence
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+       public function findOneByIdPompiste($value): ?EnregistrementEssence
+      {
+           return $this->createQueryBuilder('e')
+               ->andWhere('e.exampleField = :val')
+              ->setParameter('val', $value)
+                ->getQuery()
+                ->getOneOrNullResult()
+          ;
+       }
 }
