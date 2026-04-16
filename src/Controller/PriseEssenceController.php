@@ -127,7 +127,6 @@ final class PriseEssenceController extends AbstractController
             $enregistrementEssence->setQuantite($form->get('quantite')->getData());
 
             //quand on a ajouté la qte dans une prise essence => diminution de cette qte dans stock carburant de la station
-            
             try {
                 $this->mettreAJourStock(
                     $stockRepository,

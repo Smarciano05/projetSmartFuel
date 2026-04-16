@@ -17,6 +17,7 @@
                 <tr>
                     <th>Type de Carburant</th>
                     <th>Quantité (Litres)</th>
+                    <th> </th>
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +25,13 @@
                 <tr>
                     <td class="font-bold">{{ carbStation.getTypeCarburant() }}</td>
                     <td class="text-right">{{ carbStation.getQteCarburant()|number_format(1, '.', ' ') }} L</td>
+                    <td>
+                        <form method="post" action="{{ path('app_stock_ajouter', {'id': carbStation.id}) }}" style="display: inline;">
+                            <input type="number" name="quantite" style="width: 80px;">
+                            <button type="submit">Ajouter</button>
+                        </form> 
+                    </td>
+
                 </tr>
                 {% else %}
                 <tr>
