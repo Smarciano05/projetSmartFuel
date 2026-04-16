@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-
-use App\Entity\Number;
 use App\Repository\ImmatriculationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,7 +18,13 @@ class Immatriculation
     #[ORM\Column(length: 255)]
     private ?string  $numero = null;
 
+    #[ORM\OneToMany(targetEntity: EnregistrementEssence::class, mappedBy: 'immatriculation')]
+    private Collection $enregistrementEssences;
 
+    public function __construct()
+    {
+        $this->enregistrementEssences = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -35,10 +39,36 @@ class Immatriculation
     public function setNumero(string $numero): static
     {
         $this->numero = $numero;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EnregistrementEssence>
+     */
+    public function getEnregistrementEssences(): Collection
+    {
+        return $this->enregistrementEssences;
+    }
+
+    public function addEnregistrementEssence(EnregistrementEssence $enregistrementEssence): static
+    {
+        if (!$this->enregistrementEssences->contains($enregistrementEssence)) {
+            $this->enregistrementEssences->add($enregistrementEssence);
+            $enregistrementEssence->setImmatriculation($this);
+        }
 
         return $this;
     }
 
+    public function removeEnregistrementEssence(EnregistrementEssence $enregistrementEssence): static
+    {
+        if ($this->enregistrementEssences->removeElement($enregistrementEssence)) {
+            // set the owning side to null (unless already changed)
+            if ($enregistrementEssence->getImmatriculation() === $this) {
+                $enregistrementEssence->setImmatriculation(null);
+            }
+        }
 
-
+        return $this;
+    }
 }

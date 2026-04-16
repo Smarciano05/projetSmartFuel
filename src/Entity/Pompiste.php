@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\Collection;
 #[ORM\Entity(repositoryClass: PompisteRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-class Pompiste implements UserInterface, PasswordAuthenticatedUserInterface 
+class Pompiste implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -76,7 +76,7 @@ class Pompiste implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setEmail(string $email): static
     {
-        $this->email = $email; 
+        $this->email = $email;
 
         return $this;
     }
@@ -123,7 +123,7 @@ class Pompiste implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPassword(string $password): static
     {
-        $this->password = $password; 
+        $this->password = $password;
 
         return $this;
     }
@@ -179,26 +179,55 @@ class Pompiste implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getNumero(): ?int 
+    public function getNumero(): ?int
     {
-        return $this->numero; 
+        return $this->numero;
     }
 
-    public function setNumero(int $numero): static 
+    public function setNumero(int $numero): static
     {
-        $this->numero = $numero; 
+        $this->numero = $numero;
 
         return $this;
     }
 
     public function isVerified(): bool
-    {  
+    {
         return $this->isVerified;
     }
 
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+    /**
+     * @return Collection<int, EnregistrementEssence>
+     */
+    public function getEnregistrementEssences(): Collection
+    {
+        return $this->enregistrementEssences;
+    }
+
+    public function addEnregistrementEssence(EnregistrementEssence $enregistrementEssence): static
+    {
+        if (!$this->enregistrementEssences->contains($enregistrementEssence)) {
+            $this->enregistrementEssences->add($enregistrementEssence);
+            $enregistrementEssence->setPompiste($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEnregistrementEssence(EnregistrementEssence $enregistrementEssence): static
+    {
+        if ($this->enregistrementEssences->removeElement($enregistrementEssence)) {
+            // set the owning side to null (unless already changed)
+            if ($enregistrementEssence->getPompiste() === $this) {
+                $enregistrementEssence->setPompiste(null);
+            }
+        }
 
         return $this;
     }
