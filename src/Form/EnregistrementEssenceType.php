@@ -35,12 +35,29 @@ class EnregistrementEssenceType extends AbstractType
             ->add('typeCarburant', ChoiceType::class, [
                 'label' => 'Type de carburant',
                 'choices' => [
-                    'Essence' => 'Essence',
-                    'Diesel' => 'Diesel',
-                    'Gazole' => 'Gazole',
+                    // Carburants Essence
+                    'Essence' => [
+                        'SP95' => 'SP95',
+                        'SP98' => 'SP98',
+                        'SP95-E10' => 'SP95-E10',
+                        'SP98-E5' => 'SP98-E5',
+                        'E10' => 'E10',
+                        'E85' => 'E85',
+                    ],
+                    // Carburants Diesel/Gazole
+                    'Diesel/Gazole' => [
+                        'Gazole' => 'Gazole',
+                        'B7' => 'B7',
+                        'B10' => 'B10',
+                    ],
+                    // Autres carburants
+                    'Autres' => [
+                        'GPLc' => 'GPLc',
+                    ],
                 ],
+                'placeholder' => 'Sélectionnez un type de carburant',
                 'attr' => [
-                    'placeholder' => 'Ex: Essence',
+                    'class' => 'form-control',
                 ],
             ])
             ->add('quantite', TextType::class, [
