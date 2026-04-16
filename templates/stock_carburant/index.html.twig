@@ -26,9 +26,9 @@
                     <td class="font-bold">{{ carbStation.getTypeCarburant() }}</td>
                     <td class="text-right">{{ carbStation.getQteCarburant()|number_format(1, '.', ' ') }} L</td>
                     <td>
-                        <form method="post" action="{{ path('app_stock_ajouter', {'id': carbStation.id}) }}" style="display: inline;">
+                        <form method="post" action="{{ path('app_stock_ajouter', {'id': carbStation.id}) }}" style="display: inline;" clas="form-stock">
                             <input type="number" name="quantite" style="width: 80px;">
-                            <button type="submit">Ajouter</button>
+                            <button type="submit" class="btn-ajouter">Ajouter</button>
                         </form> 
                     </td>
 

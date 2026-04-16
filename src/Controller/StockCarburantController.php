@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Pompiste;
 use App\Entity\StockCarburant;
+use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\StockCarburantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,7 +50,7 @@ final class StockCarburantController extends AbstractController
     public function ajouterStock(StockCarburant $stock,Request $request,EntityManagerInterface $entityManager): Response {
 
         // Récupérer la quantité à ajouter depuis le formulaire
-        $qteAAjouter = $request->request->getFloat('quantite');
+        $qteAAjouter = $request->request->get('quantite');
         
         if ($qteAAjouter <= 0) {
             $this->addFlash('error', 'La quantité doit être supérieure à 0');
