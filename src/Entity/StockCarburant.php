@@ -63,4 +63,6 @@ class StockCarburant
 
         return $this;
     }
+
+
 }

@@ -9,6 +9,7 @@ use App\Entity\Client;
 use App\Form\EnregistrementEssenceType;
 use App\Repository\EnregistrementEssenceRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\StockCarburantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,42 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/prise/essence')]
 final class PriseEssenceController extends AbstractController
 {
+
+
+    // Ajoutez cette méthode privée pour gérer la mise à jour du stock
+    private function mettreAJourStock(
+        StockCarburantRepository $stockRepository,
+        EntityManagerInterface $entityManager,
+        Pompiste $pompiste,
+        string $typeCarburant,
+        int $quantiteVendue
+    ): void {
+        // Récupérer la station du pompiste
+        $station = $pompiste->getStation();
+        $stationId = $station->getId();
+
+        // Trouver la ligne de stock correspondante
+        $stock = $stockRepository->findOneBy([
+            'idStation' => $stationId,
+            'typeCarburant' => $typeCarburant
+        ]);
+
+        // Vérifier si le stock existe
+        if (!$stock) {
+            throw new \Exception("Aucun stock trouvé pour le carburant '$typeCarburant' dans cette station");
+        }
+
+        // Vérifier si la quantité est suffisante
+        if ($stock->getQteCarburant() < $quantiteVendue) {
+            throw new \Exception("Stock insuffisant ! Disponible: {$stock->getQteCarburant()}L, Demandé: {$quantiteVendue}L");
+        }
+
+        // Soustraire la quantité vendue
+        $stock->setQteCarburant($stock->getQteCarburant() - $quantiteVendue);
+        
+        // Pas besoin de persist, Doctrine détecte automatiquement la modification
+    }
+
     #[Route(name: 'app_prise_essence_index', methods: ['GET'])]
     public function index(EnregistrementEssenceRepository $enregistrementEssenceRepository): Response
     {
@@ -35,7 +72,7 @@ final class PriseEssenceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_prise_essence_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, StockCarburantRepository $stockRepository): Response
     {
         $pompiste = $this->getUser();
 
@@ -83,6 +120,23 @@ final class PriseEssenceController extends AbstractController
             $enregistrementEssence->setTypeCarburant($form->get('typeCarburant')->getData());
             $enregistrementEssence->setQuantite($form->get('quantite')->getData());
 
+            //quand on a ajouté la qte dans une prise essence => diminution de cette qte dans stock carburant de la station
+            
+            try {
+                $this->mettreAJourStock(
+                    $stockRepository,
+                    $entityManager,
+                    $pompiste,
+                    $enregistrementEssence->getTypeCarburant(),
+                    $enregistrementEssence->getQuantite()
+                );
+            } catch (\Exception $e) {
+                $this->addFlash('error', $e->getMessage());
+                return $this->redirectToRoute('app_prise_essence_new');
+            }
+
+
+
 
             // Sauvegarde finale
             $entityManager->persist($enregistrementEssence);
@@ -91,6 +145,7 @@ final class PriseEssenceController extends AbstractController
             // On crée le message flash (nommé 'success')
             $this->addFlash('success', 'La prise d\'essence pour ' . $client->getNom() . ' a été enregistrée avec succès !');
             return $this->redirectToRoute('app_prise_essence_index');
+
         }
 
         //pour garder les infos du profile: 

@@ -16,6 +16,7 @@ class StockCarburantRepository extends ServiceEntityRepository
         parent::__construct($registry, StockCarburant::class);
     }
 
+
 //    /**
 //     * @return StockCarburant[] Returns an array of StockCarburant objects
 //     */
