@@ -59,6 +59,7 @@ class EnregistrementEssenceType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ],
+
             ])
             ->add('quantite', TextType::class, [
                 'label' => 'Quantité (en litres)',
