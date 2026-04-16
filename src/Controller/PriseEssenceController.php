@@ -90,6 +90,7 @@ final class PriseEssenceController extends AbstractController
 
             // On crée le message flash (nommé 'success')
             $this->addFlash('success', 'La prise d\'essence pour ' . $client->getNom() . ' a été enregistrée avec succès !');
+            return $this->redirectToRoute('app_prise_essence_index');
         }
 
         //pour garder les infos du profile: 
