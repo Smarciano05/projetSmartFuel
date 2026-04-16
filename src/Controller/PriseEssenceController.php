@@ -57,17 +57,23 @@ final class PriseEssenceController extends AbstractController
     #[Route(name: 'app_prise_essence_index', methods: ['GET'])]
     public function index(EnregistrementEssenceRepository $enregistrementEssenceRepository): Response
     {
-        //pour garder les infos du profile: 
+        //pour garder les infos du profile:
         $pompiste = $this->getUser();
+        //test si c'est bien un obj pompiste
+        if (!$pompiste instanceof Pompiste) {
+            throw $this->createAccessDeniedException("Vous n'êtes pas un pompiste.");
+        }
+
         $nom=$pompiste->getNom();
         $prenom=$pompiste->getPrenom();
         $nomStation = $pompiste->getStation()->getNom();
 
         return $this->render('prise_essence/index.html.twig', [
-            'enregistrement_essences' => $enregistrementEssenceRepository->findAll(),
+            'enregistrement_essences' => $enregistrementEssenceRepository->findByPompiste($pompiste),
             'NOM'=>$nom,
             'PRENOM'=>$prenom,
             'NOM_station' => $nomStation,
+
         ]);
     }
 
@@ -148,8 +154,8 @@ final class PriseEssenceController extends AbstractController
 
         }
 
-        //pour garder les infos du profile: 
-    
+        //pour garder les infos du profile:
+
         $nom=$pompiste->getNom();
         $prenom=$pompiste->getPrenom();
         $nomStation = $pompiste->getStation()->getNom();
@@ -166,7 +172,7 @@ final class PriseEssenceController extends AbstractController
     #[Route('/{id}', name: 'app_prise_essence_show', methods: ['GET'])]
     public function show(EnregistrementEssence $enregistrementEssence): Response
     {
-        //pour garder les infos du profile: 
+        //pour garder les infos du profile:
         $pompiste = $this->getUser();
         $nom=$pompiste->getNom();
         $prenom=$pompiste->getPrenom();
@@ -192,7 +198,7 @@ final class PriseEssenceController extends AbstractController
             return $this->redirectToRoute('app_prise_essence_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        //pour garder les infos du profile: 
+        //pour garder les infos du profile:
         $pompiste = $this->getUser();
         $nom=$pompiste->getNom();
         $prenom=$pompiste->getPrenom();
