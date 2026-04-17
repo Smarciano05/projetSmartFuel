@@ -80,3 +80,50 @@
 .stock-table tbody tr:nth-child(even) {
     background-color: #fcfcfc;
 }
+
+
+/* Conteneur du formulaire */
+.form-stock {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px; /* Espace entre l'input et le bouton */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Style du champ de saisie (input) */
+.form-stock input[type="number"] {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-size: 14px;
+}
+
+.form-stock input[type="number"]:focus {
+    border-color: #333;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+/* Style du bouton noir */
+.btn-ajouter {
+    background-color: #1a1a1a; /* Noir légèrement doux */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+/* Effet au survol */
+.btn-ajouter:hover {
+    background-color: #333; /* Un peu plus clair au survol */
+}
+
+/* Effet au clic */
+.btn-ajouter:active {
+    transform: scale(0.96);
+}

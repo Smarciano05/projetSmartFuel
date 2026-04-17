@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Pompiste;
+use App\Entity\StockCarburant;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\StockCarburantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,6 +43,26 @@ final class StockCarburantController extends AbstractController
             'PRENOM'=>$prenom,
             'NOM_station' => $nomStation,
         ]);
+    }
+
+
+    #[Route('/stock/ajouter/{id}', name: 'app_stock_ajouter', methods: ['POST'])]
+    public function ajouterStock(StockCarburant $stock,Request $request,EntityManagerInterface $entityManager): Response {
+
+        // Récupérer la quantité à ajouter depuis le formulaire
+        $qteAAjouter = $request->request->get('quantite');
+        
+        if ($qteAAjouter <= 0) {
+            $this->addFlash('error', 'La quantité doit être supérieure à 0');
+            return $this->redirectToRoute('app_stock_carburant');
+        }
+
+        // Ajouter la quantité
+        $stock->ajouterQteCarburant($qteAAjouter);
+        $entityManager->flush();
+
+        $this->addFlash('success', $qteAAjouter . 'L ajoutés au stock de ' . $stock->getTypeCarburant());
+        return $this->redirectToRoute('app_stock_carburant');
     }
 
 

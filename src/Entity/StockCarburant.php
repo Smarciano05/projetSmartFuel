@@ -63,4 +63,10 @@ class StockCarburant
 
         return $this;
     }
+
+    public function ajouterQteCarburant(float $qteAAjouter): static
+    {
+        $this->qteCarburant += $qteAAjouter;
+        return $this;
+    }
 }
