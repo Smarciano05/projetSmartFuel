@@ -18,16 +18,8 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/prise/essence')]
 final class PriseEssenceController extends AbstractController
 {
-
-
-    // Ajoutez cette méthode privée pour gérer la mise à jour du stock
-    private function mettreAJourStock(
-        StockCarburantRepository $stockRepository,
-        EntityManagerInterface $entityManager,
-        Pompiste $pompiste,
-        string $typeCarburant,
-        int $quantiteVendue
-    ): void {
+    // méthode privée pour gérer la mise à jour du stock
+    private function mettreAJourStock(StockCarburantRepository $stockRepository,EntityManagerInterface $entityManager,Pompiste $pompiste,string $typeCarburant,int $quantiteVendue): void {
         // Récupérer la station du pompiste
         $station = $pompiste->getStation();
         $stationId = $station->getId();
