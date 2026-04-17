@@ -16,7 +16,11 @@ class StationJsonImport
 
         foreach ($data['features'] as $feature) {
            $station = new Station();
-           $station->setNom($feature['properties']['name'] ?? 'Unnamed Station');
+            $station->setNom(
+                $feature['properties']['name']
+                ?? $feature['properties']['brand']
+                ?? 'Unnamed Station'
+            );
            $station->setLongitude($feature['geometry']['coordinates'][0] ?? 0.0);
            $station->setLatitude($feature['geometry']['coordinates'][1] ?? 0.0);
            $this->entityManager->persist($station);
