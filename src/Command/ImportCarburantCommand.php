@@ -9,6 +9,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+
+// commande de symfony pour importer le fichier
 #[AsCommand(
     name: 'app:import-stock-csv',
     description: 'Importe les stocks depuis un fichier CSV'

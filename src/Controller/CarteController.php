@@ -16,7 +16,7 @@ final class CarteController extends AbstractController
             'controller_name' => 'CarteController',
         ]);
     }
-// src/Controller/CarteController.php
+
 
     #[Route('/api/carte', name: 'api_carte')]
     public function data(StockCarburantRepository $stockCarburantRepository): Response
