@@ -32,7 +32,49 @@
             </aside>
 
             <main class="main-content">
-                {% block main %}{% endblock %}
+                {% block main %}
+                    <div class="dashboard-grid">
+                        <a href="{{ path('app_prise_essence_index') }}" class="menu-card">
+                            <div class="icon-circle icon-green">
+                                <i class="fas fa-gas-pump"></i> </div>
+                            <div class="card-content">
+                                <h3>Enregistrer une prise</h3>
+                                <p>Enregistrer une nouvelle prise d'essence</p>
+                            </div>
+                        </a>
+
+                        <a href="{{ path('app_recherche_plaque') }}" class="menu-card">
+                            <div class="icon-circle icon-dark">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Rechercher une plaque</h3>
+                                <p>Vérifier l'autorisation de faire le plein</p>
+                            </div>
+                        </a>
+
+
+                        <a href="{{ path('app_carte') }}" class="menu-card">
+                            <div class="icon-circle icon-dark">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Carte des stations</h3>
+                                <p>Accéder à la carte des stations</p>
+                            </div>
+                        </a>
+
+                        <a href="{{ path('app_stock_carburant') }}" class="menu-card card-highlight">
+                            <div class="icon-circle icon-blue">
+                                <i class="fas fa-boxes"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Gestion de Stock</h3>
+                                <p>Suivi des cuves et réapprovisionnement</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endblock %}
             </main>
         </div>
     </div>

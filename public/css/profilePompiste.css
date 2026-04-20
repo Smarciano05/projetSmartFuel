@@ -113,3 +113,71 @@
     padding: 30px;
     width: 100%;    /* Assure-toi qu'il prend tout */
 }
+/* Container principal */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Style de base de la Card */
+.menu-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-decoration: none; /* Enlever le souligné du lien */
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Cercles d'icônes */
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 24px;
+    color: white;
+}
+
+.icon-green { background-color: #28a745; }
+.icon-dark { background-color: #1e2d41; }
+.icon-blue { background-color: #007bff; } /* Couleur pour le stock */
+
+/* Textes dans la card */
+.card-content h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.15rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.card-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Responsive : 1 seule colonne sur mobile */
+@media (max-width: 600px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
