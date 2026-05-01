@@ -64,6 +64,7 @@ class StockCarburant
         return $this;
     }
 
+    // Méthode qui va ajouter la quantité donnée dans le paramètre dans la quantité du carburant
     public function ajouterQteCarburant(float $qteAAjouter): static
     {
         $this->qteCarburant += $qteAAjouter;

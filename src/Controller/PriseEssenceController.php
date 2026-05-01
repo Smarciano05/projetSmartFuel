@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/prise/essence')]
 final class PriseEssenceController extends AbstractController
 {
-    // méthode privée pour gérer la mise à jour du stock
+    // Méthode privée pour gérer la mise à jour du stock
     private function mettreAJourStock(StockCarburantRepository $stockRepository,EntityManagerInterface $entityManager,Pompiste $pompiste,string $typeCarburant,int $quantiteVendue): void {
         // Récupérer la station du pompiste
         $station = $pompiste->getStation();
@@ -40,10 +40,10 @@ final class PriseEssenceController extends AbstractController
             throw new \Exception("Stock insuffisant ! Disponible: {$stock->getQteCarburant()}L, Demandé: {$quantiteVendue}L");
         }
 
-        // Soustraire la quantité vendue
+        // Diminuer le stock : nouvelle quantité = ancienne quantité - quantité vendue
         $stock->setQteCarburant($stock->getQteCarburant() - $quantiteVendue);
         
-        // Pas besoin de persist, Doctrine détecte automatiquement la modification
+        // Pas besoin de persist ici, Doctrine détecte automatiquement la modification
     }
 
     #[Route(name: 'app_prise_essence_index', methods: ['GET'])]
