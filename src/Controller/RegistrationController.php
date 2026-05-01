@@ -42,7 +42,7 @@ class RegistrationController extends AbstractController
             $user->setStation($station);
             
             // modifie le mot de passe vide par le mot de passe hasé (=plus sécurisé) donné par le pompiste
-            $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData();));
+            $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData()));
             
             // Le pompiste est user donc on met par defaut ROLE_USER
             $user->setRoles(['ROLE_USER']);
