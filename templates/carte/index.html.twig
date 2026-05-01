@@ -5,15 +5,12 @@
 {% block main %}
     <link rel="stylesheet" href="{{ asset('css/carte/carte.css') }}">
 
-    <!-- Conteneur principal de la carte -->
     <div class="map-container">
         <div class="map-header">
             <h1>Carte des stations</h1>
             <p>Visualisez les stations d'essence disponibles</p>
         </div>
 
-        <!-- Div qui contiendra la carte Leaflet -->
-        <!-- Leaflet injectera la carte dynamiquement ici -->
         <div id="map"></div>
     </div>
 
@@ -37,32 +34,30 @@
         var macarte = null; // Variable pour stocker l'instance de la carte
         var markerClusters; // Variable pour stocker les clusters de marqueurs
 
-        // Définition de l'icône personnalisée pour les marqueurs des stations
         var icone = L.icon({
-            iconUrl: "{{ asset('images/station-essence(5).png') }}", // Chemin vers l'image de l'icône
-            iconSize: [60, 60], // Taille de l'icône
-            iconAnchor: [25, 50], // Point d'ancrage de l'icône (position du marqueur)
-            popupAnchor: [0, -50] // Point d'ancrage de la popup par rapport à l'icône
+            iconUrl: "{{ asset('images/station-essence(5).png') }}",
+            iconSize: [60, 60], 
+            iconAnchor: [25, 50], 
+            popupAnchor: [0, -50] 
         });
 
         // Fonction pour initialiser la carte
         function initMap() {
-            // Création de la carte centrée sur les coordonnées de Bamako avec un zoom de niveau 11
+            // Création de la carte centrée sur les coordonnées de Bamako 
             macarte = L.map('map').setView([lat, lon], 11);
-            // Initialisation du groupe de clusters pour regrouper les marqueurs proches
+            //  groupe de clusters pour regrouper les marqueurs proches
             markerClusters = L.markerClusterGroup();
 
             // Ajout du fond de carte OpenStreetMap
             L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
                 attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
-                minZoom: 1, // Zoom minimum autorisé
-                maxZoom: 20 // Zoom maximum autorisé
+                minZoom: 1, 
+                maxZoom: 20 
             }).addTo(macarte);
 
-            // Récupération des données GeoJSON depuis l'API
+            // api/carte de carteController qui recupere les données de l'API
             fetch('api/carte')
                 .then(function(response) {
-                    // Conversion de la réponse en JSON
                     return response.json();
                 })
                 .then(function(data) {
@@ -76,9 +71,7 @@
 
                     // Création des marqueurs pour les stations filtrées
                     L.geoJSON(filteredData, {
-                        // Fonction appelée pour chaque point GeoJSON afin de créer un marqueur
                         pointToLayer: function(feature, latlng) {
-                            // Création d'un marqueur avec l'icône personnalisée
                             var marker = L.marker(latlng, {icon: icone});
                             var properties = feature.properties;
 
@@ -88,28 +81,26 @@
                             // Création du contenu de la popup pour le marqueur
                             marker.bindPopup(
                                 '<div style="font-size: 14px; padding: 5px;">' +
-                                '<strong>' + properties.name + '</strong><br>' + // Nom de la station
+                                '<strong>' + properties.name + '</strong><br>' + 
                                 '<hr style="margin: 5px 0; border: 1px solid #ccc;">' +
-                                '<strong>Carburants disponibles :</strong><br>' + // Titre de la section carburants
+                                '<strong>Carburants disponibles :</strong><br>' + 
                                 (carburantsLimites.length > 0 ?
                                         '<ul style="margin: 5px 0 0 15px; padding: 0;">' +
                                         carburantsLimites.map(carburant =>
-                                            '<li style="margin-bottom: 3px;">' + carburant + '</li>' // Liste des carburants (max 3)
+                                            '<li style="margin-bottom: 3px;">' + carburant + '</li>'
                                         ).join('') +
                                         '</ul>' :
-                                        'Aucun carburant disponible' // Message si aucun carburant n'est disponible
+                                        'Aucun carburant disponible' 
                                 ) +
                                 '</div>'
                             );
-                            return marker; // Retourne le marqueur configuré
+                            return marker; 
                         }
-                    }).addTo(markerClusters); // Ajoute les marqueurs au groupe de clusters
+                    }).addTo(markerClusters); 
 
-                    // Ajoute les clusters à la carte
                     macarte.addLayer(markerClusters);
                 })
                 .catch(function(error) {
-                    // Gestion des erreurs lors du chargement des données
                     console.error('Erreur lors du chargement du fichier GeoJSON :', error);
                 });
         }
