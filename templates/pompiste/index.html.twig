@@ -24,10 +24,26 @@
         <div class="content-wrapper">
             <aside class="sidebar">
                 <ul class="nav-menu">
-                    <li><a href="{{path('app_recherche_plaque')}}">🔍 Recherche plaque</a></li>
-                    <li><a href="{{path('app_prise_essence_index')}}">⛽ Enregistrer prise d'essence</a></li>
-                    <li><a href="{{path('app_stock_carburant')}}">📊 Gestion des stocks</a></li>
-                    <li><a href="{{path('app_carte') }}"">🗺️ Carte</a></li>
+                    <li>
+                        <a href="{{ path('app_recherche_plaque') }}">
+                            <i class="fas fa-search fa-fw"></i> Rechercher une plaque
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_prise_essence_index') }}">
+                            <i class="fas fa-gas-pump fa-fw"></i> Enregistrer une prise de carburant
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_stock_carburant') }}">
+                            <i class="fas fa-boxes fa-fw"></i> Gestion de stock
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_carte') }}">
+                            <i class="fas fa-map-marker-alt fa-fw"></i> Carte des Stations
+                        </a>
+                    </li>
                 </ul>
             </aside>
 
@@ -36,7 +52,8 @@
                     <div class="dashboard-grid">
                         <a href="{{ path('app_prise_essence_index') }}" class="menu-card">
                             <div class="icon-circle icon-green">
-                                <i class="fas fa-gas-pump"></i> </div>
+                                <i class="fas fa-gas-pump"></i>
+                            </div>
                             <div class="card-content">
                                 <h3>Enregistrer une prise</h3>
                                 <p>Enregistrer une nouvelle prise d'essence</p>
@@ -44,8 +61,7 @@
                         </a>
 
                         <a href="{{ path('app_recherche_plaque') }}" class="menu-card">
-                            <div class="icon-circle icon-dark">
-                                <i class="fas fa-search"></i>
+                            <div class="icon-circle icon-orange"> <i class="fas fa-search"></i>
                             </div>
                             <div class="card-content">
                                 <h3>Rechercher une plaque</h3>
@@ -53,10 +69,8 @@
                             </div>
                         </a>
 
-
                         <a href="{{ path('app_carte') }}" class="menu-card">
-                            <div class="icon-circle icon-dark">
-                                <i class="fas fa-map-marker-alt"></i>
+                            <div class="icon-circle icon-purple"> <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div class="card-content">
                                 <h3>Carte des stations</h3>
@@ -64,7 +78,7 @@
                             </div>
                         </a>
 
-                        <a href="{{ path('app_stock_carburant') }}" class="menu-card card-highlight">
+                        <a href="{{ path('app_stock_carburant') }}" class="menu-card">
                             <div class="icon-circle icon-blue">
                                 <i class="fas fa-boxes"></i>
                             </div>

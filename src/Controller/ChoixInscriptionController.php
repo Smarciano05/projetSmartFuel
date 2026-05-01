@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ChoixInscriptionController extends AbstractController
 {
+    //chemin pour aller vers la page choix_inscription/index.html.twig
     #[Route('/choix/inscription', name: 'app_choix_inscription')]
     public function index(): Response
     {

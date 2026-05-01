@@ -10,9 +10,9 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class ClientSecurityController extends AbstractController
 {
     #[Route('/client/login', name: 'app_client_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response  //fonction pour renvoyer vers la page de connexiondu client
     {
-        if ($this->getUser()) {
+        if ($this->getUser()) {  //vérification si un client n'est pas déjà connecté
              return $this->redirectToRoute('pageclient');
         }
 
@@ -22,7 +22,7 @@ class ClientSecurityController extends AbstractController
         ]);
     }
 
-    #[Route('/client/logout', name: 'app_client_logout')]
+    #[Route('/client/logout', name: 'app_client_logout')]  //fonction pour la deconnexion 
     public function logout(): void {}
 }
 

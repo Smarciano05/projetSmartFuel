@@ -83,12 +83,11 @@
 .sidebar {
     width: 280px;
     background-color: #121212;
-    /* On change fixed par sticky pour qu'elle reste à gauche sans chevaucher le footer */
     position: sticky; 
-    top: 70px; /* Aligné sous ton header */
+    top: 70px;
     height: calc(100vh - 70px);
-    /* Empêche la sidebar de masquer ce qui est en dessous */
-    flex-shrink: 0; 
+    flex-shrink: 0;              /* Empêche la sidebar de s'écraser */
+    z-index: 999;
 }
 
 .nav-menu { list-style: none; padding-top: 20px; }
@@ -107,77 +106,103 @@
     border-left: 4px solid #1a9d4b;
 }
 
-.main-content {
-    flex: 1;
-    margin-left: 0; /* Change 280px par 0 */
-    padding: 30px;
-    width: 100%;    /* Assure-toi qu'il prend tout */
-}
-/* Container principal */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+/* Style des icônes dans la sidebar */
+.nav-menu li a i {
+    margin-right: 15px; /* Espace entre l'icône et le texte */
+    color: #1a9d4b;      /* Couleur verte pour rappeler ton header */
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
 }
 
-/* Style de base de la Card */
+/* Changement de couleur au survol pour que ce soit interactif */
+.nav-menu li a:hover i {
+    color: white;
+    transform: scale(1.1);
+}
+
+
+/* Style du conteneur principal pour qu'il prenne toute la hauteur */
+.main-content {
+    flex: 1;                     /* Force le contenu à s'étendre à droite */
+    min-height: calc(100vh - 70px); 
+    display: flex;
+    align-items: center;         /* Centre verticalement */
+    justify-content: center;    /* Centre horizontalement */
+    background-color: #f4f7f6;
+    padding: 40px;
+    margin-left: 0;              /* Assure-toi qu'il n'y a pas de marge parasite */
+}
+
+/* La grille des cartes */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes bien propres */
+    gap: 30px;
+    width: 100%;
+    max-width: 900px; /* Largeur idéale pour le centrage visuel */
+    margin: auto;     /* Sécurité supplémentaire pour le centrage */
+}
+
+/* Style de chaque carte */
 .menu-card {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 30px 20px;
-    text-decoration: none; /* Enlever le souligné du lien */
-    color: inherit;
+    background: white;
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-decoration: none;
+    color: #333;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border: 1px solid #f0f0f0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.03);
 }
 
 .menu-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Cercles d'icônes */
+/* Cercles d'icônes avec couleurs spécifiques */
 .icon-circle {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
-    font-size: 24px;
+    margin-bottom: 20px;
+    font-size: 32px; /* Un peu plus grand pour le look */
     color: white;
+    transition: transform 0.3s ease;
 }
 
-.icon-green { background-color: #28a745; }
-.icon-dark { background-color: #1e2d41; }
-.icon-blue { background-color: #007bff; } /* Couleur pour le stock */
+/* Les 4 couleurs différentes */
+.icon-green  { background: linear-gradient(135deg, #28a745, #20c997); }
+.icon-orange { background: linear-gradient(135deg, #fd7e14, #ffc107); }
+.icon-purple { background: linear-gradient(135deg, #6f42c1, #a445b2); }
+.icon-blue   { background: linear-gradient(135deg, #007bff, #00d4ff); }
 
-/* Textes dans la card */
+/* Contenu texte */
 .card-content h3 {
-    margin: 0 0 8px 0;
-    font-size: 1.15rem;
-    color: #333;
-    font-weight: 600;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .card-content p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #777;
+    font-size: 1rem;
+    color: #6c757d;
+    line-height: 1.4;
 }
 
 /* Responsive : 1 seule colonne sur mobile */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .dashboard-grid {
         grid-template-columns: 1fr;
+    }
+    .main-content {
+        padding: 20px;
     }
 }
