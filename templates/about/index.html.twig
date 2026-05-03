@@ -1,4 +1,3 @@
-{# templates/about/index.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}À propos - SmartFuel{% endblock %}
@@ -9,5 +8,19 @@
 {% endblock %}
 
 {% block main %}
+<div class="about-simple-card">
+    <h2 style="text-align: center;">À propos de SmartFuel</h2>
+    <p>
+        En période de pénurie, chaque litre compte. SmartFuel a été créé pour garantir que tout le monde puisse avoir accès au carburant.
+    </p>
+    
+    <div class="highlight-box">
+        <strong>La règle d'or :</strong> 
+        Une seule prise de carburant autorisée toutes les 24 heures par véhicule.
+    </div>
 
+    <p>
+        L'objectif est simple : permettre aux stations de mieux gérer leurs réserves pour servir le plus grand nombre.
+    </p>
+</div>
 {% endblock %}

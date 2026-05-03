@@ -1,0 +1,32 @@
+.about-simple-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    max-width: 600px;
+    margin: 40px auto; /* Centre le bloc sur la page */
+    border-left: 5px solid #1a9d4b; /* Une barre verte pour le style */
+}
+
+.about-simple-card h2 {
+    color: #111;
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+.about-simple-card p {
+    color: #4b5563;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 15px 0;
+}
+
+.highlight-box {
+    background-color: #f0fdf4;
+    color: #1a9d4b;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    text-align: center;
+    border: 1px dashed #1a9d4b;
+}
