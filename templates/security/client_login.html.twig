@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/registration.css') }}">
 {% endblock %}
 
-{% block body %}
+{% block main %}
 {# 1. Wrapper principal pour centrer et mettre le dégradé #}
 <div class="inscription-pompiste-wrapper">
     
@@ -36,7 +36,7 @@
             <form method="post">
                 <div class="form-row-container">
                     <label for="inputEmail" class="form-label-custom">Email</label>
-                    <input type="email" value="{{ last_username }}" name="_username" id="inputEmail" class="form-input-custom" autocomplete="email" placeholder="pompiste@smartfuel.fr" required autofocus>
+                    <input type="email" value="{{ last_username }}" name="_username" id="inputEmail" class="form-input-custom" autocomplete="email" placeholder="client@smartfuel.fr" required autofocus>
                 </div>
 
                 <div class="form-row-container">

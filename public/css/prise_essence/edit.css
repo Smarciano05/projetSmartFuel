@@ -8,31 +8,40 @@
     font-family: sans-serif;
 }
 
+/* Force le conteneur à ne pas être plus large que la carte */
+.container {
+    width: 100% !important;
+    display: flex;
+    justify-content: center; /* Centre la carte horizontalement */
+    padding: 20px 0;
+}
+
+/* La carte elle-même */
+.card {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 450px !important; /* LARGEUR MAX DE TA CARTE ICI */
+    margin: 0 auto;
+}
+
+/* On s'assure que le wrapper max-w-2xl ne bloque rien */
 .max-w-2xl {
-    max-width: 42rem;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    width: 100% !important;
+    max-width: 450px !important;
+    margin: 0 auto !important;
 }
 
 h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #111; }
 p { color: #4b5563; }
 
-/* Card */
-.card {
-    background-color: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    overflow: hidden;
-    padding-bottom: 20px;
-}
 
-.card-header { padding: 1rem 1.5rem; border-bottom: 1px solid #e5e7eb; }
-.card-title { font-size: 1.25rem; font-weight: bold; }
 
-.space-y-6 > * + * { margin-top: 1.5rem; }
+
 
 /* Labels et champs Symfony */
-label { font-weight: 500; display: block; margin-bottom: 0.25rem; }
+label { font-weight: 500; display: block; margin: 20px 0 5px 0; }
 input, select {
     width: 100%;
     padding: 0.5rem 0.75rem;
@@ -48,6 +57,7 @@ input[readonly] { background-color: #f9fafb; cursor: not-allowed; }
     border-radius: 6px;
     text-decoration: none;
     font-weight: 500;
+    margin: 20px 0 10px 0;
 }
 
 .delete-btn form button {
@@ -74,15 +84,19 @@ input[readonly] { background-color: #f9fafb; cursor: not-allowed; }
 }
 
 .actions {
-    margin-top: 15px;          /* espace au-dessus du bouton */
+    margin-top: 20px;         
     display: flex;
-    gap: 10px;                 /* espace si tu ajoutes d'autres boutons */
+    gap: 20px;                 /* espace si tu ajoutes d'autres boutons */
     justify-content: flex-start; /* alignement à gauche */
     padding-left: 1rem;        /* petit padding depuis le bord de la card */
 }
 
 .actions .btn-black {
-    padding: 10px 20px;        /* plus d'espace autour du texte */
+    padding: 10px 20px;        
     border-radius: 6px;
     font-weight: 500;
 }
+
+
+
+

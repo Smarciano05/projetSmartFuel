@@ -1,4 +1,4 @@
-{% extends 'pompiste/index.html.twig' %}
+{% extends 'baseProfilePompiste.html.twig' %}
 
 {% block title %}Gestion des enregistrements{% endblock %}
 
@@ -8,69 +8,71 @@
 {% endblock %}
 
 {% block main %}
-    <div class="container">
-        <div class="header">
-            <h1>Historique des enregistrements </h1>
-            <p>Consultez, modifiez et supprimez les enregistrements de carburant</p>
+    <main class="main-content">
+        <div class="container">
+            <div class="header">
+                <h1>Historique des enregistrements </h1>
+                <p>Consultez, modifiez et supprimez les enregistrements de carburant</p>
 
-            <a href="{{ path('app_prise_essence_new') }}" class="btn btn-green">
-                + Créer une prise d'essence
-            </a>
+                <a href="{{ path('app_prise_essence_new') }}" class="btn btn-green">
+                    + Créer une prise de Carburant
+                </a>
+            </div>
+
+            <table class="table-custom">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Heure</th>
+                    <th>Client</th>
+                    <th>Immatriculation</th>
+                    <th>Type carburant</th>
+                    <th>Quantité</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for enregistrement_essence in enregistrement_essences %}
+                    <tr>
+                        <td>
+                            {{ enregistrement_essence.date ? enregistrement_essence.date|date('d/m/Y') }}
+                        </td>
+                        <td>
+                            {{ enregistrement_essence.date ? enregistrement_essence.date|date('H:i:s') }}
+                        </td>
+                        <td>
+                            {{ enregistrement_essence.client.nom }}
+                            {{ enregistrement_essence.client.prenom }}
+                        </td>
+                        <td>{{ enregistrement_essence.immatriculation.numero }}</td>
+                        <td>{{ enregistrement_essence.typeCarburant }}</td>
+                        <td>{{ enregistrement_essence.quantite }} L</td>
+
+                        <td class="actions">
+                            <a href="{{ path('app_prise_essence_show', {'id': enregistrement_essence.id}) }}" class="btn btn-black">
+                                Voir
+                            </a>
+
+                            <a href="{{ path('app_prise_essence_edit', {'id': enregistrement_essence.id}) }}" class="btn btn-green">
+                                Modifier
+                            </a>
+
+                            <div class="btn-red">
+                                {{ include('prise_essence/_delete_form.html.twig') }}
+                            </div>
+
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="empty">
+                            Aucun enregistrement trouvé
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
-
-        <table class="table-custom">
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Heure</th>
-                <th>Client</th>
-                <th>Immatriculation</th>
-                <th>Type carburant</th>
-                <th>Quantité</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            {% for enregistrement_essence in enregistrement_essences %}
-                <tr>
-                    <td>
-                        {{ enregistrement_essence.date ? enregistrement_essence.date|date('d/m/Y') }}
-                    </td>
-                    <td>
-                        {{ enregistrement_essence.date ? enregistrement_essence.date|date('H:i:s') }}
-                    </td>
-                    <td>
-                        {{ enregistrement_essence.client.nom }}
-                        {{ enregistrement_essence.client.prenom }}
-                    </td>
-                    <td>{{ enregistrement_essence.immatriculation.numero }}</td>
-                    <td>{{ enregistrement_essence.typeCarburant }}</td>
-                    <td>{{ enregistrement_essence.quantite }} L</td>
-
-                    <td class="actions">
-                        <a href="{{ path('app_prise_essence_show', {'id': enregistrement_essence.id}) }}" class="btn btn-black">
-                            Voir
-                        </a>
-
-                        <a href="{{ path('app_prise_essence_edit', {'id': enregistrement_essence.id}) }}" class="btn btn-green">
-                            Modifier
-                        </a>
-
-                        <div class="btn-red">
-                            {{ include('prise_essence/_delete_form.html.twig') }}
-                        </div>
-
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5" class="empty">
-                        Aucun enregistrement trouvé
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    </main>
 {% endblock %}

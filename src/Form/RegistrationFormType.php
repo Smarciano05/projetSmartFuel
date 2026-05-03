@@ -19,27 +19,37 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
 
-
+/**
+ * Formulaire d'inscription pour les pompistes
+ * Définit les champs et les règles de validation
+ */
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
     $builder
+            // Nom du pompiste
             ->add('nom', TextType::class, [
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez entrer votre nom']),
                 ],
             ])
+
+            // Prénom du pompiste
             ->add('prenom', TextType::class, [
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez entrer votre prénom']),
                 ],
             ])
+
+            // Numéro de téléphone
             ->add('numero', IntegerType::class, [
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez entrer votre numéro de téléphone']),
                 ],
             ])
+
+            // Email 
             ->add('email', TextType::class, [
                 'label' => 'Email',
                 'constraints' => [
@@ -47,21 +57,28 @@ class RegistrationFormType extends AbstractType
                     new Email(['message' => 'Veuillez entrer un email valide (ex: nom@domaine.com)']),
                 ],
             ])
-            /* Champ temporaire pour l'ID de la station */
+
+            // Champ : Sélection de la station (liste déroulante)
+            // L'utilisateur voit le NOM de la station, mais le formulaire envoie son ID
+            // Non mappé car on traite dans le contrôleur
             ->add('station', EntityType::class, [
-                'class' => Station::class,       // lie à l'entité
+                'class' => Station::class,    
                 'mapped' => false,
                 'choice_label' => 'nom',
                 'required' => true,
                 'attr' => ['placeholder' => 'Entrez le nom de la station'],
 
             ])
+
+            // Case à cocher conditions 
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue(['message' => 'Vous devez accepter les conditions pour continuer']),
                 ],
             ])
+
+            // Mot de passe - non mappé car c'est le mot de passe hashé dans le controlleur qui va etre envoyé vers la BDD
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
@@ -81,8 +98,8 @@ class RegistrationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Pompiste::class,
-            'entity_manager' => null, // Sera passé par le contrôleur
+            'data_class' => Pompiste::class, // Lie le formulaire à l'entité Pompiste
+            'entity_manager' => null,
         ]);
     }
 }

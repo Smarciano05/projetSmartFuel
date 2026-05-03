@@ -7,9 +7,7 @@
  (mettre le numero de la version à la place des zero)
 
 
-# Fixtures et stations
- php bin/console doctrine:fixtures:load
-
+# commande pour importer les stations et le carburant
 php bin/console app:import-station                                                                                                                      
 php bin/console app:import-stock-csv public/data/stockcarburant.csv
  
