@@ -19,6 +19,9 @@ class Station
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+    #[ORM\Column(length: 50, unique: true)]
+    private ?string $osmId = null;
+
     /**
      * @var Collection<int, Pompiste>
      */
@@ -48,12 +51,20 @@ class Station
     {
         $this->pompistes = new ArrayCollection();
         $this->stockCarburants = new ArrayCollection();
+        $this->enregistrementEssences = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
     }
+
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
+    }
+
+
 
     public function getNom(): ?string
     {
@@ -74,6 +85,11 @@ class Station
     {
         return $this->pompistes;
     }
+    public function setPompistes(Collection $pompistes): void
+    {
+        $this->pompistes = $pompistes;
+    }
+
 
     public function addPompiste(Pompiste $pompiste): static
     {
@@ -104,6 +120,11 @@ class Station
     {
         return $this->stockCarburants;
     }
+    public function setStockCarburants(Collection $stockCarburants): void
+    {
+        $this->stockCarburants = $stockCarburants;
+    }
+
 
     public function addStockCarburant(StockCarburant $stockCarburant): static
     {
@@ -150,4 +171,49 @@ class Station
 
         return $this;
     }
+
+
+
+    public function getEnregistrementEssences(): Collection
+    {
+        return $this->enregistrementEssences;
+    }
+
+    public function setEnregistrementEssences(Collection $enregistrementEssences): void
+    {
+        $this->enregistrementEssences = $enregistrementEssences;
+    }
+
+    public function addEnregistrementEssence(EnregistrementEssence $enregistrementEssence): static
+    {
+        if (!$this->enregistrementEssences->contains($enregistrementEssence)) {
+            $this->enregistrementEssences->add($enregistrementEssence);
+            $enregistrementEssence->setStation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEnregistrementEssence(EnregistrementEssence $enregistrementEssence): static
+    {
+        if ($this->enregistrementEssences->removeElement($enregistrementEssence)) {
+            if ($enregistrementEssence->getStation() === $this) {
+                $enregistrementEssence->setStation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getOsmId(): ?string
+    {
+        return $this->osmId;
+    }
+
+    public function setOsmId(?string $osmId): void
+    {
+        $this->osmId = $osmId;
+    }
+
+
 }
