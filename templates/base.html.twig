@@ -69,14 +69,14 @@
             <h4 class="h4new">Navigation</h4>
             <ul>
                 <li><a href="{{ path('app_home') }}">Accueil</a></li>
-                <li><a href="">À propos</a></li>
+                <li><a href="{{ path('app_about') }}">À propos</a></li>
             </ul>
         </div>
     </div>
 
     {# COPYRIGHT #}
     <div class="container">
-        <a class="mb-0" href="#">© {{ "now"|date("Y") }} SmartFuel - Tous droits réservés.</a>
+        <a class="mb-0" href="{{ path('app_right')}}">© {{ "now"|date("Y") }} SmartFuel - Tous droits réservés.</a>
     </div>
 </footer>
 

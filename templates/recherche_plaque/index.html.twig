@@ -1,15 +1,20 @@
 {% extends 'baseProfilePompiste.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}  {# Garde le CSS global de base.html.twig (on en a besoin pour le footer) #}
+    <link rel="stylesheet" href="{{ asset('css/recherche_plaque.css') }}">
+{% endblock %}
+
 {% block main %}
-<div class="max-w-4xl mx-auto p-6">
-    <h1 class="text-2xl font-bold mb-6">Recherche par Immatriculation</h1>
+<div class="search-container">
+    <h1>Recherche par Immatriculation</h1>
 
-    <form method="get" class="flex gap-2 mb-8">
-        <input type="text" name="q" value="{{ plaque_recherchee }}" placeholder="Ex: AA-123-AA" 
-               class="border p-2 rounded-lg flex-1 focus:ring-2 focus:ring-indigo-500 outline-none">
-        <button type="submit" class="bg-indigo-600 text-black px-6 py-2 rounded-lg hover:bg-indigo-700 ">Chercher</button>
+    <form method="get" class="search-form">
+        <input type="text" name="q" value="{{ plaque_recherchee }}" placeholder="Ex: AA-123-AA">
+        <button type="submit">Chercher</button>
     </form>
-
+</div>
+<div class="max-w-4xl mx-auto p-6">
     {% if plaque_recherchee %}
         <div class="mb-6 p-4 rounded-xl {{ peut_ravitailler ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }} font-bold">
             {% if peut_ravitailler %}

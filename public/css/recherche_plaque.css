@@ -1,0 +1,81 @@
+/* Centrage vertical et horizontal sur toute la page */
+main {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    min-height: 80vh; /* Ajuste à 100vh si tu n'as pas de barre de navigation */
+    background-color: #f8fafc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Conteneur principal */
+.search-container {
+    text-align: left;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+/* Titre */
+h1 {
+    color: #1e293b;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+/* Formulaire de recherche */
+.search-form {
+    display: flex;
+    gap: 0; /* On colle l'input et le bouton pour un look "barre unique" */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+}
+
+/* Champ de saisie */
+.search-form input[name="q"] {
+    flex: 1;
+    border: 2px solid white;
+    padding: 14px 20px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-form input[name="q"]:focus {
+    background-color: #f1f5f9;
+}
+
+/* Bouton */
+.search-form button[type="submit"] {
+    background-color: #1a9d4b; /* Indigo moderne */
+    color: white;
+    border: none;
+    padding: 0 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.search-form button[type="submit"]:hover {
+    background-color: #4338ca;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 480px) {
+    .search-form {
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: none;
+        background: transparent;
+    }
+    .search-form input, .search-form button {
+        border-radius: 8px;
+        width: 100%;
+        padding: 12px;
+    }
+}
