@@ -1,4 +1,14 @@
-{% extends 'pompiste/index.html.twig' %}
+{#
+    TEMPLATE : Page de gestion des stocks de carburant
+    RÔLE : Afficher les niveaux de stock et permettre l'ajout de carburant
+    URL : /stock/carburant (route 'app_stock_carburant')
+    
+    FONCTIONNEMENT :
+    - Affiche tous les types de carburant de la station du pompiste
+    - Montre la quantité actuelle en litres
+    - Permet d'ajouter du stock via un formulaire
+#}
+{% extends 'baseProfilePompiste.html.twig' %}
 
 {% block title %} GESTION DE STOCK DES CARBURANTS {% endblock %}
 
@@ -9,30 +19,39 @@
 
 {% block main %}
 <div class="stock-wrapper">
+    {# Titre du tableau #}
     <h4 class="table-title">Gestion de Stock de Carburant</h4>
     
     <div class="table-container">
+        {# Tableau des stocks #}
         <table class="stock-table">
             <thead>
                 <tr>
-                    <th>Type de Carburant</th>
-                    <th>Quantité (Litres)</th>
-                    <th> </th>
+                    <th>Type de Carburant</th> {# SP95, SP98, Diesel, etc. #}
+                    <th>Quantité (Litres)</th> {# Niveau actuel #}
+                    <th> </th>                 {# Champs + Bouton  pour ajouter pour chaque type de Carburant #}
                 </tr>
             </thead>
             <tbody>
+                {# Boucle sur tous les carburants de la station #}
                 {% for carbStation in listStockCarbStation %}
                 <tr>
+                    {# Type de carburant #}
                     <td class="font-bold">{{ carbStation.getTypeCarburant() }}</td>
+
+                    {# Quantité en litres (format: 1 234.5) #}
                     <td class="text-right">{{ carbStation.getQteCarburant()|number_format(1, '.', ' ') }} L</td>
+
+                    {# Formulaire d'ajout #}
                     <td>
                         <form method="post" action="{{ path('app_stock_ajouter', {'id': carbStation.id}) }}" style="display: inline;" clas="form-stock">
                             <input type="number" name="quantite" style="width: 80px;">
                             <button type="submit" class="btn-ajouter">Ajouter</button>
                         </form> 
                     </td>
-
                 </tr>
+
+                {# Si aucun stock trouvé (si la boucle n'a rien à affichier) #}
                 {% else %}
                 <tr>
                     <td colspan="2" class="text-center">Aucun stock disponible pour cette station.</td>

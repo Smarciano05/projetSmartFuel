@@ -1,0 +1,93 @@
+{#
+    TEMPLATE : Base layout pour les pompistes CONNECTÉS
+    RÔLE : Structure commune à TOUTES les pages du pompiste après connexion
+    
+    DIFFÉRENCE avec base.html.twig :
+        - Menu (sidebar) 
+        - Header avec infos pompiste + bouton déconnexion
+        - Accessible uniquement après authentification
+#}
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}  {# Garde le CSS global de base.html.twig (on en a besoin pour le footer) #}
+    <link rel="stylesheet" href="{{ asset('css/profilePompiste.css') }}">
+{% endblock %}
+
+
+{# CORPS DE LA PAGE - Remplace le body de base.html.twig #}
+{% block body %}
+    <div class="app-container">
+        {# En-tete avec infos utilisateur #}
+        <header class="main-header">
+
+            {# PARTIE GAUCHE - Infos du pompiste et de la station #}
+            <div class="header-left">
+                {# Bloc utilisateur : affiche le nom et prénom du pompiste #}
+                <div class="user-block">
+                    <span class="user-name">Bonjour {{NOM}} {{PRENOM}}</span>
+                    {# NOM, PRENOM : variables passées par le contrôleur #}
+                </div>
+
+                {# Séparateur visuel entre le nom et la station #}
+                <div class="separator"></div>
+
+                {# Nom de la station où travaille le pompiste #}
+                <span class="station-name">Station {{NOM_station}}</span>
+                {# NOM_station : variable passée par le contrôleur #}
+            </div>
+            
+
+            {# PARTIE DROITE - Bouton de déconnexion #}
+            <div class="header-right">
+                <a href="{{ path('app_logout') }}" class="logout-btn">Déconnexion</a>
+                {# path('app_logout') : route qui exécute la déconnexion #}
+            </div>
+        </header>
+
+        
+        <div class="content-wrapper">
+            {% block menu %}
+                <aside class="sidebar">
+                    <ul class="nav-menu">
+                    
+                        {# 1er LIEN : Rechercher une plaque #}
+                        <li>
+                            <a href="{{ path('app_recherche_plaque') }}">
+                                <i class="fas fa-search fa-fw"></i> Rechercher une plaque
+                            </a>
+                            {# Permet de vérifier si une plaque est autorisée à faire son plein #}
+                        </li>
+
+                        {# 2eme LIEN : Enregistrer une prise de carburant #}
+                        <li>
+                            <a href="{{ path('app_prise_essence_index') }}">
+                                <i class="fas fa-gas-pump fa-fw"></i> Enregistrer une prise de carburant
+                            </a>
+                        </li>
+
+                        {# 3eme LIEN : Gestion de stock #}
+                        <li>
+                            <a href="{{ path('app_stock_carburant') }}">
+                                <i class="fas fa-boxes fa-fw"></i> Gestion de stock
+                            </a>
+                        </li>
+
+                        {# 4eme LIEN : Carte des Stations #}
+                        <li>
+                            <a href="{{ path('app_carte') }}">
+                                <i class="fas fa-map-marker-alt fa-fw"></i> Carte des Stations
+                            </a>
+                        </li>
+                    </ul>
+                </aside>
+            {% endblock %}
+
+            {# ZONE CENTRALE - Contenu spécifique à chaque page #}
+            <main class="main-content">
+                {# La partie Centrale #}
+                {% block main %} {% endblock %}
+            </main>
+        </div>
+    </div>
+{% endblock %}

@@ -1,12 +1,7 @@
 {# 
-    TEMPLATE : choixInscription.html.twig
-    RÔLE : Page de choix du type d'inscription
-    URL : /inscription (ou route 'choix_inscription')
+    ROLE: Page permettant à l'utilisateur de choisir quel type de compte il souhaite créer
+    URL : /choix/inscription (ou route 'app_choix_inscription')
     
-    DESCRIPTION :
-    Cette page permet à l'utilisateur de choisir quel type de compte il souhaite créer :
-    - Compte CLIENT (personne qui achète du carburant)
-    - Compte POMPISTE (employé de station-service)
 #}
 {% extends 'base.html.twig' %}
 
@@ -15,7 +10,7 @@
 
 {# STYLES CSS SPÉCIFIQUES - Fichier CSS pour cette page uniquement #}
 {% block stylesheets %}
-{{ parent() }}   {# Garde le CSS global de base.html.twig #}
+{{ parent() }}   {# Garde le CSS global de base.html.twig (on a besoin pour l'en-tete et le footer) #}
 <link rel="stylesheet" href="{{ asset('css/choixInscription.css') }}">
 {% endblock %}
 
@@ -26,9 +21,7 @@
 
        {# 
             OPTION CLIENT
-            
             UTILISATION : Lien cliquable vers l'inscription client
-            MÉTHODE : GET (car c'est un simple lien <a href>)
             QUAND ON CLIQUE : Redirige vers /client/register qui affiche un formulaire
     
        #}
@@ -41,9 +34,7 @@
 
         {#
             OPTION POMPISTE 
-            
             UTILISATION : Lien cliquable vers l'inscription pompiste
-            MÉTHODE : GET (lien simple)
             QUAND ON CLIQUE : Redirige vers /register qui affiche un formulaire 
         #}
         <a href="{{ path('inscription_pompiste') }}" class="choice-section pompiste-side">
@@ -52,7 +43,5 @@
             <div class="btn-choice">S'inscrire en tant que Pompiste</div>
         </a>
     </div>
-
-
 
 {% endblock %}

@@ -1,29 +1,50 @@
+{#
+    TEMPLATE : Base layout de l'application
+#}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+
+    {# Bootstrap CSS #}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    {# CSS personnalisé #}
     {% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/base.css') }}">{% endblock %}
 </head>
 <body>
 {% block body %}
 
-    <header class="navbar-custom">
+        {# 
+            HEADER PUBLIC
+            Utilisé pour :
+            - Les visiteurs non connectés (pages publiques)
+            - La page carte (accessible depuis l'espace pompiste sans avoir à se déconnecter)
+        #}
         <div class="header-container">
+
+            {# LOGO - Cliquable vers l'accueil #}
             <div class="logo-box">
                 <a href="/"><img src="{{ asset('images/logoSite.png') }}" alt="SmartFuel"></a>
             </div>
+
+            {# MENU DE NAVIGATION - Liens publics #}
             <nav class="nav-links">
+
+                {# Lien vers la carte des stations #}
                 <a href="/carte" class="nav-btn-link">
                     <img src="{{ asset('images/logoCarte.png') }}" alt="" class="nav-icon">
                     Carte
                 </a>
+
+                {# Lien vers le choix d'inscription (Client ou Pompiste) #}
                 <a href="{{path('app_choix_inscription')}}" class="btn-connexion">S'inscrire</a>
             </nav>
         </div>
     </header>
 
+    {# CONTENU PRINCIPAL #}
     <main class="main-content">
         {% block main %}
         {% endblock %}
@@ -31,29 +52,34 @@
 
 {% endblock %}
 
+{# FOOTER - Pied de page commun à toutes les pages #}
 <footer>
     <div class="footer-content">
+
+        {# SECTION CONTACT #}
         <div class="piedSite">
             <h4 class="h4new nomContact">Contact</h4>
             <p class="num">Tel: +33 1 23 45 67 89</p>
             <p class="email">Email: contact@smartfuel.fr</p>
         </div>
 
+        {# SECTION LIENS UTILES #}
         <div class="liens-utiles">
             <h4 class="h4new">Navigation</h4>
             <ul>
                 <li><a href="{{ path('app_home') }}">Accueil</a></li>
-                <li><a href="">Tarifs</a></li>
                 <li><a href="">À propos</a></li>
             </ul>
         </div>
     </div>
 
+    {# COPYRIGHT #}
     <div class="container">
         <a class="mb-0" href="#">© {{ "now"|date("Y") }} SmartFuel - Tous droits réservés.</a>
     </div>
 </footer>
 
+{# SCRIPTS - Bootstrap + FontAwesome #}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/1497a6bbb1.js" crossorigin="anonymous"></script>
 

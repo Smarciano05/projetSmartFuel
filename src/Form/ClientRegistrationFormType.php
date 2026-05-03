@@ -15,12 +15,17 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
 
-
+/**
+ * Formulaire d'inscription pour les clients
+ * Définit les champs et les règles de validation
+ */
 class ClientRegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+
+            // Email du client
             ->add('email', TextType::class, [
                 'label' => 'Email',
                 'constraints' => [
@@ -32,6 +37,8 @@ class ClientRegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+
+            // Nom du client
             ->add('nom', TextType::class, [
                 'constraints' => [
                     new NotBlank([
@@ -39,6 +46,8 @@ class ClientRegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+
+            // Preenom du client 
             ->add('prenom', TextType::class, [
                 'constraints' => [
                     new NotBlank([
@@ -47,6 +56,7 @@ class ClientRegistrationFormType extends AbstractType
                 ],
             ])
             
+            // Numéro du client
             ->add('numero', IntegerType::class, [
                 'label' => 'Numéro de téléphone',
                 'constraints' => [
@@ -55,6 +65,8 @@ class ClientRegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+
+            // Case à cocher conditions 
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'label' => 'J\'accepte les conditions d\'utilisation',
@@ -64,6 +76,8 @@ class ClientRegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+
+            // Mot de passe - non mappé car c'est le mot de passe hashé dans le controlleur qui va etre envoyé vers la BDD
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
@@ -85,7 +99,7 @@ class ClientRegistrationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Client::class,
+            'data_class' => Client::class, // Lie le formulaire à l'entité Client
         ]);
     }
 }
