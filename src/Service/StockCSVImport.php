@@ -2,9 +2,9 @@
 
 namespace App\Service;
 
-    use App\Entity\Station;
-    use App\Entity\StockCarburant;
-    use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Station;
+use App\Entity\StockCarburant;
+use Doctrine\ORM\EntityManagerInterface;
 
 class StockCSVImport
 {
@@ -15,6 +15,7 @@ class StockCSVImport
         $this->em = $em;
     }
 
+    // src/Service/StockCSVImport.php
     public function importFromCSV(string $file): array
     {
         $messages = [];
@@ -28,17 +29,22 @@ class StockCSVImport
         $header = fgetcsv($handle);
 
         while (($data = fgetcsv($handle)) !== false) {
-            [$typeCarburant, $qteCarburant, $idStation] = $data;
-            $station = $this->em->getRepository(Station::class)->find($idStation);
+            [$typeCarburant, $qteCarburant, $osmId] = $data;
+
+            // Trouver la station par son osmId
+            $station = $this->em->getRepository(Station::class)->findOneBy(['osmId' => $osmId]);
+
             if (!$station) {
-                $messages[] = "Station $idStation introuvable";
+                $messages[] = "Station avec osmId $osmId introuvable";
                 continue;
             }
 
+            // Créer le stock
             $stock = new StockCarburant();
             $stock->setTypeCarburant($typeCarburant);
             $stock->setQteCarburant((float)$qteCarburant);
             $stock->setIdStation($station);
+
             $this->em->persist($stock);
         }
 

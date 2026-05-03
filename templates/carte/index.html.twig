@@ -36,14 +36,14 @@
 
         var icone = L.icon({
             iconUrl: "{{ asset('images/station-essence(5).png') }}",
-            iconSize: [60, 60], 
-            iconAnchor: [25, 50], 
-            popupAnchor: [0, -50] 
+            iconSize: [60, 60],
+            iconAnchor: [25, 50],
+            popupAnchor: [0, -50]
         });
 
         // Fonction pour initialiser la carte
         function initMap() {
-            // Création de la carte centrée sur les coordonnées de Bamako 
+            // Création de la carte centrée sur les coordonnées de Bamako
             macarte = L.map('map').setView([lat, lon], 11);
             //  groupe de clusters pour regrouper les marqueurs proches
             markerClusters = L.markerClusterGroup();
@@ -51,61 +51,54 @@
             // Ajout du fond de carte OpenStreetMap
             L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
                 attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
-                minZoom: 1, 
-                maxZoom: 20 
+                minZoom: 1,
+                maxZoom: 20
             }).addTo(macarte);
 
-            // api/carte de carteController qui recupere les données de l'API
+            // api/carte de carteController qui recupere les données de l'API (fichier geojson)
             fetch('api/carte')
                 .then(function(response) {
                     return response.json();
-                })
-                .then(function(data) {
-                    // Filtre les stations dont le nom est "Unnamed Station"
-                    const filteredData = {
-                        ...data, // Copie toutes les propriétés de data
-                        features: data.features.filter(feature =>
-                            (feature.properties.name || '') !== 'Unnamed Station' // Exclut les stations sans nom
-                        )
-                    };
+                }).then(data => {
 
-                    // Création des marqueurs pour les stations filtrées
-                    L.geoJSON(filteredData, {
-                        pointToLayer: function(feature, latlng) {
-                            var marker = L.marker(latlng, {icon: icone});
-                            var properties = feature.properties;
+                // Création des marqueurs pour les stations filtrées
+                L.geoJSON(data, {
+                    pointToLayer: function(feature, latlng) {
+                        var marker = L.marker(latlng, {icon: icone});
+                        var properties = feature.properties;
 
-                            // Limite l'affichage à 3 carburants maximum dans la popup
-                            var carburantsLimites = properties.carburants ? properties.carburants.slice(0, 3) : [];
+                        // Limite l'affichage à 3 carburants maximum dans la popup
+                        var carburantsLimites = properties.carburants ? properties.carburants.slice(0, 3) : [];
 
-                            // Création du contenu de la popup pour le marqueur
-                            marker.bindPopup(
-                                '<div style="font-size: 14px; padding: 5px;">' +
-                                '<strong>' + properties.name + '</strong><br>' + 
-                                '<hr style="margin: 5px 0; border: 1px solid #ccc;">' +
-                                '<strong>Carburants disponibles :</strong><br>' + 
-                                (carburantsLimites.length > 0 ?
-                                        '<ul style="margin: 5px 0 0 15px; padding: 0;">' +
-                                        carburantsLimites.map(carburant =>
-                                            '<li style="margin-bottom: 3px;">' + carburant + '</li>'
-                                        ).join('') +
-                                        '</ul>' :
-                                        'Aucun carburant disponible' 
-                                ) +
-                                '</div>'
-                            );
-                            return marker; 
-                        }
-                    }).addTo(markerClusters); 
+                        // creer du contenu de la popup pour le marqueur
+                        marker.bindPopup(
+                            '<div style="font-size: 14px; padding: 5px;">' +
+                            '<strong>' + properties.name + '</strong><br>' +
+                            '<hr style="margin: 5px 0; border: 1px solid #ccc;">' +
+                            '<strong>Carburants disponibles :</strong><br>' +
+                            (carburantsLimites.length > 0 ?
+                                    '<ul style="margin: 5px 0 0 15px; padding: 0;">' +
+                                    carburantsLimites.map(carburant =>
+                                        '<li style="margin-bottom: 3px;">' + carburant + '</li>'
+                                    ).join('') +
+                                    '</ul>' :
+                                    'Aucun carburant disponible'
+                            ) +
+                            '</div>'
+                        );
+                        return marker;
+                    }
+                }).addTo(markerClusters);
 
-                    macarte.addLayer(markerClusters);
-                })
+
+                macarte.addLayer(markerClusters);
+
+            })
                 .catch(function(error) {
                     console.error('Erreur lors du chargement du fichier GeoJSON :', error);
                 });
         }
 
-        // Initialisation de la carte au chargement de la page
         window.onload = function () {
             initMap();
         };
