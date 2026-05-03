@@ -40,6 +40,7 @@ body {
     display: flex;
     flex-direction: column;
     font-size: 20px ;
+    text-align: center;
 }
 
 .label {
@@ -70,6 +71,10 @@ body {
     padding: 6px 12px;
     border-radius: 20px;
     width: fit-content;
+    margin: 0 auto; /* Ajoute ceci pour le centrer */
+    margin-top: 10px;
+    display: block;  /* Assure que la marge auto fonctionne */
+
 }
 
 /* boutons */
@@ -109,6 +114,6 @@ body {
 }
 
 .btn-black {
-    background: #111;
     color: white;
+    background: #111;
 }
