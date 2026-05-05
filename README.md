@@ -43,6 +43,11 @@ git clone git@github.com:Smarciano05/projetSmartFuel.git
 
 ### 2. Lancer les conteneurs Docker
 
+Avant de lancer Docker, assurez-vous de vous placer dans le dossier contenant le fichier `docker-compose.yml` se trouvant dans .docker :
+
+```bash
+cd .docker 
+
 ```bash
 docker-compose up -d
 ```
