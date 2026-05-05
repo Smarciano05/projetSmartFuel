@@ -45,6 +45,10 @@
         function initMap() {
             // Création de la carte centrée sur les coordonnées de Bamako
             macarte = L.map('map').setView([lat, lon], 11);
+
+            // debug uniquement ( centrer sur station : star)
+            //macarte.setView([12.6547626, -7.9757077], 16);
+
             //  groupe de clusters pour regrouper les marqueurs proches
             markerClusters = L.markerClusterGroup();
 
