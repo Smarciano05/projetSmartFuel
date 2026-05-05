@@ -101,3 +101,13 @@ composer require --dev orm-fixtures
 ```bash
 docker exec -it <container_php> php bin/console doctrine:fixtures:load --append
 ```
+
+## 🧪 Comptes de test
+
+### 👤 Client
+- Email : sophie.dubois@test.com
+- Mot de passe : Password  
+
+### ⛽ Pompiste
+- Email : marc.dupont@smartfuel.com  
+- Mot de passe : Smartfuel
