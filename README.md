@@ -47,6 +47,7 @@ Avant de lancer Docker, assurez-vous de vous placer dans le dossier contenant le
 
 ```bash
 cd .docker 
+```
 
 ```bash
 docker-compose up -d
