@@ -52,13 +52,19 @@ cd .docker
 ```bash
 docker-compose up -d
 ```
+puis sortir de .docker en faisant : 
+
+```bash
+cd ..
+```
+
 
 ---
 
 ### 3. Installer les dépendances
 
 ```bash
-docker exec $(DOCKER_PHP_CONTAINER) composer install
+docker exec -it smartfuel_php composer install
 ```
 
 ---
