@@ -42,14 +42,15 @@
         });
 
         // Fonction pour initialiser la carte
-        function initMap() {
+        async function initMap() {
+
             // Création de la carte centrée sur les coordonnées de Bamako
             macarte = L.map('map').setView([lat, lon], 11);
 
             // debug uniquement ( centrer sur station : star)
             //macarte.setView([12.6547626, -7.9757077], 16);
 
-            //  groupe de clusters pour regrouper les marqueurs proches
+            // groupe de clusters pour regrouper les marqueurs proches
             markerClusters = L.markerClusterGroup();
 
             // Ajout du fond de carte OpenStreetMap
@@ -60,13 +61,12 @@
             }).addTo(macarte);
 
             // api/carte de carteController qui recupere les données de l'API (fichier geojson)
-            fetch('api/carte')
-                .then(function(response) {
-                    return response.json();
-                }).then(data => {
+            try {
+                const response = await fetch('/api/carte');
+                const data = await response.json();
 
                 // Création des marqueurs pour les stations filtrées
-                L.geoJSON(data, {
+                const geoLayer = L.geoJSON(data, {
                     pointToLayer: function(feature, latlng) {
                         var marker = L.marker(latlng, {icon: icone});
                         var properties = feature.properties;
@@ -92,20 +92,22 @@
                         );
                         return marker;
                     }
-                }).addTo(markerClusters);
+                });
 
-
+                markerClusters.addLayer(geoLayer);
                 macarte.addLayer(markerClusters);
 
-            })
-                .catch(function(error) {
-                    console.error('Erreur lors du chargement du fichier GeoJSON :', error);
-                });
+            } catch (error) {
+                console.error('Erreur lors du chargement du fichier GeoJSON :', error);
+            }
         }
 
-        window.onload = function () {
+        // pour attendre que le DOM soit prêt (corrige le problème de premier affichage) sinon
+        // sa prend du temps a s'afficher et faut faire un refresh
+        document.addEventListener("DOMContentLoaded", function () {
             initMap();
-        };
+        });
+
     </script>
 
 {% endblock %}
