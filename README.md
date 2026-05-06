@@ -68,13 +68,13 @@ docker exec smartfuel_php  php bin/console doctrine:migrations:migrate
 #### Import des stations :
 
 ```bash
-php bin/console app:import-station
+docker exec smartfuel_php php bin/console app:import-station
 ```
 
 #### Import des stocks de carburant :
 
 ```bash
-php bin/console app:import-stock-csv public/data/stockcarburant.csv
+docker exec smartfuel_php php bin/console app:import-stock-csv public/data/stockcarburant.csv
 ```
 
 ---
