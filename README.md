@@ -58,7 +58,7 @@ docker exec -it smartfuel_php composer install
 ### 4. Lancer les migrations
 
 ```bash
-docker exec smartfuel_php  php bin/console doctrine:migrations:migrate --no-interaction
+docker exec smartfuel_php  php bin/console doctrine:migrations:migrate 
 ```
 
 ---
