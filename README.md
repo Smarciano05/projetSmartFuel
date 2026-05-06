@@ -97,7 +97,7 @@ composer require --dev orm-fixtures
 ## Chargement des données sans suppression : 
 
 ```bash
-docker exec -it <container_php> php bin/console doctrine:fixtures:load --append
+ docker exec -it smartfuel_php  php bin/console doctrine:fixtures:load --append 
 ```
 
 ## 🧪 Comptes de test
