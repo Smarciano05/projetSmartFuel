@@ -80,8 +80,7 @@ docker exec smartfuel_php php bin/console app:import-station
 ```bash
 docker exec smartfuel_php php bin/console app:import-stock-csv public/data/stockcarburant.csv
 ```
-
----
+La plateforme est actuellement limitée à la gestion de 20 stations-service.
 
 ## 📦 Installation supplémentaire
 
