@@ -2,13 +2,17 @@
 
 ## 👥 Membres de l'équipe
 
-    Mariam Sidiki Diawara :  
+    Mariam Sidiki Diawara : diawaramariamsidiki@gmail.com
     Shirel Marciano : shirel.marciano05@gmail.com
     Sarah Marecar : marecarsarah@gmail.com
 
 ## 📌 Description du projet
 
+Smart Fuel est une plateforme web de gestion intelligente du carburant conçue pour aider les stations-service et les clients à mieux gérer les périodes de pénurie au Mali.
 
+Côté client, les utilisateurs peuvent consulter les stations disponibles sur une carte, voir l’historique de leurs prises d’essence et connaître leur limite de consommation. Lorsqu’un client effectue une prise de carburant, il ne peut plus en reprendre avant un certain délai (ex : 24h), afin de garantir une distribution plus équitable.
+
+Côté pompiste, la plateforme permet d’enregistrer les prises d’essence, gérer les stocks de carburant en temps réel, ajouter du stock après approvisionnement, consulter la carte des stations et effectuer des recherches par immatriculation. Le stock est automatiquement mis à jour après chaque prise enregistrée.
 
 ---
 
