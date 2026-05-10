@@ -8,11 +8,11 @@
 
 ## 📌 Description du projet
 
-Smart Fuel est une plateforme web de gestion intelligente du carburant conçue pour aider les stations-service et les clients à mieux gérer les périodes de pénurie au Mali.
+Smart Fuel est une plateforme web de gestion du carburant conçue pour aider les stations-service et les clients à mieux gérer les périodes de pénurie à Bamako au Mali.
+L'objectif est simple : permettre aux stations de mieux gérer leurs réserves pour servir le plus grand nombre.
+Côté client, les utilisateurs peuvent consulter les stations disponibles sur une carte, voir l’historique de leurs prises d’essence et connaître leur limite de consommation. Lorsqu’un client effectue une prise de carburant, il ne peut plus en reprendre avant un certain délai (24h), afin de garantir une distribution plus équitable.
 
-Côté client, les utilisateurs peuvent consulter les stations disponibles sur une carte, voir l’historique de leurs prises d’essence et connaître leur limite de consommation. Lorsqu’un client effectue une prise de carburant, il ne peut plus en reprendre avant un certain délai (ex : 24h), afin de garantir une distribution plus équitable.
-
-Côté pompiste, la plateforme permet d’enregistrer les prises d’essence, gérer les stocks de carburant en temps réel, ajouter du stock après approvisionnement, consulter la carte des stations et effectuer des recherches par immatriculation. Le stock est automatiquement mis à jour après chaque prise enregistrée.
+Côté pompiste, la plateforme permet d'effectuer des recherches par immatriculation, d’enregistrer les prises d’essence, de gérer les stocks de carburant en temps réel, d'ajouter du stock après approvisionnement et de consulter la carte des stations. Le stock est automatiquement mis à jour après chaque prise enregistrée.
 
 ---
 
