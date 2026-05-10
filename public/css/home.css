@@ -76,15 +76,26 @@
 }
 
 .button-pompiste {
+    display: inline-block;
+    text-decoration: none;    
+    text-align: center;       
+    
     margin-top: auto;
     padding: 8px 16px;
     background-color: black;
     border: none;
-    color: white;
+    color: white !important;  
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    transition: none;
+    transition: all 0.3s ease;
+}
+
+
+.button-pompiste:hover {
+    background-color: #333;
+    color: white;
+    text-decoration: none;
 }
 
 button:hover {
